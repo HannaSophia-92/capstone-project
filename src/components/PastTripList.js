@@ -1,25 +1,7 @@
-import styled from 'styled-components';
-
-export default function PastTripList({ pastTripList }) {
+export default function PastTripList({ country, city }) {
   return (
-    <Cards>
-      {pastTripList.map(pastTrip => {
-        return (
-          <li key={pastTrip._id}>
-            {pastTrip.country}, {pastTrip.city}
-          </li>
-        );
-      })}
-    </Cards>
+    <li>
+      {country}, {city}
+    </li>
   );
 }
-
-const Cards = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  gap: 20px;
-  margin: 20px;
-`;

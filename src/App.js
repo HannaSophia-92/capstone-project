@@ -1,14 +1,18 @@
-import { useState } from 'react';
 import PastTripList from './components/PastTripList';
 import pastTripList from './data';
 
 function App() {
-  const [pastTrips, setPastTrips] = useState(pastTripList);
+  console.log(pastTripList);
 
   return (
-    <main>
-      <PastTripList pastTripList={pastTrips} />
-    </main>
+    <div>
+      <h1>Welcome to my capstone project</h1>
+      <ul>
+        {pastTripList.map(({ country, city, _id }) => (
+          <PastTripList key={_id} country={country} city={city} />
+        ))}
+      </ul>
+    </div>
   );
 }
 

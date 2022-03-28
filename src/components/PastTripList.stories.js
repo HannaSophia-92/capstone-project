@@ -8,4 +8,8 @@ export default {
 const Template = args => <PastTripList {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  _id: '1',
+  country: 'South Africa',
+  city: 'Cape Town',
+};
