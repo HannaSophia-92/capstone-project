@@ -1,10 +1,15 @@
-import "./App.css";
+import { useState } from 'react';
+import PastTripList from './components/PastTripList';
+import pastTripList from './data';
 
 function App() {
+  const [pastTrips, setPastTrips] = useState(pastTripList);
+
   return (
-    <div>
-      <h1>Welcome to my capstone project</h1>
-    </div>
+    <main>
+      <h1>Capstone Project</h1>
+      <PastTripList pastTripList={pastTrips} />
+    </main>
   );
 }
 
