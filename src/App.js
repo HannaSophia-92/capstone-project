@@ -7,7 +7,6 @@ function App() {
 
   return (
     <main>
-      <h1>Capstone Project</h1>
       <PastTripList pastTripList={pastTrips} />
     </main>
   );

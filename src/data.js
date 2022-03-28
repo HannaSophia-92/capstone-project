@@ -24,6 +24,11 @@ const pastTripList = [
     country: 'Brasil',
     city: 'Rio de Janeiro',
   },
+  {
+    _id: '6',
+    country: 'China',
+    city: 'Hongkong',
+  },
 ];
 
 export default pastTripList;
