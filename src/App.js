@@ -1,11 +1,18 @@
-import "./App.css";
+import PastTripCard from './components/PastTripCard';
+import styled from 'styled-components';
 
 function App() {
   return (
     <div>
-      <h1>Welcome to my capstone project</h1>
+      <Heading>Journi</Heading>
+      <PastTripCard />
     </div>
   );
 }
+
+const Heading = styled.h1`
+  margin: 20px;
+  text-align: center;
+`;
 
 export default App;
