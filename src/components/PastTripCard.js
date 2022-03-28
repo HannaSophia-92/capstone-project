@@ -4,7 +4,7 @@ import PastTripList from './PastTripList';
 
 export default function PastTripCard() {
   return (
-    <PastTripCards>
+    <PastTripCards role="list" aria-label="past-trips">
       {pastTripList.map(({ country, city, _id }) => {
         return <PastTripList country={country} city={city} key={_id} />;
       })}
