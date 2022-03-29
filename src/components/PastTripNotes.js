@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import ButtonAdd from './Button';
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');
@@ -12,27 +12,28 @@ export default function PastTripNotes({ onHandleNewNote }) {
       onSubmit={handleSubmit}
       autoComplete="off"
     >
-      <label htmlFor="notes">Things to remember</label>
-      <input
+      <Label htmlFor="notes">Things to remember:</Label>
+      <Input
         type="text"
         id="notes"
         name="notes"
         placeholder="Enter your notes..."
         value={textInput}
         onChange={event => setTextInput(event.target.value)}
+        maxLength="500"
         required
       />
-      <Button type="submit" id="notes-form">
+      <ButtonAdd type="submit" id="notes-form">
         Add
-      </Button>
+      </ButtonAdd>
     </NotesForm>
   );
 
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const inputElement = form.elements.notes;
-    onHandleNewNote(inputElement.value);
+    const inputElement = form.elements.notes.value.trim();
+    onHandleNewNote(inputElement);
     form.reset();
     setTextInput('');
   }
@@ -41,4 +42,13 @@ export default function PastTripNotes({ onHandleNewNote }) {
 const NotesForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 15px;
+`;
+
+const Label = styled.label`
+  padding: 15px 0;
+`;
+
+const Input = styled.input`
+  padding: 5px;
 `;
