@@ -1,20 +1,36 @@
 import styled from 'styled-components';
+import Button from './Button';
 
-export default function PastTripList({ country, city, _id }) {
+export default function PastTripList({ country, city, _id, image }) {
   return (
     <PastTripLists key={_id}>
-      {country}, {city}
+      <Image alt="country" src={image} />
+      <Place>
+        {country}, {city}
+      </Place>
+      <Button>Notes</Button>
     </PastTripLists>
   );
 }
 
 const PastTripLists = styled.li`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   background-color: gray;
-  height: 200px;
+  height: 300px;
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;
+`;
+
+const Image = styled.img`
+  border-radius: 40px;
+`;
+
+const Place = styled.span`
+  margin: 15px;
+  text-align: left;
 `;

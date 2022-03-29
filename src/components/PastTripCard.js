@@ -4,9 +4,11 @@ import PastTripList from './PastTripList';
 
 export default function PastTripCard() {
   return (
-    <PastTripCards role="list" aria-label="past-trips">
-      {pastTripList.map(({ country, city, _id }) => {
-        return <PastTripList country={country} city={city} key={_id} />;
+    <PastTripCards role="list" aria-label="past-trip">
+      {pastTripList.map(({ country, city, _id, image }) => {
+        return (
+          <PastTripList image={image} country={country} city={city} key={_id} />
+        );
       })}
     </PastTripCards>
   );
