@@ -20,6 +20,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
         placeholder="Enter your notes..."
         value={textInput}
         onChange={event => setTextInput(event.target.value)}
+        required
       />
       <Button type="submit" id="notes-form">
         Add
