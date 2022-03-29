@@ -6,12 +6,17 @@ import { nanoid } from 'nanoid';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  console.log(notes);
+  // console.log(notes);
   return (
     <div>
       <Heading>Journi</Heading>
-      <PastTripCard notes={notes} />
-      <PastTripNotes onSubmit={handleNewNote} />
+      <PastTripCard />
+      <PastTripNotes onHandleNewNote={handleNewNote} />
+      <ul>
+        {notes.map(({ note, id }) => {
+          return <li key={id}>{note}</li>;
+        })}
+      </ul>
     </div>
   );
 
@@ -19,11 +24,12 @@ function App() {
     //const newNotes = { note };
     const newNotes = {
       id: nanoid(),
-      note: note,
+      note,
     };
 
     setNotes([...notes, newNotes]);
-    console.log(newNotes);
+    // console.log(notes);
+    // console.log(newNotes);
   }
 }
 

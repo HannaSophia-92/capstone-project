@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 
-export default function PastTripNotes({ onSubmit }) {
+export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');
   console.log(textInput);
 
@@ -21,10 +21,9 @@ export default function PastTripNotes({ onSubmit }) {
         value={textInput}
         onChange={event => setTextInput(event.target.value)}
       />
-      <Button type="submit" id="notes-form" onClick={() => onSubmit(textInput)}>
+      <Button type="submit" id="notes-form">
         Add
       </Button>
-      <p>{textInput}</p>
     </NotesForm>
   );
 
@@ -32,9 +31,9 @@ export default function PastTripNotes({ onSubmit }) {
     event.preventDefault();
     const form = event.target;
     const inputElement = form.elements.notes;
-    onSubmit(inputElement.value);
-    setTextInput('');
+    onHandleNewNote(inputElement.value);
     form.reset();
+    setTextInput('');
   }
 }
 
