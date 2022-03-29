@@ -21,9 +21,10 @@ export default function PastTripNotes({ onSubmit }) {
         value={textInput}
         onChange={event => setTextInput(event.target.value)}
       />
-      <Button type="submit" id="notes-form">
+      <Button type="submit" id="notes-form" onClick={() => onSubmit(textInput)}>
         Add
       </Button>
+      <p>{textInput}</p>
     </NotesForm>
   );
 
@@ -32,6 +33,7 @@ export default function PastTripNotes({ onSubmit }) {
     const form = event.target;
     const inputElement = form.elements.notes;
     onSubmit(inputElement.value);
+    setTextInput('');
     form.reset();
   }
 }
