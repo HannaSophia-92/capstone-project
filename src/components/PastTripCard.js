@@ -5,6 +5,8 @@ import { useState } from 'react';
 import PastTripNotes from './PastTripNotes';
 import NotesList from './NotesList';
 
+import { BsArrowLeftCircleFill } from 'react-icons/bs';
+
 export default function PastTripCard({ notes, onHandleNewNote }) {
   const [active, setActive] = useState(true);
 
@@ -29,10 +31,17 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
         </PastTripCards>
       )}
       {!active && (
-        <PastTripNotes
-          onHandleNewNote={onHandleNewNote}
-          onClick={() => handleCardToggle()}
-        />
+        <GoBackButton onClick={() => handleCardToggle()}>
+          <BsArrowLeftCircleFill />
+        </GoBackButton>
+      )}
+      {!active && (
+        <>
+          <PastTripNotes
+            onHandleNewNote={onHandleNewNote}
+            onClick={() => handleCardToggle()}
+          />
+        </>
       )}
       {!active && <NotesList notes={notes} />}
     </>
@@ -42,6 +51,14 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
     setActive(!active);
   }
 }
+
+const GoBackButton = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #2f2f2f;
+  margin: 0 15px;
+`;
 
 const PastTripCards = styled.ul`
   display: flex;
