@@ -1,16 +1,26 @@
 import styled from 'styled-components';
 import Button from './Button';
 
-export default function PastTripList({ country, city, _id, image }) {
+export default function PastTripList({
+  country,
+  city,
+  _id,
+  image,
+  handleCardToggle,
+}) {
   return (
     <PastTripLists key={_id}>
       <Image alt="country" src={image} />
       <Place>
         {country}, {city}
       </Place>
-      <Button>Notes</Button>
+      <Button onClick={handleToggle}>Notes</Button>
     </PastTripLists>
   );
+
+  function handleToggle() {
+    handleCardToggle();
+  }
 }
 
 const PastTripLists = styled.li`

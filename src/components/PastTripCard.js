@@ -13,11 +13,7 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
   return (
     <>
       {isActive && (
-        <PastTripCards
-          onClick={() => handleCardToggle()}
-          role="list"
-          aria-label="past-trips"
-        >
+        <PastTripCards role="list" aria-label="past-trips">
           {pastTripList.map(({ country, city, _id, image }) => {
             return (
               <PastTripList
@@ -25,6 +21,7 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
                 country={country}
                 city={city}
                 key={_id}
+                handleCardToggle={handleCardToggle}
               />
             );
           })}
