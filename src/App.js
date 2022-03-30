@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  // console.log(notes);
+
   return (
     <div>
       <Heading>Journi</Heading>
@@ -14,15 +14,12 @@ function App() {
   );
 
   function handleNewNote(note) {
-    //const newNotes = { note };
     const newNotes = {
       id: nanoid(),
       note,
     };
 
     setNotes([...notes, newNotes]);
-    // console.log(notes);
-    // console.log(newNotes);
   }
 }
 

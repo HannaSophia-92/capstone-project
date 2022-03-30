@@ -2,8 +2,8 @@ import pastTripList from '../data';
 import styled from 'styled-components';
 import PastTripList from './PastTripList';
 import { useState } from 'react';
-import PastTripNotes from './PastTripNotes';
-import NotesList from './NotesList';
+import PastTripForm from './PastTripForm';
+import PastTripsNotesList from './PastTripNotesList';
 
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 
@@ -37,13 +37,13 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
       )}
       {!active && (
         <>
-          <PastTripNotes
+          <PastTripForm
             onHandleNewNote={onHandleNewNote}
             onClick={() => handleCardToggle()}
           />
         </>
       )}
-      {!active && <NotesList notes={notes} />}
+      {!active && <PastTripsNotesList notes={notes} />}
     </>
   );
 

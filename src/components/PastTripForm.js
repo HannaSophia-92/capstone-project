@@ -4,7 +4,6 @@ import ButtonAdd from './Button';
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');
-  console.log(textInput);
 
   return (
     <>
