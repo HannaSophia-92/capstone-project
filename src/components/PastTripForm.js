@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ButtonAdd from './Button';
+import Button from './Button';
+import ScreenReaderOnly from './ScreenReaderOnly';
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');
@@ -13,6 +14,9 @@ export default function PastTripNotes({ onHandleNewNote }) {
         autoComplete="off"
       >
         <Label htmlFor="notes">Things to remember:</Label>
+        <ScreenReaderOnly id="notes-form">
+          Enter notes to remember
+        </ScreenReaderOnly>
         <Input
           type="text"
           id="notes"
@@ -24,9 +28,9 @@ export default function PastTripNotes({ onHandleNewNote }) {
           rows="3"
           required
         />
-        <ButtonAdd variant="add" type="submit" id="notes-form">
+        <Button variant="add" type="submit">
           Add notes
-        </ButtonAdd>
+        </Button>
       </NotesForm>
     </>
   );
@@ -34,8 +38,8 @@ export default function PastTripNotes({ onHandleNewNote }) {
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
-    const inputElement = form.elements.notes.value.trim();
-    onHandleNewNote(inputElement);
+    const inputValue = form.elements.notes.value.trim();
+    onHandleNewNote(inputValue);
     form.reset();
     setTextInput('');
   }

@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import PastTripNotes from './PastTripNotes';
+import PastTripForm from './PastTripForm';
 import userEvent from '@testing-library/user-event';
 
 describe('PastTripNotes', () => {
-  it('renders an input with a placeholder', () => {
+  it('renders an input with a placeholder and a button', () => {
     render(
-      <PastTripNotes
+      <PastTripForm
         labelText="Things to remember"
         placeholder="Enter your notes..."
         name="notes"
@@ -19,23 +19,23 @@ describe('PastTripNotes', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('renders a form with the name "Add notes"', () => {
-    render(<PastTripNotes />);
+  it('renders a form with the name "Enter notes to remember"', () => {
+    render(<PastTripForm />);
 
-    const form = screen.getByRole('form', { name: 'Add notes' });
+    const form = screen.getByRole('form', { name: 'Enter notes to remember' });
     expect(form).toBeInTheDocument();
   });
 
   it('submits form data when field is filled out', () => {
     const handleNewNote = jest.fn();
-    render(<PastTripNotes onHandleNewNote={handleNewNote} />);
+    render(<PastTripForm onHandleNewNote={handleNewNote} />);
 
     const input = screen.getByLabelText(/Things to remember/i);
     const button = screen.getByRole('button');
 
-    userEvent.type(input, '{enter}');
+    userEvent.type(input, 'Lorem ipsum');
     userEvent.click(button);
 
-    expect(handleNewNote).not.toHaveBeenCalledWith();
+    expect(handleNewNote).toHaveBeenCalledWith('Lorem ipsum');
   });
 });

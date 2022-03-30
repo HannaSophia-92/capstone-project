@@ -8,15 +8,15 @@ import PastTripsNotesList from './PastTripNotesList';
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 
 export default function PastTripCard({ notes, onHandleNewNote }) {
-  const [active, setActive] = useState(true);
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <>
-      {active && (
+      {isActive && (
         <PastTripCards
           onClick={() => handleCardToggle()}
           role="list"
-          aria-label="past-trip"
+          aria-label="past-trips"
         >
           {pastTripList.map(({ country, city, _id, image }) => {
             return (
@@ -30,12 +30,12 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
           })}
         </PastTripCards>
       )}
-      {!active && (
+      {!isActive && (
         <GoBackButton onClick={() => handleCardToggle()}>
           <BsArrowLeftCircleFill />
         </GoBackButton>
       )}
-      {!active && (
+      {!isActive && (
         <>
           <PastTripForm
             onHandleNewNote={onHandleNewNote}
@@ -43,12 +43,12 @@ export default function PastTripCard({ notes, onHandleNewNote }) {
           />
         </>
       )}
-      {!active && <PastTripsNotesList notes={notes} />}
+      {!isActive && <PastTripsNotesList notes={notes} />}
     </>
   );
 
   function handleCardToggle() {
-    setActive(!active);
+    setIsActive(!isActive);
   }
 }
 
