@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function NotesList({ notes }) {
+export default function PastTripNotes({ notes }) {
   return (
     <ul>
       {notes.map(({ note, id }) => {

@@ -1,46 +1,66 @@
+import pastTripList from '../data';
 import styled from 'styled-components';
-import Button from './Button';
+import PastTripCard from './PastTripCard';
+import { useState } from 'react';
+import PastTripForm from './PastTripForm';
+import PastTripNotes from './PastTripNotes';
 
-export default function PastTripList({
-  country,
-  city,
-  _id,
-  image,
-  handleCardToggle,
-}) {
+import { BsArrowLeftCircleFill } from 'react-icons/bs';
+
+export default function PastTripList({ notes, onHandleNewNote }) {
+  const [isActive, setIsActive] = useState(true);
+
   return (
-    <PastTripLists key={_id}>
-      <Image alt="country" src={image} />
-      <Place>
-        {country}, {city}
-      </Place>
-      <Button onClick={handleToggle}>Notes</Button>
-    </PastTripLists>
+    <>
+      {isActive && (
+        <PastTripLists role="list" aria-label="past-trips">
+          {pastTripList.map(({ country, city, _id, image }) => {
+            return (
+              <PastTripCard
+                image={image}
+                country={country}
+                city={city}
+                key={_id}
+                handleCardToggle={handleCardToggle}
+              />
+            );
+          })}
+        </PastTripLists>
+      )}
+      {!isActive && (
+        <GoBackButton onClick={() => handleCardToggle()}>
+          <BsArrowLeftCircleFill />
+        </GoBackButton>
+      )}
+      {!isActive && (
+        <>
+          <PastTripForm
+            onHandleNewNote={onHandleNewNote}
+            onClick={() => handleCardToggle()}
+          />
+        </>
+      )}
+      {!isActive && <PastTripNotes notes={notes} />}
+    </>
   );
 
-  function handleToggle() {
-    handleCardToggle();
+  function handleCardToggle() {
+    setIsActive(!isActive);
   }
 }
 
-const PastTripLists = styled.li`
+const GoBackButton = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #2f2f2f;
+  margin: 0 15px;
+`;
+
+const PastTripLists = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  background-color: gray;
-  height: 300px;
-  border-radius: 40px;
-  background-color: #2f2f2f;
-  color: #f6f6f6;
-`;
-
-const Image = styled.img`
-  border-radius: 40px;
-`;
-
-const Place = styled.span`
-  margin: 15px;
-  text-align: left;
+  gap: 20px;
+  list-style: none;
+  margin: 20px;
 `;
