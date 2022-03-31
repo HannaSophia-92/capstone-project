@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import FutureTrips from './pages/FutureTrips';
+import FormPage from './pages/FormPage';
 import Navigation from './components/Navigation';
+import FuturePage from './pages/FuturePage';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  //const navigate = useNavigate();
+  const [trips, setTrips] = useState([]);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -20,11 +22,20 @@ function App() {
             <PastTripList onHandleNewNote={handleNewNote} notes={notes} />
           }
         />
-        <Route path="/futureTrips" element={<FutureTrips />} />
+        <Route
+          path="/formPage"
+          element={<FormPage onCreateTrip={createTrip} />}
+        />
+        <Route path="/futurePage" element={<FuturePage trips={trips} />} />
       </Routes>
       <Navigation />
     </div>
   );
+
+  function createTrip(formData) {
+    setTrips([...trips, formData]);
+    navigate('/futurePage');
+  }
 
   function handleNewNote(note) {
     const newNotes = {

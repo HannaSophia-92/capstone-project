@@ -4,7 +4,8 @@ export default function Navigation() {
   return (
     <nav>
       <NavLink to="/">PastTrips</NavLink>
-      <NavLink to="/futureTrips">FutureTrips</NavLink>
+      <NavLink to="/formPage">FormPage</NavLink>
+      <NavLink to="/futurePage">FuturePage</NavLink>
     </nav>
   );
 }
