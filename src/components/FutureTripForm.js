@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+import Button from './Button';
 
 export default function FutureTripForm({ onCreateTrip }) {
   const [formData, setFormData] = useState('');
@@ -12,11 +14,12 @@ export default function FutureTripForm({ onCreateTrip }) {
   };
 
   return (
-    <form
+    <Form
       aria-labelledby="future-trips-form"
       autoComplete="off"
       onSubmit={handleSubmit}
     >
+      <h2 id="future-trips-form">New Trip</h2>
       <label htmlFor="destination">Add a new Destination:</label>
       <input
         type="text"
@@ -24,6 +27,7 @@ export default function FutureTripForm({ onCreateTrip }) {
         name="destination"
         onChange={handleOnChange}
         maxLength="100"
+        placeholder="Country/City"
         required
       ></input>
 
@@ -34,8 +38,8 @@ export default function FutureTripForm({ onCreateTrip }) {
         name="date"
         onChange={handleOnChange}
       ></input>
-      <button id="future-trips-form">Add Trip</button>
-    </form>
+      <Button>Add Trip</Button>
+    </Form>
   );
 
   function handleSubmit(event) {
@@ -43,3 +47,10 @@ export default function FutureTripForm({ onCreateTrip }) {
     onCreateTrip(formData);
   }
 }
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px;
+`;

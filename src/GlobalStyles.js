@@ -11,4 +11,8 @@ export default createGlobalStyle`
     font-family: sans-serif;
     font-size: 112.5%;
   }
+
+  h2 {
+    font-size: 18px;
+  }
 `;

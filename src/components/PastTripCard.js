@@ -29,7 +29,6 @@ const PastTripCards = styled.li`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: gray;
   height: 300px;
   border-radius: 40px;
   background-color: #2f2f2f;
