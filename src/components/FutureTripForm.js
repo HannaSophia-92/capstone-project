@@ -23,6 +23,7 @@ export default function FutureTripForm({ onCreateTrip }) {
         id="destination"
         name="destination"
         onChange={handleOnChange}
+        maxLength="100"
         required
       ></input>
 

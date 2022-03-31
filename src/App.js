@@ -28,7 +28,9 @@ function App() {
         />
         <Route path="/futurePage" element={<FuturePage trips={trips} />} />
       </Routes>
-      <Navigation />
+      <Footer>
+        <Navigation />
+      </Footer>
     </div>
   );
 
@@ -49,6 +51,12 @@ function App() {
 const Heading = styled.h1`
   margin: 20px;
   text-align: center;
+`;
+
+const Footer = styled.footer`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 `;
 
 export default App;
