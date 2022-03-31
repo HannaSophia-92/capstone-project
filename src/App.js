@@ -1,4 +1,4 @@
-import PastTripCard from './components/PastTripCard';
+import PastTripList from './components/PastTripList';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Heading>Journi</Heading>
-      <PastTripCard onHandleNewNote={handleNewNote} notes={notes} />
+      <PastTripList onHandleNewNote={handleNewNote} notes={notes} />
     </div>
   );
 

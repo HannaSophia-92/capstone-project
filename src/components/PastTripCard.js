@@ -1,66 +1,46 @@
-import pastTripList from '../data';
 import styled from 'styled-components';
-import PastTripList from './PastTripList';
-import { useState } from 'react';
-import PastTripForm from './PastTripForm';
-import PastTripsNotesList from './PastTripNotesList';
+import Button from './Button';
 
-import { BsArrowLeftCircleFill } from 'react-icons/bs';
-
-export default function PastTripCard({ notes, onHandleNewNote }) {
-  const [isActive, setIsActive] = useState(true);
-
+export default function PastTripCard({
+  country,
+  city,
+  _id,
+  image,
+  handleCardToggle,
+}) {
   return (
-    <>
-      {isActive && (
-        <PastTripCards role="list" aria-label="past-trips">
-          {pastTripList.map(({ country, city, _id, image }) => {
-            return (
-              <PastTripList
-                image={image}
-                country={country}
-                city={city}
-                key={_id}
-                handleCardToggle={handleCardToggle}
-              />
-            );
-          })}
-        </PastTripCards>
-      )}
-      {!isActive && (
-        <GoBackButton onClick={() => handleCardToggle()}>
-          <BsArrowLeftCircleFill />
-        </GoBackButton>
-      )}
-      {!isActive && (
-        <>
-          <PastTripForm
-            onHandleNewNote={onHandleNewNote}
-            onClick={() => handleCardToggle()}
-          />
-        </>
-      )}
-      {!isActive && <PastTripsNotesList notes={notes} />}
-    </>
+    <PastTripCards key={_id}>
+      <Image alt="country" src={image} />
+      <Place>
+        {country}, {city}
+      </Place>
+      <Button onClick={handleToggle}>Notes</Button>
+    </PastTripCards>
   );
 
-  function handleCardToggle() {
-    setIsActive(!isActive);
+  function handleToggle() {
+    handleCardToggle();
   }
 }
 
-const GoBackButton = styled.button`
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  color: #2f2f2f;
-  margin: 0 15px;
-`;
-
-const PastTripCards = styled.ul`
+const PastTripCards = styled.li`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  list-style: none;
-  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: gray;
+  height: 300px;
+  border-radius: 40px;
+  background-color: #2f2f2f;
+  color: #f6f6f6;
+`;
+
+const Image = styled.img`
+  border-radius: 40px;
+`;
+
+const Place = styled.span`
+  margin: 15px;
+  text-align: left;
 `;
