@@ -26,13 +26,20 @@ function App() {
           path="/formPage"
           element={<FormPage onCreateTrip={createTrip} />}
         />
-        <Route path="/futurePage" element={<FuturePage trips={trips} />} />
+        <Route
+          path="/futurePage"
+          element={<FuturePage trips={trips} onDeleteCard={handleDeleteCard} />}
+        />
       </Routes>
       <Footer>
         <Navigation />
       </Footer>
     </div>
   );
+
+  function handleDeleteCard(cardId) {
+    setTrips(trips.filter(card => card.index !== cardId));
+  }
 
   function createTrip(formData) {
     setTrips([...trips, formData]);
