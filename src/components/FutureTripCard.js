@@ -8,7 +8,7 @@ export default function FutureTripCard({ trip, onDeleteCard }) {
         {trip.startDate} - {trip.endDate}
       </Date>
       <span>{trip.destination}</span>
-      <Delete onClick={() => onDeleteCard(trip.index)}>
+      <Delete onClick={() => onDeleteCard(trip._id)}>
         <FiTrash size={25} />
       </Delete>
     </Card>

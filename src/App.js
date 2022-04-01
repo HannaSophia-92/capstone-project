@@ -11,6 +11,8 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
+  console.log(trips);
+  //console.log(notes);
 
   return (
     <Wrapper>
@@ -41,18 +43,22 @@ function App() {
     </Wrapper>
   );
 
-  function handleDeleteCard(cardId) {
-    setTrips(trips.filter(card => card.index !== cardId));
+  function handleDeleteCard(_id) {
+    setTrips(trips.filter(trip => trip._id !== _id));
   }
 
-  function createTrip(formData) {
-    setTrips([...trips, formData]);
+  function createTrip(data) {
+    const newData = {
+      _id: nanoid(),
+      data,
+    };
+    setTrips([...trips, newData]);
     navigate('/futurePage');
   }
 
   function handleNewNote(note) {
     const newNotes = {
-      id: nanoid(),
+      _id: nanoid(),
       note,
     };
     setNotes([...notes, newNotes]);

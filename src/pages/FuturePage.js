@@ -1,14 +1,19 @@
 import FutureTripCard from '../components/FutureTripCard';
 import styled from 'styled-components';
+import { nanoid } from 'nanoid';
 
 export default function FuturePage({ trips, onDeleteCard }) {
   return (
     <>
       <Heading>Future Trips</Heading>
       <ul>
-        {trips.map((trip, index) => (
-          <li key={index}>
-            <FutureTripCard trip={trip} onDeleteCard={onDeleteCard} />
+        {trips.map(trip => (
+          <li key={trip._id}>
+            <FutureTripCard
+              _id={nanoid}
+              trip={trip}
+              onDeleteCard={onDeleteCard}
+            />
           </li>
         ))}
       </ul>
