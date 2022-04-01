@@ -16,7 +16,7 @@ export default function FutureTripForm({ onCreateTrip }) {
 
   return (
     <Form
-      aria-labelledby="future-trips-forsm"
+      aria-labelledby="future-trips-form"
       autoComplete="off"
       onSubmit={handleSubmit}
     >
@@ -30,7 +30,7 @@ export default function FutureTripForm({ onCreateTrip }) {
         maxLength="100"
         placeholder="Country/City"
         required
-      ></input>
+      />
 
       <Label htmlFor="startDate">Add Dates:</Label>
       <InputDateWrapper>
@@ -39,7 +39,7 @@ export default function FutureTripForm({ onCreateTrip }) {
           id="startDate"
           name="startDate"
           onChange={handleOnChange}
-        ></input>
+        />
         <Label htmlFor="endDate">
           <ScreenReaderOnly>Add Dates:</ScreenReaderOnly>
         </Label>
@@ -49,7 +49,7 @@ export default function FutureTripForm({ onCreateTrip }) {
           id="endDate"
           name="endDate"
           onChange={handleOnChange}
-        ></input>
+        />
       </InputDateWrapper>
 
       <Button variant="add">Add Trip</Button>

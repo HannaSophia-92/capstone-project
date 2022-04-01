@@ -36,7 +36,7 @@ const Delete = styled.div`
   bottom: 10px;
   right: 25px;
 
-  &&:hover {
+  &:hover {
     color: red;
   }
 `;
