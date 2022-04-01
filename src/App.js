@@ -13,13 +13,17 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <Wrapper>
       <Heading>Journi</Heading>
       <Routes>
         <Route
           path="/"
           element={
-            <PastTripList onHandleNewNote={handleNewNote} notes={notes} />
+            <PastTripList
+              onHandleNewNote={handleNewNote}
+              notes={notes}
+              onDeleteCard={handleDeleteCard}
+            />
           }
         />
         <Route
@@ -34,7 +38,7 @@ function App() {
       <Footer>
         <Navigation />
       </Footer>
-    </div>
+    </Wrapper>
   );
 
   function handleDeleteCard(cardId) {
@@ -55,9 +59,14 @@ function App() {
   }
 }
 
+const Wrapper = styled.div`
+  margin-bottom: 60px;
+`;
+
 const Heading = styled.h1`
   margin: 20px;
   text-align: center;
+  color: #2f2f2f;
 `;
 
 const Footer = styled.footer`

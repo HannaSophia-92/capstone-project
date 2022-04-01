@@ -1,16 +1,21 @@
 import FutureTripCard from '../components/FutureTripCard';
+import styled from 'styled-components';
 
 export default function FuturePage({ trips, onDeleteCard }) {
   return (
     <>
-      <h2>Future Trips</h2>
+      <Heading>Future Trips</Heading>
       <ul>
         {trips.map((trip, index) => (
-          <li key={index} onClick={() => onDeleteCard(trip.index)}>
-            <FutureTripCard trip={trip} />
+          <li key={index}>
+            <FutureTripCard trip={trip} onDeleteCard={onDeleteCard} />
           </li>
         ))}
       </ul>
     </>
   );
 }
+
+const Heading = styled.h2`
+  margin: 20px;
+`;

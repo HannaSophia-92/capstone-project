@@ -4,9 +4,11 @@ import { FiTrash } from 'react-icons/fi';
 export default function FutureTripCard({ trip, onDeleteCard }) {
   return (
     <Card>
-      <Date>{trip.date}</Date>
+      <Date>
+        {trip.startDate} - {trip.endDate}
+      </Date>
       <span>{trip.destination}</span>
-      <Delete onDeleteCard={onDeleteCard}>
+      <Delete onClick={() => onDeleteCard(trip.index)}>
         <FiTrash size={25} />
       </Delete>
     </Card>

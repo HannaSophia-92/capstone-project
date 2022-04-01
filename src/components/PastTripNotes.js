@@ -15,7 +15,7 @@ const ListEntries = styled.li`
   flex-direction: column;
   word-break: break-all;
   margin: 15px;
-  padding: 15px;
+  padding: 20px;
   border-radius: 40px;
   min-height: 100px;
   background-color: #2f2f2f;

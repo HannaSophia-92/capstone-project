@@ -10,9 +10,11 @@ export default createGlobalStyle`
   body {
     font-family: sans-serif;
     font-size: 112.5%;
+
   }
 
   h2 {
     font-size: 18px;
+    color: #2f2f2f;
   }
 `;
