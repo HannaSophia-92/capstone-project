@@ -2,7 +2,6 @@ import FutureTripCard from '../components/FutureTripCard';
 import styled from 'styled-components';
 
 export default function FuturePage({ trips, onDeleteCard }) {
-  console.log(trips);
   return (
     <>
       <Heading>Future Trips</Heading>

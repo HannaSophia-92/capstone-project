@@ -6,10 +6,11 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import FormPage from './pages/FormPage';
 import Navigation from './components/Navigation';
 import FuturePage from './pages/FuturePage';
+import { useLocalStorage } from 'usehooks-ts';
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [trips, setTrips] = useState([]);
+  const [notes, setNotes] = useLocalStorage('notes', []);
+  const [trips, setTrips] = useLocalStorage('trips', []);
   const navigate = useNavigate();
 
   return (
