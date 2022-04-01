@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
 
-export default function PastTripNotes({ notes }) {
+export default function PastTripNotes({ notes, onDeleteNote }) {
   return (
     <ul>
       {notes.map(({ note, _id }) => {
         return (
           <ListEntries key={_id}>
             <p>{note}</p>
-            <Delete>
+            <Delete onClick={() => onDeleteNote(_id)}>
               <FiTrash />
             </Delete>
           </ListEntries>

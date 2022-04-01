@@ -11,8 +11,6 @@ function App() {
   const [notes, setNotes] = useState([]);
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
-  console.log(trips);
-  //console.log(notes);
 
   return (
     <Wrapper>
@@ -24,7 +22,7 @@ function App() {
             <PastTripList
               onHandleNewNote={handleNewNote}
               notes={notes}
-              onDeleteCard={handleDeleteCard}
+              onDeleteNote={handleDeleteNote}
             />
           }
         />
@@ -43,16 +41,16 @@ function App() {
     </Wrapper>
   );
 
-  function handleDeleteCard(_id) {
-    setTrips(trips.filter(trip => trip._id !== _id));
+  function handleDeleteCard(tripId) {
+    setTrips(trips.filter(trip => trip._id !== tripId));
   }
 
-  function createTrip(data) {
-    const newData = {
-      _id: nanoid(),
-      data,
-    };
-    setTrips([...trips, newData]);
+  function handleDeleteNote(noteId) {
+    setNotes(notes.filter(note => note._id !== noteId));
+  }
+
+  function createTrip(formData) {
+    setTrips([...trips, formData]);
     navigate('/futurePage');
   }
 

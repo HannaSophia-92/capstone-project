@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
@@ -9,6 +10,7 @@ export default function FutureTripForm({ onCreateTrip }) {
   const handleOnChange = event => {
     const { name, value } = event.target;
     setFormData({
+      _id: nanoid(),
       ...formData,
       [name]: value,
     });

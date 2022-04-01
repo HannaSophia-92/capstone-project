@@ -7,6 +7,7 @@ export default function PastTripCard({
   _id,
   image,
   handleCardToggle,
+  onDeleteNote,
 }) {
   return (
     <PastTripCards key={_id}>
@@ -33,6 +34,7 @@ const PastTripCards = styled.li`
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;
+  position: relative;
 `;
 
 const Image = styled.img`
@@ -42,4 +44,14 @@ const Image = styled.img`
 const Place = styled.span`
   margin: 15px;
   text-align: left;
+`;
+
+const Delete = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 25px;
+
+  &:hover {
+    color: red;
+  }
 `;

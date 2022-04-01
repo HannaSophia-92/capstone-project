@@ -4,10 +4,9 @@ import PastTripCard from './PastTripCard';
 import { useState } from 'react';
 import PastTripForm from './PastTripForm';
 import PastTripNotes from './PastTripNotes';
-
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 
-export default function PastTripList({ notes, onHandleNewNote }) {
+export default function PastTripList({ notes, onHandleNewNote, onDeleteNote }) {
   const [isActive, setIsActive] = useState(true);
 
   return (
@@ -22,6 +21,7 @@ export default function PastTripList({ notes, onHandleNewNote }) {
                 city={city}
                 key={_id}
                 handleCardToggle={handleCardToggle}
+                _id={_id}
               />
             );
           })}
@@ -40,7 +40,7 @@ export default function PastTripList({ notes, onHandleNewNote }) {
           />
         </>
       )}
-      {!isActive && <PastTripNotes notes={notes} />}
+      {!isActive && <PastTripNotes notes={notes} onDeleteNote={onDeleteNote} />}
     </>
   );
 
