@@ -45,13 +45,3 @@ const Place = styled.span`
   margin: 15px;
   text-align: left;
 `;
-
-const Delete = styled.div`
-  position: absolute;
-  bottom: 10px;
-  right: 25px;
-
-  &:hover {
-    color: red;
-  }
-`;

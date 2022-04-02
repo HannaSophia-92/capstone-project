@@ -1,12 +1,11 @@
-import PastTripList from './components/PastTripList';
 import styled from 'styled-components';
-import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import FormPage from './pages/FormPage';
 import Navigation from './components/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
+import HomePage from './pages/HomePage';
 
 function App() {
   const [notes, setNotes] = useLocalStorage('notes', []);
@@ -15,12 +14,11 @@ function App() {
 
   return (
     <Wrapper>
-      <Heading>Journi</Heading>
       <Routes>
         <Route
           path="/"
           element={
-            <PastTripList
+            <HomePage
               onHandleNewNote={handleNewNote}
               notes={notes}
               onDeleteNote={handleDeleteNote}
@@ -66,12 +64,6 @@ function App() {
 
 const Wrapper = styled.div`
   margin-bottom: 60px;
-`;
-
-const Heading = styled.h1`
-  margin: 20px;
-  text-align: center;
-  color: #2f2f2f;
 `;
 
 const Footer = styled.footer`

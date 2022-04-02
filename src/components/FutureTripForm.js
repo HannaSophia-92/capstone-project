@@ -54,6 +54,20 @@ export default function FutureTripForm({ onCreateTrip }) {
         />
       </InputDateWrapper>
 
+      <Label htmlFor="notes">Notes:</Label>
+      <ScreenReaderOnly id="notes">Enter notes</ScreenReaderOnly>
+
+      <textarea
+        type="text"
+        id="notes"
+        name="notes"
+        placeholder="Documents, Visa, Packing List..."
+        onChange={handleOnChange}
+        maxLength="500"
+        rows="3"
+        required
+      />
+
       <Button variant="add">Add Trip</Button>
     </Form>
   );

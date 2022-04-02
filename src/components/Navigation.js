@@ -28,7 +28,6 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   height: 48px;
-  background-color: steelblue;
   background-color: #2f2f2f;
 `;
 
