@@ -4,7 +4,7 @@ import PastTripCard from './PastTripCard';
 import { useState } from 'react';
 import PastTripForm from './PastTripForm';
 import PastTripNotes from './PastTripNotes';
-import { BsArrowLeftCircleFill } from 'react-icons/bs';
+import { MdKeyboardBackspace } from 'react-icons/md';
 
 export default function PastTripList({ notes, onHandleNewNote, onDeleteNote }) {
   const [isActive, setIsActive] = useState(true);
@@ -29,7 +29,7 @@ export default function PastTripList({ notes, onHandleNewNote, onDeleteNote }) {
       )}
       {!isActive && (
         <GoBackButton onClick={() => handleCardToggle()}>
-          <BsArrowLeftCircleFill />
+          <MdKeyboardBackspace size={25} />
         </GoBackButton>
       )}
       {!isActive && (
@@ -54,7 +54,7 @@ const GoBackButton = styled.button`
   background: transparent;
   font-size: 20px;
   color: #2f2f2f;
-  margin: 0 15px;
+  padding: 10px 15px 0 15px;
 `;
 
 const PastTripLists = styled.ul`

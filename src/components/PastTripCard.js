@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Button from './Button';
+import { MdOutlineNoteAlt } from 'react-icons/md';
+import ScreenReaderOnly from './ScreenReaderOnly';
 
 export default function PastTripCard({
   country,
@@ -7,7 +8,6 @@ export default function PastTripCard({
   _id,
   image,
   handleCardToggle,
-  onDeleteNote,
 }) {
   return (
     <PastTripCards key={_id}>
@@ -15,7 +15,10 @@ export default function PastTripCard({
       <Place>
         {country}, {city}
       </Place>
-      <Button onClick={handleToggle}>Notes</Button>
+      <StyledButton onClick={handleToggle}>
+        <ScreenReaderOnly>Notes</ScreenReaderOnly>
+        <MdOutlineNoteAlt size={25} />
+      </StyledButton>
     </PastTripCards>
   );
 
@@ -30,7 +33,7 @@ const PastTripCards = styled.li`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 300px;
+  height: 330px;
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;
@@ -38,10 +41,17 @@ const PastTripCards = styled.li`
 `;
 
 const Image = styled.img`
-  border-radius: 40px;
+  border-radius: 20px;
+  margin-top: 15px;
 `;
 
 const Place = styled.span`
   margin: 15px;
   text-align: left;
+`;
+
+const StyledButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #f6f6f6;
 `;

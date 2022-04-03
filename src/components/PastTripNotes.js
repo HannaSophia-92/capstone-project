@@ -24,19 +24,22 @@ const ListEntries = styled.li`
   word-break: break-all;
   margin: 15px;
   padding: 20px;
-  border-radius: 40px;
-  min-height: 100px;
+  border-radius: 20px;
+  min-height: 150px;
   background-color: #2f2f2f;
   color: #f6f6f6;
   position: relative;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
 `;
 
-const Delete = styled.div`
+const Delete = styled.span`
   position: absolute;
   bottom: 10px;
   right: 25px;
+  cursor: pointer;
 
   &:hover {
-    color: red;
+    color: #ffcb74;
   }
 `;

@@ -41,16 +41,17 @@ export default function FutureTripForm({ onCreateTrip }) {
           id="startDate"
           name="startDate"
           onChange={handleOnChange}
+          required
         />
         <Label htmlFor="endDate">
           <ScreenReaderOnly>Add Dates:</ScreenReaderOnly>
         </Label>
-
         <input
           type="date"
           id="endDate"
           name="endDate"
           onChange={handleOnChange}
+          required
         />
       </InputDateWrapper>
 
@@ -65,7 +66,6 @@ export default function FutureTripForm({ onCreateTrip }) {
         onChange={handleOnChange}
         maxLength="500"
         rows="3"
-        required
       />
 
       <Button variant="add">Add Trip</Button>

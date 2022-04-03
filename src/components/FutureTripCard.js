@@ -2,10 +2,14 @@ import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
 
 export default function FutureTripCard({ trip, onDeleteCard }) {
+  var dayjs = require('dayjs');
+  dayjs().format();
+
   return (
     <Card>
       <Date>
-        {trip.startDate} - {trip.endDate}
+        {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
+        {dayjs(trip.endDate).format('DD-MM-YY')}
       </Date>
       <Destination>{trip.destination}</Destination>
       <Notes>{trip.notes}</Notes>
@@ -33,6 +37,7 @@ const Date = styled.span`
   display: flex;
   justify-content: center;
   margin: 10px;
+  gap: 15px;
 `;
 
 const Destination = styled.p`
