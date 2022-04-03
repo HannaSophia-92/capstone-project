@@ -17,4 +17,9 @@ export default createGlobalStyle`
     font-size: 18px;
     color: #2f2f2f;
   }
+
+  input {
+  border: none;
+  border-bottom: 1px solid #2f2f2f;
+}
 `;

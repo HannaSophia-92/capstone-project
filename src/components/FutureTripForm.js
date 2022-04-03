@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import ScreenReaderOnly from './ScreenReaderOnly';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 
 export default function FutureTripForm({ onCreateTrip }) {
   const [formData, setFormData] = useState('');
@@ -34,25 +35,30 @@ export default function FutureTripForm({ onCreateTrip }) {
         required
       />
 
-      <Label htmlFor="startDate">Add Dates:</Label>
       <InputDateWrapper>
-        <input
-          type="date"
-          id="startDate"
-          name="startDate"
-          onChange={handleOnChange}
-          required
-        />
-        <Label htmlFor="endDate">
-          <ScreenReaderOnly>Add Dates:</ScreenReaderOnly>
-        </Label>
-        <input
-          type="date"
-          id="endDate"
-          name="endDate"
-          onChange={handleOnChange}
-          required
-        />
+        <div>
+          <Label htmlFor="startDate">Start:</Label>
+          <InputDate
+            type="date"
+            id="startDate"
+            name="startDate"
+            onChange={handleOnChange}
+            required
+          />
+        </div>
+        <span>
+          <HiOutlineArrowNarrowRight size={20} />
+        </span>
+        <div>
+          <Label htmlFor="endDate">End:</Label>
+          <InputDate
+            type="date"
+            id="endDate"
+            name="endDate"
+            onChange={handleOnChange}
+            required
+          />
+        </div>
       </InputDateWrapper>
 
       <Label htmlFor="notes">Notes:</Label>
@@ -82,16 +88,23 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin: 15px;
+  margin: 20px;
 `;
 
 const Label = styled.label`
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
   margin-top: 10px;
 `;
 
 const InputDateWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const InputDate = styled.input`
+  color: gray;
+  margin-top: 12px;
 `;

@@ -25,7 +25,7 @@ const ListEntries = styled.li`
   margin: 15px;
   padding: 20px;
   border-radius: 20px;
-  min-height: 150px;
+  min-height: 110px;
   background-color: #2f2f2f;
   color: #f6f6f6;
   position: relative;
