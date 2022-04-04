@@ -12,22 +12,28 @@ export default function FutureTripCard({ trip, onDelete, id }) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Card>
-      <Date>
-        {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
-        {dayjs(trip.endDate).format('DD-MM-YY')}
-      </Date>
-      <Destination>{trip.destination}</Destination>
-      <Notes>{trip.notes}</Notes>
-      {/* <Delete onClick={() => onDeleteCard(trip._id)}> */}
-      <Delete onClick={() => setVisible(!setVisible)}>
-        <FiTrash size={25} />
-      </Delete>
-      <Modal
-        onDelete={() => onDelete(id)}
-        onKeep={() => setVisible(!visible)}
-      />
-    </Card>
+    <>
+      {!visible && (
+        <Card>
+          <Date>
+            {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
+            {dayjs(trip.endDate).format('DD-MM-YY')}
+          </Date>
+          <Destination>{trip.destination}</Destination>
+          <Notes>{trip.notes}</Notes>
+          {/* <Delete onClick={() => onDeleteCard(trip._id)}> */}
+          <Delete onClick={() => setVisible(!visible)}>
+            <FiTrash size={25} />
+          </Delete>
+        </Card>
+      )}
+      {visible && (
+        <Modal
+          onDelete={() => onDelete(id)}
+          onKeep={() => setVisible(!visible)}
+        />
+      )}
+    </>
   );
 }
 

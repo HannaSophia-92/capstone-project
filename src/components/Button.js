@@ -22,14 +22,14 @@ export default styled.button`
   ${props =>
     props.variant === 'submit' &&
     css`
-      background-color: hotpink;
+      background-color: seagreen;
       color: #f6f6f6;
     `}
 
     ${props =>
     props.variant === 'danger' &&
     css`
-      background-color: hotpink;
+      background-color: tomato;
       color: #f6f6f6;
     `}
 `;
