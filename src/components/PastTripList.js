@@ -4,10 +4,9 @@ import PastTripCard from './PastTripCard';
 import { useState } from 'react';
 import PastTripForm from './PastTripForm';
 import PastTripNotes from './PastTripNotes';
+import { MdKeyboardBackspace } from 'react-icons/md';
 
-import { BsArrowLeftCircleFill } from 'react-icons/bs';
-
-export default function PastTripList({ notes, onHandleNewNote }) {
+export default function PastTripList({ notes, onHandleNewNote, onDeleteNote }) {
   const [isActive, setIsActive] = useState(true);
 
   return (
@@ -22,6 +21,7 @@ export default function PastTripList({ notes, onHandleNewNote }) {
                 city={city}
                 key={_id}
                 handleCardToggle={handleCardToggle}
+                _id={_id}
               />
             );
           })}
@@ -29,7 +29,7 @@ export default function PastTripList({ notes, onHandleNewNote }) {
       )}
       {!isActive && (
         <GoBackButton onClick={() => handleCardToggle()}>
-          <BsArrowLeftCircleFill />
+          <MdKeyboardBackspace size={25} />
         </GoBackButton>
       )}
       {!isActive && (
@@ -40,7 +40,7 @@ export default function PastTripList({ notes, onHandleNewNote }) {
           />
         </>
       )}
-      {!isActive && <PastTripNotes notes={notes} />}
+      {!isActive && <PastTripNotes notes={notes} onDeleteNote={onDeleteNote} />}
     </>
   );
 
@@ -54,7 +54,7 @@ const GoBackButton = styled.button`
   background: transparent;
   font-size: 20px;
   color: #2f2f2f;
-  margin: 0 15px;
+  padding: 10px 15px 0 15px;
 `;
 
 const PastTripLists = styled.ul`

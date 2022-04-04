@@ -17,7 +17,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
         <ScreenReaderOnly id="notes-form">
           Enter notes to remember
         </ScreenReaderOnly>
-        <Input
+        <Textarea
           type="text"
           id="notes"
           name="notes"
@@ -55,6 +55,7 @@ const Label = styled.label`
   padding: 15px 0;
 `;
 
-const Input = styled.textarea`
+const Textarea = styled.textarea`
   padding: 5px;
+  margin-bottom: 10px;
 `;
