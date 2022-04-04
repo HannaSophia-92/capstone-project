@@ -3,20 +3,17 @@ import FutureTripForm from './FutureTripForm';
 import userEvent from '@testing-library/user-event';
 
 describe('FutureTripForm', () => {
-  it('renders an input with a placeholder and a button', () => {
-    render(
-      <FutureTripForm
-        labelText="Add a new Destination:"
-        placeholder="Country/City"
-        name="destination"
-      />
-    );
+  it('renders three input fields with placeholder and a button', () => {
+    render(<FutureTripForm />);
 
     const inputDestination = screen.getByLabelText(/Add a new Destination:/i);
     expect(inputDestination).toHaveAttribute('placeholder', 'Country/City');
 
-    const inputDate = screen.getByLabelText(/Add Dates:/i);
-    expect(inputDate).toBeInTheDocument();
+    const inputStartDate = screen.getByLabelText(/Start:/i);
+    expect(inputStartDate).toBeInTheDocument();
+
+    const inputEndDate = screen.getByLabelText(/End:/i);
+    expect(inputEndDate).toBeInTheDocument();
 
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
