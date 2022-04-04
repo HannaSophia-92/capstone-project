@@ -39,4 +39,5 @@ const StyledModal = styled.section`
   background-color: #2f2f2f;
   color: #f6f6f6;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  border-radius: 18px;
 `;

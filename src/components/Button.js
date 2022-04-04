@@ -24,12 +24,14 @@ export default styled.button`
     css`
       background-color: seagreen;
       color: #f6f6f6;
+      text-transform: uppercase;
     `}
 
     ${props =>
     props.variant === 'danger' &&
     css`
-      background-color: tomato;
+      background-color: crimson;
       color: #f6f6f6;
+      text-transform: uppercase;
     `}
 `;
