@@ -18,4 +18,18 @@ export default styled.button`
       background-color: #2f2f2f;
       color: #f6f6f6;
     `}
+
+  ${props =>
+    props.variant === 'submit' &&
+    css`
+      background-color: hotpink;
+      color: #f6f6f6;
+    `}
+
+    ${props =>
+    props.variant === 'danger' &&
+    css`
+      background-color: hotpink;
+      color: #f6f6f6;
+    `}
 `;

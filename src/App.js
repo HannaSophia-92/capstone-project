@@ -6,10 +6,12 @@ import Navigation from './components/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
+import { useState } from 'react';
 
 function App() {
   const [notes, setNotes] = useLocalStorage('notes', []);
   const [trips, setTrips] = useLocalStorage('trips', []);
+  const [modal, setModal] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -31,7 +33,14 @@ function App() {
         />
         <Route
           path="/futurePage"
-          element={<FuturePage trips={trips} onDeleteCard={handleDeleteCard} />}
+          element={
+            <FuturePage
+              trips={trips}
+              onDeleteCard={handleDeleteCard}
+              modal={modal}
+              onDeleteClick={handleDeleteClick}
+            />
+          }
         />
       </Routes>
       <Footer>
@@ -40,17 +49,22 @@ function App() {
     </Wrapper>
   );
 
-  function handleDeleteCard(tripId) {
-    setTrips(trips.filter(trip => trip._id !== tripId));
+  function handleDeleteClick() {
+    setModal(true);
   }
 
-  function handleDeleteNote(noteId) {
-    setNotes(notes.filter(note => note._id !== noteId));
+  function handleDeleteCard(tripId) {
+    setTrips(trips.filter(trip => trip._id !== tripId));
+    setModal(false);
   }
 
   function createTrip(formData) {
     setTrips([...trips, formData]);
     navigate('/futurePage');
+  }
+
+  function handleDeleteNote(noteId) {
+    setNotes(notes.filter(note => note._id !== noteId));
   }
 
   function handleNewNote(note) {

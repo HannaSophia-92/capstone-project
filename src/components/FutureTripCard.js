@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
+import Modal from './Modal';
+import { useState } from 'react';
 
-export default function FutureTripCard({ trip, onDeleteCard }) {
+export default function FutureTripCard({ trip, onDelete, id }) {
   var dayjs = require('dayjs');
   dayjs().format();
+
+  console.log(id);
+
+  const [visible, setVisible] = useState(false);
 
   return (
     <Card>
@@ -13,9 +19,14 @@ export default function FutureTripCard({ trip, onDeleteCard }) {
       </Date>
       <Destination>{trip.destination}</Destination>
       <Notes>{trip.notes}</Notes>
-      <Delete onClick={() => onDeleteCard(trip._id)}>
+      {/* <Delete onClick={() => onDeleteCard(trip._id)}> */}
+      <Delete onClick={() => setVisible(!setVisible)}>
         <FiTrash size={25} />
       </Delete>
+      <Modal
+        onDelete={() => onDelete(id)}
+        onKeep={() => setVisible(!visible)}
+      />
     </Card>
   );
 }

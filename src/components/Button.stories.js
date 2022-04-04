@@ -26,3 +26,15 @@ GoBack.args = {
   children: 'Go Back',
   variant: 'goBack',
 };
+
+export const Submit = Template.bind({});
+Submit.args = {
+  children: 'YES',
+  variant: 'submit',
+};
+
+export const Danger = Template.bind({});
+Danger.args = {
+  children: 'NO',
+  variant: 'danger',
+};
