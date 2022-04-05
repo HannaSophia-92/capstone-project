@@ -18,12 +18,10 @@ export default function FutureTripCard({ trip, onDelete, id }) {
         </Date>
         <Destination>{trip.destination}</Destination>
         <Notes>{trip.notes}</Notes>
-        {/* <Delete onClick={() => onDeleteCard(trip._id)}> */}
         <Delete onClick={() => setVisible(!visible)}>
           <FiTrash size={25} />
         </Delete>
       </Card>
-
       {visible && (
         <Modal
           onDelete={() => onDelete(id)}

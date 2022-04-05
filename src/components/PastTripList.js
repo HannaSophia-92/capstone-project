@@ -34,7 +34,7 @@ export default function PastTripList({
       )}
       {!isActive && (
         <GoBackButton onClick={() => handleCardToggle()}>
-          <MdKeyboardBackspace size={25} />
+          <MdKeyboardBackspace size={30} />
         </GoBackButton>
       )}
       {!isActive && (

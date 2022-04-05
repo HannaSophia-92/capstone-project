@@ -6,6 +6,7 @@ import { useState } from 'react';
 export default function PastTripNotes({ notes, onDelete }) {
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState('');
+
   return (
     <ul>
       {notes.map(({ note, _id }) => {
