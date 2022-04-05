@@ -6,6 +6,7 @@ export default function HomePage({
   notes,
   onDeleteNote,
   handleCardToggle,
+  _id,
 }) {
   return (
     <>
@@ -13,8 +14,9 @@ export default function HomePage({
       <PastTripList
         onHandleNewNote={onHandleNewNote}
         notes={notes}
-        onDeleteNote={onDeleteNote}
+        onDelete={onDeleteNote}
         handleCardToggle={handleCardToggle}
+        _id={_id}
       />
     </>
   );

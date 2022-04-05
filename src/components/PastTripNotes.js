@@ -1,21 +1,46 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
+import Modal from './Modal';
+import { useState } from 'react';
 
-export default function PastTripNotes({ notes, onDeleteNote }) {
+export default function PastTripNotes({ notes, onDelete }) {
+  const [visible, setVisible] = useState(false);
+  const [id, setId] = useState('');
   return (
-    <ul>
-      {notes.map(({ note, _id }) => {
-        return (
-          <ListEntries key={_id}>
-            <p>{note}</p>
-            <Delete onClick={() => onDeleteNote(_id)}>
-              <FiTrash />
-            </Delete>
-          </ListEntries>
-        );
-      })}
-    </ul>
+    <>
+      <ul>
+        {notes.map(({ note, _id }) => {
+          return (
+            <>
+              <ListEntries key={_id}>
+                <p>{note}</p>
+                {/* <Delete onClick={() => onDelete(_id)}> */}
+                <Delete onClick={() => handleId(_id)}>
+                  <FiTrash />
+                </Delete>
+              </ListEntries>
+            </>
+          );
+        })}
+        {visible && (
+          <Modal
+            onDelete={() => handleDelete(id)}
+            onDeleteModal={console.log(id)}
+            onKeep={() => setVisible(!visible)}
+          />
+        )}
+      </ul>
+    </>
   );
+
+  function handleId(id) {
+    setVisible(!visible);
+    setId(id);
+  }
+  function handleDelete(_id) {
+    onDelete(_id);
+    setVisible(!visible);
+  }
 }
 
 const ListEntries = styled.li`

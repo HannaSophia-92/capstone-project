@@ -7,8 +7,6 @@ export default function FutureTripCard({ trip, onDelete, id }) {
   var dayjs = require('dayjs');
   dayjs().format();
 
-  console.log(id);
-
   const [visible, setVisible] = useState(false);
 
   return (
