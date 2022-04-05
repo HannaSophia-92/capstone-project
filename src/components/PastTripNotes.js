@@ -7,30 +7,24 @@ export default function PastTripNotes({ notes, onDelete }) {
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState('');
   return (
-    <>
-      <ul>
-        {notes.map(({ note, _id }) => {
-          return (
-            <>
-              <ListEntries key={_id}>
-                <p>{note}</p>
-                {/* <Delete onClick={() => onDelete(_id)}> */}
-                <Delete onClick={() => handleId(_id)}>
-                  <FiTrash />
-                </Delete>
-              </ListEntries>
-            </>
-          );
-        })}
-        {visible && (
-          <Modal
-            onDelete={() => handleDelete(id)}
-            onDeleteModal={console.log(id)}
-            onKeep={() => setVisible(!visible)}
-          />
-        )}
-      </ul>
-    </>
+    <ul>
+      {notes.map(({ note, _id }) => {
+        return (
+          <ListEntry key={_id}>
+            <p>{note}</p>
+            <Delete onClick={() => handleId(_id)}>
+              <FiTrash />
+            </Delete>
+          </ListEntry>
+        );
+      })}
+      {visible && (
+        <Modal
+          onDelete={() => handleDelete(id)}
+          onKeep={() => setVisible(!visible)}
+        />
+      )}
+    </ul>
   );
 
   function handleId(id) {
@@ -43,7 +37,7 @@ export default function PastTripNotes({ notes, onDelete }) {
   }
 }
 
-const ListEntries = styled.li`
+const ListEntry = styled.li`
   display: flex;
   flex-direction: column;
   word-break: break-all;
