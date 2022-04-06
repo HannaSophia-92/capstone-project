@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Button from './Button';
-import ScreenReaderOnly from './ScreenReaderOnly';
+import Button from '../Button/Button';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');

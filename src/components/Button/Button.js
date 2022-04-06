@@ -34,4 +34,12 @@ export default styled.button`
       color: #f6f6f6;
       text-transform: uppercase;
     `}
+
+    ${props =>
+    props.variant === 'notes' &&
+    css`
+      background: transparent;
+      border: none;
+      color: #f6f6f6;
+    `}
 `;

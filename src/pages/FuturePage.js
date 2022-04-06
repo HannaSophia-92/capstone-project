@@ -1,4 +1,4 @@
-import FutureTripCard from '../components/FutureTripCard';
+import FutureTripCard from '../components/FutureTripCard/FutureTripCard';
 import styled from 'styled-components';
 
 export default function FuturePage({ trips, onDeleteCard }) {
@@ -8,10 +8,7 @@ export default function FuturePage({ trips, onDeleteCard }) {
       <ul>
         {trips.map(trip => (
           <li key={trip._id}>
-            <FutureTripCard
-              trip={trip}
-              onDelete={() => onDeleteCard(trip._id)}
-            />
+            <FutureTripCard {...trip} onDelete={() => onDeleteCard(trip._id)} />
           </li>
         ))}
       </ul>

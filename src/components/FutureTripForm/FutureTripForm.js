@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Button from './Button';
-import ScreenReaderOnly from './ScreenReaderOnly';
+import Button from '../Button/Button';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 
 export default function FutureTripForm({ onCreateTrip }) {
@@ -11,7 +11,6 @@ export default function FutureTripForm({ onCreateTrip }) {
   const handleOnChange = event => {
     const { name, value } = event.target;
     setFormData({
-      _id: nanoid(),
       ...formData,
       [name]: value.trim(),
     });
@@ -80,7 +79,7 @@ export default function FutureTripForm({ onCreateTrip }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onCreateTrip(formData);
+    onCreateTrip({ ...formData, _id: nanoid() });
   }
 }
 
