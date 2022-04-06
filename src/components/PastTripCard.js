@@ -11,7 +11,7 @@ export default function PastTripCard({
 }) {
   return (
     <PastTripCards key={_id}>
-      <Image alt="country" src={image} loading="lazy" />
+      <Image alt="country" src={image} />
       <Place>
         {country}, {city}
       </Place>

@@ -2,39 +2,31 @@ import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
 import Modal from './Modal';
 import { useState } from 'react';
+import React from 'react';
 
-export default function PastTripNotes({ notes, onDelete }) {
-  const [visible, setVisible] = useState(false);
-  const [id, setId] = useState('');
+export default function PastTripNotes({ note, onDelete }) {
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <ul>
-      {notes.map(({ note, _id }) => {
-        return (
-          <ListEntry key={_id}>
-            <p>{note}</p>
-            <Delete onClick={() => handleId(_id)}>
-              <FiTrash />
-            </Delete>
-          </ListEntry>
-        );
-      })}
-      {visible && (
+    <>
+      <ListEntry>
+        <p>{note}</p>
+        <Delete onClick={() => setIsVisible(!isVisible)}>
+          <FiTrash />
+        </Delete>
+      </ListEntry>
+      {isVisible && (
         <Modal
-          onDelete={() => handleDelete(id)}
-          onKeep={() => setVisible(!visible)}
+          onDelete={handleDelete}
+          onKeep={() => setIsVisible(!isVisible)}
         />
       )}
-    </ul>
+    </>
   );
 
-  function handleId(id) {
-    setVisible(!visible);
-    setId(id);
-  }
-  function handleDelete(_id) {
-    onDelete(_id);
-    setVisible(!visible);
+  function handleDelete() {
+    onDelete();
+    setIsVisible(!isVisible);
   }
 }
 
@@ -53,7 +45,10 @@ const ListEntry = styled.li`
     rgba(0, 0, 0, 0.05) 0px 5px 10px;
 `;
 
-const Delete = styled.span`
+const Delete = styled.button`
+  background: transparent;
+  border: none;
+  color: #f6f6f6;
   position: absolute;
   bottom: 10px;
   right: 25px;

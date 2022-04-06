@@ -6,12 +6,7 @@ import PastTripForm from './PastTripForm';
 import PastTripNotes from './PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 
-export default function PastTripList({
-  notes,
-  onHandleNewNote,
-  onDelete,
-  _id,
-}) {
+export default function PastTripList({ notes, onHandleNewNote, onDelete }) {
   const [isActive, setIsActive] = useState(true);
 
   return (
@@ -45,9 +40,16 @@ export default function PastTripList({
           />
         </>
       )}
-      {!isActive && (
-        <PastTripNotes notes={notes} _id={_id} onDelete={onDelete} />
-      )}
+      {!isActive &&
+        notes.map(({ note, _id }) => {
+          return (
+            <PastTripNotes
+              key={_id}
+              note={note}
+              onDelete={() => onDelete(_id)}
+            />
+          );
+        })}
     </>
   );
 

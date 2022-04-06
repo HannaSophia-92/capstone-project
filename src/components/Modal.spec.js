@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('Modal', () => {
   it('renders a warning message and two buttons when clicking on the delete button', () => {
-    render(<Modal visible={true} />);
+    render(<Modal />);
 
     const message = screen.getByText(
       'Are you sure you want to delete this trip?'
@@ -18,9 +18,9 @@ describe('Modal', () => {
     expect(buttonDelete).toBeInTheDocument();
   });
 
-  it('deletes the current card when clicking on "yes"', () => {
+  it('calls the delete callback on click of button delete', () => {
     const deleteModal = jest.fn();
-    render(<Modal visible={true} onDelete={deleteModal} />);
+    render(<Modal onDelete={deleteModal} />);
 
     const buttonDelete = screen.getByRole('button', { name: /yes/i });
 
@@ -30,7 +30,7 @@ describe('Modal', () => {
 
   it('keeps the current card when clicking on "no"', () => {
     const keepModal = jest.fn();
-    render(<Modal visible={true} onKeep={keepModal} />);
+    render(<Modal onKeep={keepModal} />);
 
     const buttonKeep = screen.getByRole('button', { name: /no/i });
 
