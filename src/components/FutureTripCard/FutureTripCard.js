@@ -3,21 +3,29 @@ import { FiTrash } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 
-export default function FutureTripCard({ trip, onDelete }) {
+export default function FutureTripCard({
+  onDelete,
+  startDate,
+  endDate,
+  destination,
+  notes,
+}) {
   const [visible, setVisible] = useState(false);
 
   return (
     <>
       <Card>
         <Date>
-          {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
-          {dayjs(trip.endDate).format('DD-MM-YY')}
+          {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
+          {dayjs(endDate).format('DD-MM-YY')}
         </Date>
-        <Destination>{trip.destination}</Destination>
-        <Notes>{trip.notes}</Notes>
+        <Destination>{destination}</Destination>
+        <Notes>{notes}</Notes>
         <Delete onClick={() => setVisible(!visible)}>
           <FiTrash size={25} />
+          <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
         </Delete>
       </Card>
       {visible && (

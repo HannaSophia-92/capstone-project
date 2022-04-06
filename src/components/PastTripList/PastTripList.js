@@ -28,7 +28,10 @@ export default function PastTripList({ notes, onHandleNewNote, onDelete }) {
         </PastTripLists>
       )}
       {!isActive && (
-        <GoBackButton onClick={() => handleCardToggle()}>
+        <GoBackButton
+          aria-labelledby="Go back"
+          onClick={() => handleCardToggle()}
+        >
           <MdKeyboardBackspace size={30} />
         </GoBackButton>
       )}

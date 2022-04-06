@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { MdOutlineNoteAlt } from 'react-icons/md';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import Button from '../Button/Button';
 
 export default function PastTripCard({
   country,
@@ -15,10 +16,14 @@ export default function PastTripCard({
       <Place>
         {country}, {city}
       </Place>
-      <StyledButton onClick={handleToggle}>
+      <Button
+        variant="notes"
+        onClick={handleToggle}
+        aria-labelledby="Enter notes"
+      >
         <ScreenReaderOnly>Notes</ScreenReaderOnly>
         <MdOutlineNoteAlt size={25} />
-      </StyledButton>
+      </Button>
     </Card>
   );
 
