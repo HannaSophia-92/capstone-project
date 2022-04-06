@@ -18,4 +18,20 @@ export default styled.button`
       background-color: #2f2f2f;
       color: #f6f6f6;
     `}
+
+  ${props =>
+    props.variant === 'submit' &&
+    css`
+      background-color: seagreen;
+      color: #f6f6f6;
+      text-transform: uppercase;
+    `}
+
+    ${props =>
+    props.variant === 'danger' &&
+    css`
+      background-color: crimson;
+      color: #f6f6f6;
+      text-transform: uppercase;
+    `}
 `;

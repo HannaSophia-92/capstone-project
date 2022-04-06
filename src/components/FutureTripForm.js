@@ -13,7 +13,7 @@ export default function FutureTripForm({ onCreateTrip }) {
     setFormData({
       _id: nanoid(),
       ...formData,
-      [name]: value,
+      [name]: value.trim(),
     });
   };
 

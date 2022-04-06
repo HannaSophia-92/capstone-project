@@ -1,22 +1,29 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
+import Modal from './Modal';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 
-export default function FutureTripCard({ trip, onDeleteCard }) {
-  var dayjs = require('dayjs');
-  dayjs().format();
+export default function FutureTripCard({ trip, onDelete }) {
+  const [visible, setVisible] = useState(false);
 
   return (
-    <Card>
-      <Date>
-        {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
-        {dayjs(trip.endDate).format('DD-MM-YY')}
-      </Date>
-      <Destination>{trip.destination}</Destination>
-      <Notes>{trip.notes}</Notes>
-      <Delete onClick={() => onDeleteCard(trip._id)}>
-        <FiTrash size={25} />
-      </Delete>
-    </Card>
+    <>
+      <Card>
+        <Date>
+          {dayjs(trip.startDate).format('DD-MM-YY')} <span> to </span>
+          {dayjs(trip.endDate).format('DD-MM-YY')}
+        </Date>
+        <Destination>{trip.destination}</Destination>
+        <Notes>{trip.notes}</Notes>
+        <Delete onClick={() => setVisible(!visible)}>
+          <FiTrash size={25} />
+        </Delete>
+      </Card>
+      {visible && (
+        <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)} />
+      )}
+    </>
   );
 }
 
@@ -50,8 +57,11 @@ const Notes = styled.p`
   padding-top: 15px;
 `;
 
-const Delete = styled.div`
+const Delete = styled.button`
+  background: transparent;
+  border: none;
   position: absolute;
+  color: #f6f6f6;
   bottom: 10px;
   right: 25px;
 

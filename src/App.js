@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 function App() {
   const [notes, setNotes] = useLocalStorage('notes', []);
   const [trips, setTrips] = useLocalStorage('trips', []);
+
   const navigate = useNavigate();
 
   return (
@@ -44,13 +45,13 @@ function App() {
     setTrips(trips.filter(trip => trip._id !== tripId));
   }
 
-  function handleDeleteNote(noteId) {
-    setNotes(notes.filter(note => note._id !== noteId));
-  }
-
   function createTrip(formData) {
     setTrips([...trips, formData]);
     navigate('/futurePage');
+  }
+
+  function handleDeleteNote(noteId) {
+    setNotes(notes.filter(note => note._id !== noteId));
   }
 
   function handleNewNote(note) {
