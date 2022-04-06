@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
-import Modal from './Modal';
+import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 

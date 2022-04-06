@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import FormPage from './pages/FormPage';
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import ScreenReaderOnly from './ScreenReaderOnly';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { HiHome } from 'react-icons/hi';
 import { FaCompass } from 'react-icons/fa';
 import { IoIosCreate } from 'react-icons/io';

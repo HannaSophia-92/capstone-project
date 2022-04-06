@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
-import Modal from './Modal';
+import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
 
@@ -12,7 +12,7 @@ export default function PastTripNotes({ note, onDelete }) {
       <ListEntry>
         <p>{note}</p>
         <Delete onClick={() => setIsVisible(!isVisible)}>
-          <FiTrash />
+          <FiTrash size={20} />
         </Delete>
       </ListEntry>
       {isVisible && (

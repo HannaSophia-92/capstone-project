@@ -1,4 +1,4 @@
-import FutureTripCard from '../components/FutureTripCard';
+import FutureTripCard from '../components/FutureTripCard/FutureTripCard';
 import styled from 'styled-components';
 
 export default function FuturePage({ trips, onDeleteCard }) {

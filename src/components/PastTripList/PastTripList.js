@@ -1,9 +1,9 @@
-import pastTripList from '../data';
+import pastTripList from '../../data';
 import styled from 'styled-components';
-import PastTripCard from './PastTripCard';
+import PastTripCard from '../PastTripCard/PastTripCard';
 import { useState } from 'react';
-import PastTripForm from './PastTripForm';
-import PastTripNotes from './PastTripNotes';
+import PastTripForm from '../PastTripForm/PastTripForm';
+import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 
 export default function PastTripList({ notes, onHandleNewNote, onDelete }) {
