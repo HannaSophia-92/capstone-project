@@ -6,7 +6,6 @@ import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import FutureTripCard from '../FutureTripCard/FutureTripCard';
-import dayjs from 'dayjs';
 
 export default function PastTripList({
   notes,
@@ -40,14 +39,19 @@ export default function PastTripList({
               );
             })}
           </Card>
-          {history.map(({ destination, startDate, endDate, textNotes }) => (
-            <FutureTripCard
-              destination={destination}
-              startDate={startDate}
-              endDate={endDate}
-              textNotes={textNotes}
-            />
-          ))}
+          <Card>
+            {history.map(
+              ({ destination, startDate, endDate, textNotes, _id }) => (
+                <FutureTripCard
+                  destination={destination}
+                  startDate={startDate}
+                  endDate={endDate}
+                  textNotes={textNotes}
+                  _id={_id}
+                />
+              )
+            )}
+          </Card>
         </>
       )}
       {!isActive && (

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { FaRegCheckSquare } from 'react-icons/fa';
+import React from 'react';
 
 export default function FutureTripCard({
   onDelete,
@@ -13,11 +14,14 @@ export default function FutureTripCard({
   destination,
   textNotes,
   onFinishTrip,
+  _id,
 }) {
   const [visible, setVisible] = useState(false);
 
+  console.log(_id);
+
   return (
-    <>
+    <React.Fragment key={_id}>
       <Card>
         <Date>
           {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
@@ -27,7 +31,7 @@ export default function FutureTripCard({
         <Notes>{textNotes}</Notes>
         <Done
           onClick={() =>
-            onFinishTrip(startDate, endDate, destination, textNotes)
+            onFinishTrip(startDate, endDate, destination, textNotes, _id)
           }
           aria-labelledby="Finish your trip"
         >
@@ -41,7 +45,7 @@ export default function FutureTripCard({
       {visible && (
         <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)} />
       )}
-    </>
+    </React.Fragment>
   );
 }
 

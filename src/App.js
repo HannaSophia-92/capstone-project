@@ -52,10 +52,14 @@ function App() {
     </Wrapper>
   );
 
-  function handleFinishTrip(startDate, endDate, destination, textNotes) {
-    setHistory([{ startDate, endDate, destination, textNotes }, ...history]);
-    setTrips([]);
+  function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
+    setHistory([
+      { startDate, endDate, destination, textNotes, _id },
+      ...history,
+    ]);
+    setTrips(trips.filter(trip => trip._id !== _id));
     navigate('./');
+    console.log(handleFinishTrip);
   }
 
   function handleDeleteCard(tripId) {
