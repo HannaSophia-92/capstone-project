@@ -5,7 +5,7 @@ export default function FuturePage({ trips, onDeleteCard, onFinishTrip }) {
   return (
     <>
       <Heading>Future Trips</Heading>
-      <ul>
+      <Card>
         {trips.map(trip => (
           <li key={trip._id}>
             <FutureTripCard
@@ -15,11 +15,16 @@ export default function FuturePage({ trips, onDeleteCard, onFinishTrip }) {
             />
           </li>
         ))}
-      </ul>
+      </Card>
     </>
   );
 }
 
 const Heading = styled.h2`
+  margin: 20px;
+`;
+
+const Card = styled.ul`
+  list-style: none;
   margin: 20px;
 `;

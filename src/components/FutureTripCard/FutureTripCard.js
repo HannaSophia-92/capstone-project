@@ -51,11 +51,10 @@ export default function FutureTripCard({
 
 const Card = styled.article`
   padding: 15px;
-  margin: 20px;
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;
-  height: 300px;
+  height: 330px;
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -97,6 +96,10 @@ const Done = styled.button`
   border: none;
   color: #f6f6f6;
   position: absolute;
-  bottom: 10px;
+  bottom: 9px;
   right: 25px;
+
+  &:hover {
+    color: #ffcb74;
+  }
 `;
