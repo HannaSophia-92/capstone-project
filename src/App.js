@@ -14,8 +14,6 @@ function App() {
 
   const navigate = useNavigate();
 
-  console.log(history);
-
   return (
     <Wrapper>
       <Routes>
@@ -59,7 +57,6 @@ function App() {
     ]);
     setTrips(trips.filter(trip => trip._id !== _id));
     navigate('./');
-    console.log(handleFinishTrip);
   }
 
   function handleDeleteCard(tripId) {

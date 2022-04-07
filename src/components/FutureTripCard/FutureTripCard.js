@@ -18,8 +18,6 @@ export default function FutureTripCard({
 }) {
   const [visible, setVisible] = useState(false);
 
-  console.log(_id);
-
   return (
     <React.Fragment key={_id}>
       <Card>
@@ -51,6 +49,7 @@ export default function FutureTripCard({
 
 const Card = styled.article`
   padding: 15px;
+  margin: 20px 0;
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;

@@ -12,14 +12,8 @@ export default function PastTripList({
   onHandleNewNote,
   onDelete,
   history,
-  destination,
-  startDate,
-  endDate,
-  textNotes,
 }) {
   const [isActive, setIsActive] = useState(true);
-
-  console.log(history);
 
   return (
     <>

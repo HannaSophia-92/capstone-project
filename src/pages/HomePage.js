@@ -7,7 +7,6 @@ export default function HomePage({
   onDeleteNote,
   history,
 }) {
-  console.log(history);
   return (
     <>
       <Header />

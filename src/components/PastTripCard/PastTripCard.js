@@ -57,9 +57,3 @@ const Place = styled.span`
   margin: 15px;
   text-align: left;
 `;
-
-const StyledButton = styled.button`
-  background: transparent;
-  border: none;
-  color: #f6f6f6;
-`;
