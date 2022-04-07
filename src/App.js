@@ -52,12 +52,8 @@ function App() {
     </Wrapper>
   );
 
-  function handleFinishTrip({ startDate, endDate, destination, notes, trips }) {
-    console.log(destination);
-    setHistory([
-      { startDate, endDate, destination, notes, ...trips },
-      ...history,
-    ]);
+  function handleFinishTrip(startDate, endDate, destination, textNotes) {
+    setHistory([{ startDate, endDate, destination, textNotes }, ...history]);
     setTrips([]);
     navigate('./');
   }

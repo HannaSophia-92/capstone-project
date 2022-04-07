@@ -60,13 +60,13 @@ export default function FutureTripForm({ onCreateTrip }) {
         </div>
       </InputDateWrapper>
 
-      <Label htmlFor="notes">Notes:</Label>
-      <ScreenReaderOnly id="notes">Enter notes</ScreenReaderOnly>
+      <Label htmlFor="textNotes">Notes:</Label>
+      <ScreenReaderOnly id="textNotes">Enter notes</ScreenReaderOnly>
 
       <textarea
         type="text"
-        id="notes"
-        name="notes"
+        id="textNotes"
+        name="textNotes"
         placeholder="Documents, Visa, Packing List..."
         onChange={handleOnChange}
         maxLength="500"

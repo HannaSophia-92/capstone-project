@@ -11,12 +11,11 @@ export default function HomePage({
   return (
     <>
       <Header />
-
       <PastTripList
-        onHandleNewNote={onHandleNewNote}
         notes={notes}
+        onHandleNewNote={onHandleNewNote}
         onDelete={onDeleteNote}
-        {...history}
+        history={history}
       />
     </>
   );

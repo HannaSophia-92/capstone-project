@@ -5,15 +5,23 @@ import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
+import FutureTripCard from '../FutureTripCard/FutureTripCard';
+import dayjs from 'dayjs';
 
 export default function PastTripList({
   notes,
   onHandleNewNote,
   onDelete,
   history,
+  destination,
+  startDate,
+  endDate,
+  textNotes,
 }) {
   const [isActive, setIsActive] = useState(true);
+
   console.log(history);
+
   return (
     <>
       {isActive && (
@@ -32,21 +40,14 @@ export default function PastTripList({
               );
             })}
           </Card>
-          {/* <Card>
-            {trips?.map(
-              ({ trips, destination, startDate, endDate, notes, _id }) => (
-                <li key={_id}>
-                  <FutureTripCard
-                    destination={destination}
-                    startDate={startDate}
-                    endDate={endDate}
-                    notes={notes}
-                    trips={trips}
-                  />
-                </li>
-              )
-            )}
-          </Card> */}
+          {history.map(({ destination, startDate, endDate, textNotes }) => (
+            <FutureTripCard
+              destination={destination}
+              startDate={startDate}
+              endDate={endDate}
+              textNotes={textNotes}
+            />
+          ))}
         </>
       )}
       {!isActive && (

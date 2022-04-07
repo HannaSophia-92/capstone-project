@@ -11,7 +11,7 @@ export default function FutureTripCard({
   startDate,
   endDate,
   destination,
-  notes,
+  textNotes,
   onFinishTrip,
 }) {
   const [visible, setVisible] = useState(false);
@@ -24,9 +24,11 @@ export default function FutureTripCard({
           {dayjs(endDate).format('DD-MM-YY')}
         </Date>
         <Destination>{destination}</Destination>
-        <Notes>{notes}</Notes>
+        <Notes>{textNotes}</Notes>
         <Done
-          onClick={() => onFinishTrip(startDate, endDate, destination, notes)}
+          onClick={() =>
+            onFinishTrip(startDate, endDate, destination, textNotes)
+          }
           aria-labelledby="Finish your trip"
         >
           <FaRegCheckSquare size={25} />
