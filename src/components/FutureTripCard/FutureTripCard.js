@@ -4,6 +4,7 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import { FaRegCheckSquare } from 'react-icons/fa';
 
 export default function FutureTripCard({
   onDelete,
@@ -11,6 +12,7 @@ export default function FutureTripCard({
   endDate,
   destination,
   notes,
+  onFinishTrip,
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -23,6 +25,12 @@ export default function FutureTripCard({
         </Date>
         <Destination>{destination}</Destination>
         <Notes>{notes}</Notes>
+        <Done
+          onClick={() => onFinishTrip(startDate, endDate, destination, notes)}
+          aria-labelledby="Finish your trip"
+        >
+          <FaRegCheckSquare size={25} />
+        </Done>
         <Delete onClick={() => setVisible(!visible)}>
           <FiTrash size={25} />
           <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
@@ -71,9 +79,18 @@ const Delete = styled.button`
   position: absolute;
   color: #f6f6f6;
   bottom: 10px;
-  right: 25px;
+  right: 60px;
 
   &:hover {
     color: #ffcb74;
   }
+`;
+
+const Done = styled.button`
+  background: transparent;
+  border: none;
+  color: #f6f6f6;
+  position: absolute;
+  bottom: 10px;
+  right: 25px;
 `;

@@ -6,26 +6,48 @@ import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 
-export default function PastTripList({ notes, onHandleNewNote, onDelete }) {
+export default function PastTripList({
+  notes,
+  onHandleNewNote,
+  onDelete,
+  history,
+}) {
   const [isActive, setIsActive] = useState(true);
-
+  console.log(history);
   return (
     <>
       {isActive && (
-        <PastTripLists role="list" aria-label="past-trips">
-          {pastTripList.map(({ country, city, _id, image }) => {
-            return (
-              <PastTripCard
-                image={image}
-                country={country}
-                city={city}
-                key={_id}
-                handleCardToggle={handleCardToggle}
-                _id={_id}
-              />
-            );
-          })}
-        </PastTripLists>
+        <>
+          <Card role="list" aria-label="past-trips">
+            {pastTripList?.map(({ country, city, _id, image }) => {
+              return (
+                <PastTripCard
+                  image={image}
+                  country={country}
+                  city={city}
+                  key={_id}
+                  handleCardToggle={handleCardToggle}
+                  _id={_id}
+                />
+              );
+            })}
+          </Card>
+          {/* <Card>
+            {trips?.map(
+              ({ trips, destination, startDate, endDate, notes, _id }) => (
+                <li key={_id}>
+                  <FutureTripCard
+                    destination={destination}
+                    startDate={startDate}
+                    endDate={endDate}
+                    notes={notes}
+                    trips={trips}
+                  />
+                </li>
+              )
+            )}
+          </Card> */}
+        </>
       )}
       {!isActive && (
         <GoBackButton
@@ -69,7 +91,7 @@ const GoBackButton = styled.button`
   padding: 10px 15px 0 15px;
 `;
 
-const PastTripLists = styled.ul`
+const Card = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
