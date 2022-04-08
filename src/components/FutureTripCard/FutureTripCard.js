@@ -4,13 +4,16 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import { FaRegCheckSquare } from 'react-icons/fa';
 
 export default function FutureTripCard({
   onDelete,
   startDate,
   endDate,
   destination,
-  notes,
+  textNotes,
+  onFinishTrip,
+  _id,
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -22,14 +25,24 @@ export default function FutureTripCard({
           {dayjs(endDate).format('DD-MM-YY')}
         </Date>
         <Destination>{destination}</Destination>
-        <Notes>{notes}</Notes>
+        <Notes>{textNotes}</Notes>
+        <Done
+          onClick={() =>
+            onFinishTrip(startDate, endDate, destination, textNotes, _id)
+          }
+          aria-labelledby="Finish your trip"
+        >
+          <FaRegCheckSquare size={25} />
+        </Done>
         <Delete onClick={() => setVisible(!visible)}>
           <FiTrash size={25} />
           <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
         </Delete>
       </Card>
       {visible && (
-        <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)} />
+        <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)}>
+          Are you sure you want to delete this trip?
+        </Modal>
       )}
     </>
   );
@@ -37,11 +50,11 @@ export default function FutureTripCard({
 
 const Card = styled.article`
   padding: 15px;
-  margin: 20px;
+  margin: 20px 0;
   border-radius: 40px;
   background-color: #2f2f2f;
   color: #f6f6f6;
-  height: 300px;
+  height: 330px;
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -71,6 +84,19 @@ const Delete = styled.button`
   position: absolute;
   color: #f6f6f6;
   bottom: 10px;
+  right: 60px;
+
+  &:hover {
+    color: #ffcb74;
+  }
+`;
+
+const Done = styled.button`
+  background: transparent;
+  border: none;
+  color: #f6f6f6;
+  position: absolute;
+  bottom: 9px;
   right: 25px;
 
   &:hover {

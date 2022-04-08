@@ -6,8 +6,8 @@ describe('FutureTripCard', () => {
     render(
       <FutureTripCard
         destination="South Africa"
-        startDate="06-04-22"
-        endDate="20-05-22"
+        dateStart="06-04-22"
+        dateEnd="20-05-22"
         notes="passport"
       />
     );
@@ -15,11 +15,11 @@ describe('FutureTripCard', () => {
     const destination = screen.getByText(/south africa/i);
     expect(destination).toBeInTheDocument();
 
-    const startDate = screen.getByText(/22/i);
-    expect(startDate).toBeInTheDocument();
+    const dateStart = screen.getByText(/22/i);
+    expect(dateStart).toBeInTheDocument();
 
-    const endDate = screen.getByText(/22/i);
-    expect(endDate).toBeInTheDocument();
+    const dateEnd = screen.getByText(/22/i);
+    expect(dateEnd).toBeInTheDocument();
 
     const note = screen.getByText(/passport/i);
     expect(note).toBeInTheDocument();

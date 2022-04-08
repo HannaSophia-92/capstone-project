@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 function App() {
   const [notes, setNotes] = useLocalStorage('notes', []);
   const [trips, setTrips] = useLocalStorage('trips', []);
+  const [history, setHistory] = useLocalStorage('history', []);
 
   const navigate = useNavigate();
 
@@ -23,6 +24,8 @@ function App() {
               onHandleNewNote={handleNewNote}
               notes={notes}
               onDeleteNote={handleDeleteNote}
+              history={history}
+              trips={trips}
             />
           }
         />
@@ -32,7 +35,13 @@ function App() {
         />
         <Route
           path="/futurePage"
-          element={<FuturePage trips={trips} onDeleteCard={handleDeleteCard} />}
+          element={
+            <FuturePage
+              trips={trips}
+              onDeleteCard={handleDeleteCard}
+              onFinishTrip={handleFinishTrip}
+            />
+          }
         />
       </Routes>
       <Footer>
@@ -40,6 +49,15 @@ function App() {
       </Footer>
     </Wrapper>
   );
+
+  function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
+    setHistory([
+      { startDate, endDate, destination, textNotes, _id },
+      ...history,
+    ]);
+    setTrips(trips.filter(trip => trip._id !== _id));
+    navigate('./');
+  }
 
   function handleDeleteCard(tripId) {
     setTrips(trips.filter(trip => trip._id !== tripId));

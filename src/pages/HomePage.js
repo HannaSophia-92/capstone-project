@@ -1,14 +1,20 @@
 import Header from '../components/Header/Header';
 import PastTripList from '../components/PastTripList/PastTripList';
 
-export default function HomePage({ onHandleNewNote, notes, onDeleteNote }) {
+export default function HomePage({
+  onHandleNewNote,
+  notes,
+  onDeleteNote,
+  history,
+}) {
   return (
     <>
       <Header />
       <PastTripList
-        onHandleNewNote={onHandleNewNote}
         notes={notes}
+        onHandleNewNote={onHandleNewNote}
         onDelete={onDeleteNote}
+        history={history}
       />
     </>
   );
