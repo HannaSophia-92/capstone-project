@@ -16,6 +16,14 @@ export default function FutureTripForm({ onCreateTrip }) {
     });
   };
 
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return yyyy + '-' + mm + '-' + dd;
+  };
+
   return (
     <Form
       aria-labelledby="future-trips-form"
@@ -42,6 +50,7 @@ export default function FutureTripForm({ onCreateTrip }) {
             id="startDate"
             name="startDate"
             onChange={handleOnChange}
+            min={disablePastDate()}
             required
           />
         </div>
@@ -55,6 +64,7 @@ export default function FutureTripForm({ onCreateTrip }) {
             id="endDate"
             name="endDate"
             onChange={handleOnChange}
+            min={disablePastDate()}
             required
           />
         </div>
