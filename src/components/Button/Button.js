@@ -42,4 +42,54 @@ export default styled.button`
       border: none;
       color: #f6f6f6;
     `}
+
+    ${props =>
+    props.variant === 'edit' &&
+    css`
+      background: transparent;
+      border: none;
+      color: #f6f6f6;
+      position: absolute;
+      bottom: 0px;
+      right: 90px;
+    `}
+
+    ${props =>
+    props.variant === 'submitEdit' &&
+    css`
+      background: transparent;
+      border: none;
+      color: #f6f6f6;
+    `}
+
+    ${props =>
+    props.variant === 'delete' &&
+    css`
+      background: transparent;
+      border: none;
+      color: #f6f6f6;
+      position: absolute;
+      color: #f6f6f6;
+      bottom: 0px;
+      left: -25px;
+
+      &:hover {
+        color: #ffcb74;
+      }
+    `}
+
+    ${props =>
+    props.variant === 'done' &&
+    css`
+      background: transparent;
+      border: none;
+      color: #f6f6f6;
+      position: absolute;
+      bottom: 0px;
+      right: -25px;
+
+      &:hover {
+        color: #ffcb74;
+      }
+    `}
 `;

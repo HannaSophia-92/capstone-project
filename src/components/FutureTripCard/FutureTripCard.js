@@ -5,6 +5,8 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { FaRegCheckSquare } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
+import Button from '../Button/Button';
 
 export default function FutureTripCard({
   onDelete,
@@ -14,31 +16,75 @@ export default function FutureTripCard({
   textNotes,
   onFinishTrip,
   _id,
+  onEdit,
 }) {
   const [visible, setVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
+  console.log(_id);
   return (
     <>
-      <Card>
-        <Date>
-          {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
-          {dayjs(endDate).format('DD-MM-YY')}
-        </Date>
-        <Destination>{destination}</Destination>
-        <Notes>{textNotes}</Notes>
-        <Done
-          onClick={() =>
-            onFinishTrip(startDate, endDate, destination, textNotes, _id)
-          }
-          aria-labelledby="Finish your trip"
-        >
-          <FaRegCheckSquare size={25} />
-        </Done>
-        <Delete onClick={() => setVisible(!visible)}>
-          <FiTrash size={25} />
-          <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
-        </Delete>
-      </Card>
+      {isEditing ? (
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <div>
+            <label htmlFor="startDate">edit start date</label>
+            <input type="date" id="startDate" defaultValue={startDate} />
+          </div>
+          <div>
+            <label htmlFor="endDate">edit end date</label>
+            <input type="date" id="endDate" defaultValue={endDate} />
+          </div>
+          <div>
+            <label htmlFor="destination">edit destination</label>
+            <input type="text" id="destination" defaultValue={destination} />
+          </div>
+          <div>
+            <label htmlFor="textNotes">edit textNotes</label>
+            <input type="text" id="textNotes" defaultValue={textNotes} />
+          </div>
+          <Button variant="add" category="Save changes" type="submit">
+            Submit changes
+          </Button>
+        </form>
+      ) : (
+        <Card>
+          <Date>
+            {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
+            {dayjs(endDate).format('DD-MM-YY')}
+          </Date>
+          <Destination>{destination}</Destination>
+          <Notes>{textNotes}</Notes>
+          <Button
+            variant="done"
+            type="button"
+            aria-labelledby="Finish your trip"
+            onClick={() =>
+              onFinishTrip(startDate, endDate, destination, textNotes, _id)
+            }
+          >
+            <FaRegCheckSquare size={25} />
+            <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
+          </Button>
+          <Button
+            variant="edit"
+            type="button"
+            aria-labelledby="Edit your card"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            <FaEdit size={25} />
+            <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
+          </Button>
+          <Button
+            variant="delete"
+            type="button"
+            aria-labelledby="Delete your trip"
+            onClick={() => setVisible(!visible)}
+          >
+            <FiTrash size={25} />
+            <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
+          </Button>
+        </Card>
+      )}
       {visible && (
         <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)}>
           Are you sure you want to delete this trip?
@@ -46,6 +92,21 @@ export default function FutureTripCard({
       )}
     </>
   );
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { startDate, endDate, destination, textNotes } =
+      event.target.elements;
+    onEdit({
+      _id: _id,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      destination: destination.value,
+      textNotes: textNotes.value,
+    });
+    console.log(_id);
+    setIsEditing(false);
+  }
 }
 
 const Card = styled.article`
@@ -76,19 +137,6 @@ const Destination = styled.p`
 
 const Notes = styled.p`
   padding-top: 15px;
-`;
-
-const Delete = styled.button`
-  background: transparent;
-  border: none;
-  position: absolute;
-  color: #f6f6f6;
-  bottom: 10px;
-  right: 60px;
-
-  &:hover {
-    color: #ffcb74;
-  }
 `;
 
 const Done = styled.button`
