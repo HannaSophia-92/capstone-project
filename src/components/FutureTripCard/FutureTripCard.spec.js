@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import FutureTripCard from './FutureTripCard';
 import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 describe('FutureTripCard', () => {
   it('renders a destination, a start date, end date and notes', () => {

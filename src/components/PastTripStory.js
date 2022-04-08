@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import React from 'react';
+import Button from './Button/Button';
+import ScreenReaderOnly from './styledComponents/ScreenReaderOnly';
+import { MdOutlineNoteAlt } from 'react-icons/md';
 
 export default function PastTripStory({
   startDate,
   endDate,
   destination,
   textNotes,
+  handleCardToggle,
 }) {
   return (
-    <React.Fragment>
+    <>
       <Card>
         <Date>
           {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
@@ -17,9 +20,21 @@ export default function PastTripStory({
         </Date>
         <Destination>{destination}</Destination>
         <Notes>{textNotes}</Notes>
+        <Button
+          variant="notes"
+          onClick={handleToggle}
+          aria-labelledby="Enter notes"
+        >
+          <ScreenReaderOnly>Notes</ScreenReaderOnly>
+          <MdOutlineNoteAlt size={25} />
+        </Button>
       </Card>
-    </React.Fragment>
+    </>
   );
+
+  function handleToggle() {
+    handleCardToggle();
+  }
 }
 
 const Card = styled.li`

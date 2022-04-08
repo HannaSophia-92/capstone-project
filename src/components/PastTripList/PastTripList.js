@@ -44,6 +44,7 @@ export default function PastTripList({
                     textNotes={textNotes}
                     _id={_id}
                     key={_id}
+                    handleCardToggle={handleCardToggle}
                   />
                 );
               }

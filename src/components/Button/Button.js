@@ -41,6 +41,9 @@ export default styled.button`
       background: transparent;
       border: none;
       color: #f6f6f6;
+      position: absolute;
+      bottom: 0;
+      right: 95px;
     `}
 
     ${props =>
@@ -95,5 +98,21 @@ export default styled.button`
       &:hover {
         color: #ffcb74;
       }
+    `}
+
+    ${props =>
+    props.variant === 'save' &&
+    css`
+      background-color: #ffcb74;
+      color: #2f2f2f;
+      text-transform: uppercase;
+    `}
+
+    ${props =>
+    props.variant === 'keep' &&
+    css`
+      background-color: #f6f6f6;
+      color: #2f2f2f;
+      text-transform: uppercase;
     `}
 `;

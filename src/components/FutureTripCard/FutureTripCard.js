@@ -7,6 +7,8 @@ import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { FaEdit } from 'react-icons/fa';
 import Button from '../Button/Button';
+import SaveModal from '../Modal/SaveModal';
+import { HiHome } from 'react-icons/hi';
 
 export default function FutureTripCard({
   onDelete,
@@ -18,7 +20,8 @@ export default function FutureTripCard({
   _id,
   onEdit,
 }) {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -67,17 +70,27 @@ export default function FutureTripCard({
           </Date>
           <Destination>{destination}</Destination>
           <Notes>{textNotes}</Notes>
+
           <Button
             variant="done"
             type="button"
             aria-labelledby="Finish your trip"
-            onClick={() =>
-              onFinishTrip(startDate, endDate, destination, textNotes, _id)
-            }
+            onClick={() => setIsOpen(!isOpen)}
           >
             <FaRegCheckSquare size={25} />
             <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
           </Button>
+          {isOpen && (
+            <SaveModal
+              onClick={() =>
+                onFinishTrip(startDate, endDate, destination, textNotes, _id)
+              }
+              onKeep={() => setIsOpen(!isOpen)}
+            >
+              Back home? Your trip will be saved to your history
+            </SaveModal>
+          )}
+
           <Button
             variant="edit"
             type="button"
@@ -91,15 +104,15 @@ export default function FutureTripCard({
             variant="delete"
             type="button"
             aria-labelledby="Delete your trip"
-            onClick={() => setVisible(!visible)}
+            onClick={() => setIsVisible(!isVisible)}
           >
             <FiTrash size={25} />
             <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
           </Button>
         </Card>
       )}
-      {visible && (
-        <Modal onDelete={onDelete} onKeep={() => setVisible(!visible)}>
+      {isVisible && (
+        <Modal onDelete={onDelete} onKeep={() => setIsVisible(!isVisible)}>
           Are you sure you want to delete this trip?
         </Modal>
       )}
