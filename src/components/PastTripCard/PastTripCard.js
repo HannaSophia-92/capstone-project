@@ -6,12 +6,11 @@ import Button from '../Button/Button';
 export default function PastTripCard({
   country,
   city,
-  _id,
   image,
   handleCardToggle,
 }) {
   return (
-    <Card key={_id}>
+    <Card>
       <Image alt="country" src={image} />
       <Place>
         {country}, {city}
