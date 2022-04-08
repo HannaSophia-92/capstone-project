@@ -5,7 +5,7 @@ import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
-import FutureTripCard from '../FutureTripCard/FutureTripCard';
+import PastTripStory from '../PastTripStory';
 
 export default function PastTripList({
   notes,
@@ -35,15 +35,18 @@ export default function PastTripList({
           </Card>
           <Card>
             {history.map(
-              ({ destination, startDate, endDate, textNotes, _id }) => (
-                <FutureTripCard
-                  destination={destination}
-                  startDate={startDate}
-                  endDate={endDate}
-                  textNotes={textNotes}
-                  _id={_id}
-                />
-              )
+              ({ destination, startDate, endDate, textNotes, _id }) => {
+                return (
+                  <PastTripStory
+                    destination={destination}
+                    startDate={startDate}
+                    endDate={endDate}
+                    textNotes={textNotes}
+                    _id={_id}
+                    key={_id}
+                  />
+                );
+              }
             )}
           </Card>
         </>

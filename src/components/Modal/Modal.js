@@ -1,11 +1,11 @@
 import Button from '../Button/Button';
 import styled from 'styled-components';
 
-export default function Modal({ onKeep, onDelete }) {
+export default function Modal({ onKeep, onDelete, children }) {
   return (
     <Background>
       <StyledModal>
-        <span>Are you sure you want to delete this trip?</span>
+        <span>{children}</span>
         <Button variant={'submit'} onClick={onKeep}>
           no
         </Button>
