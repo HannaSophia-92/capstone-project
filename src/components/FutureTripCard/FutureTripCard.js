@@ -21,7 +21,6 @@ export default function FutureTripCard({
   const [visible, setVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log(_id);
   return (
     <>
       {isEditing ? (
@@ -113,7 +112,6 @@ export default function FutureTripCard({
       destination: destination.value,
       textNotes: textNotes.value,
     });
-    console.log(_id);
     setIsEditing(false);
   }
 }

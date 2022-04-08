@@ -1,14 +1,14 @@
-import PastTripNotes from './PastTripNotes.js';
+import PastTripForm from './PastTripForm.js';
 
 export default {
-  title: 'components/PastTripNotes',
-  component: PastTripNotes,
+  title: 'components/PastTripForm',
+  component: PastTripForm,
   argTypes: {
     onHandleNewNote: 'onSubmit',
   },
 };
 
-const Template = args => <PastTripNotes {...args} />;
+const Template = args => <PastTripForm {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

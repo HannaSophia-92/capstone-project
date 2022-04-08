@@ -8,7 +8,7 @@ describe('FutureTripCard', () => {
         destination="South Africa"
         dateStart="06-04-22"
         dateEnd="20-05-22"
-        notes="passport"
+        textNotes="passport"
       />
     );
 
