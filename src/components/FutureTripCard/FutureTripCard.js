@@ -25,27 +25,36 @@ export default function FutureTripCard({
   return (
     <>
       {isEditing ? (
-        <form onSubmit={handleSubmit} autoComplete="off">
+        <Form onSubmit={handleSubmit} autoComplete="off">
           <div>
-            <label htmlFor="startDate">edit start date</label>
-            <input type="date" id="startDate" defaultValue={startDate} />
+            <Label htmlFor="destination">Destination:</Label>
+            <Input type="text" id="destination" defaultValue={destination} />
           </div>
+          <InputDateWrapper>
+            <div>
+              <Label htmlFor="startDate">Start:</Label>
+              <InputDate type="date" id="startDate" defaultValue={startDate} />
+            </div>
+            <div>
+              <Label htmlFor="endDate">End:</Label>
+              <InputDate type="date" id="endDate" defaultValue={endDate} />
+            </div>
+          </InputDateWrapper>
+
           <div>
-            <label htmlFor="endDate">edit end date</label>
-            <input type="date" id="endDate" defaultValue={endDate} />
-          </div>
-          <div>
-            <label htmlFor="destination">edit destination</label>
-            <input type="text" id="destination" defaultValue={destination} />
-          </div>
-          <div>
-            <label htmlFor="textNotes">edit textNotes</label>
-            <input type="text" id="textNotes" defaultValue={textNotes} />
+            <Label htmlFor="textNotes">Enter notes:</Label>
+            <Textarea
+              type="text"
+              id="textNotes"
+              defaultValue={textNotes}
+              maxLength="500"
+              rows="3"
+            />
           </div>
           <Button variant="add" category="Save changes" type="submit">
             Submit changes
           </Button>
-        </form>
+        </Form>
       ) : (
         <Card>
           <Date>
@@ -139,15 +148,35 @@ const Notes = styled.p`
   padding-top: 15px;
 `;
 
-const Done = styled.button`
-  background: transparent;
-  border: none;
-  color: #f6f6f6;
-  position: absolute;
-  bottom: 9px;
-  right: 25px;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px;
+`;
 
-  &:hover {
-    color: #ffcb74;
-  }
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  margin-top: 10px;
+`;
+
+const InputDateWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const InputDate = styled.input`
+  color: gray;
+  margin-top: 12px;
+`;
+
+const Textarea = styled.textarea`
+  width: 100%;
+`;
+
+const Input = styled.input`
+  width: 100%;
 `;

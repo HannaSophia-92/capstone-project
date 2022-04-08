@@ -52,6 +52,10 @@ export default styled.button`
       position: absolute;
       bottom: 0px;
       right: 90px;
+
+      &:hover {
+        color: #ffcb74;
+      }
     `}
 
     ${props =>
