@@ -24,7 +24,12 @@ export default function FutureTripCard({
   return (
     <>
       {isEditing ? (
-        <Form onSubmit={handleSubmit} autoComplete="off">
+        <Form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          aria-labelledby="edit-form"
+        >
+          <h2 id="edit-form">Edit notes</h2>
           <div>
             <Label htmlFor="destination">Destination:</Label>
             <Input type="text" id="destination" defaultValue={destination} />
