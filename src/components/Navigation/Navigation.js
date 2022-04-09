@@ -36,4 +36,8 @@ const NavLinkStyled = styled(NavLink)`
   justify-content: space-around;
   width: 100%;
   color: #f6f6f6;
+
+  &.active {
+    color: #ffcb74;
+  }
 `;

@@ -69,6 +69,7 @@ function App() {
     ]);
     setTrips(trips.filter(trip => trip._id !== _id));
     navigate('./');
+    console.log(handleFinishTrip);
   }
 
   function handleDeleteCard(tripId) {

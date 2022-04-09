@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { FiTrash } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
+import SaveModal from '../Modal/SaveModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { FaEdit } from 'react-icons/fa';
 import Button from '../Button/Button';
-import SaveModal from '../Modal/SaveModal';
-import { HiHome } from 'react-icons/hi';
 
 export default function FutureTripCard({
   onDelete,
@@ -80,16 +79,6 @@ export default function FutureTripCard({
             <FaRegCheckSquare size={25} />
             <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
           </Button>
-          {isOpen && (
-            <SaveModal
-              onClick={() =>
-                onFinishTrip(startDate, endDate, destination, textNotes, _id)
-              }
-              onKeep={() => setIsOpen(!isOpen)}
-            >
-              Back home? Your trip will be saved to your history
-            </SaveModal>
-          )}
 
           <Button
             variant="edit"
@@ -115,6 +104,16 @@ export default function FutureTripCard({
         <Modal onDelete={onDelete} onKeep={() => setIsVisible(!isVisible)}>
           Are you sure you want to delete this trip?
         </Modal>
+      )}
+      {isOpen && (
+        <SaveModal
+          onKeep={() => setIsOpen(!isOpen)}
+          onFinishTrip={() =>
+            onFinishTrip(startDate, endDate, destination, textNotes, _id)
+          }
+        >
+          Back home? Your trip will be saved to your history
+        </SaveModal>
       )}
     </>
   );
