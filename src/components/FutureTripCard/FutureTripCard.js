@@ -8,6 +8,8 @@ import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { FaRegCheckSquare } from 'react-icons/fa';
 import { FaEdit } from 'react-icons/fa';
 import Button from '../Button/Button';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { Form } from '../styledComponents/StyledForm';
 
 export default function FutureTripCard({
   onDelete,
@@ -31,7 +33,10 @@ export default function FutureTripCard({
           autoComplete="off"
           aria-labelledby="edit-form"
         >
-          <h2 id="edit-form">Edit notes</h2>
+          <ScreenReaderOnly>
+            <h2 id="edit-form">Edit notes</h2>
+          </ScreenReaderOnly>
+
           <div>
             <Label htmlFor="destination">Destination:</Label>
             <Input type="text" id="destination" defaultValue={destination} />
@@ -41,6 +46,9 @@ export default function FutureTripCard({
               <Label htmlFor="startDate">Start:</Label>
               <InputDate type="date" id="startDate" defaultValue={startDate} />
             </div>
+            <span>
+              <ArrowIcon size={15} />
+            </span>
             <div>
               <Label htmlFor="endDate">End:</Label>
               <InputDate type="date" id="endDate" defaultValue={endDate} />
@@ -57,9 +65,11 @@ export default function FutureTripCard({
               rows="3"
             />
           </div>
-          <Button variant="add" category="Save changes" type="submit">
-            Submit changes
-          </Button>
+          <ButtonWrapper>
+            <Button variant="add" category="Save changes" type="submit">
+              Submit changes
+            </Button>
+          </ButtonWrapper>
         </Form>
       ) : (
         <div>
@@ -147,9 +157,7 @@ const Card = styled.article`
   background-color: var(--color-dark-gray);
   color: var(--color-white);
   height: 330px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: var(--box-shadow);
 `;
 
 const Date = styled.span`
@@ -167,13 +175,6 @@ const Destination = styled.p`
 
 const Notes = styled.p`
   padding-top: 15px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin: 20px;
 `;
 
 const Label = styled.label`
@@ -196,10 +197,12 @@ const InputDate = styled.input`
 
 const Textarea = styled.textarea`
   width: 100%;
+  margin-top: 10px;
 `;
 
 const Input = styled.input`
   width: 100%;
+  margin-top: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -208,4 +211,8 @@ const ButtonWrapper = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
+`;
+
+const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
+  margin: 7px;
 `;

@@ -9,7 +9,7 @@ export default function FuturePage({
 }) {
   return (
     <>
-      <Heading>Future Trips</Heading>
+      <h2>Future Trips</h2>
       <Card>
         {trips.map(({ startDate, endDate, destination, textNotes, _id }) => {
           return (
@@ -30,10 +30,6 @@ export default function FuturePage({
     </>
   );
 }
-
-const Heading = styled.h2`
-  margin: 20px;
-`;
 
 const Card = styled.ul`
   list-style: none;

@@ -15,8 +15,8 @@ export default styled.button`
   ${props =>
     props.variant === 'add' &&
     css`
-      background-color: var(--color-dark-gray);
-      color: var(--color-white);
+      background-color: var(--color-yellow);
+      color: var(--color-dark-gray);
     `}
 
   ${props =>
@@ -55,6 +55,9 @@ export default styled.button`
       color: var(--color-white);
 
       &:hover {
+        color: var(--color-yellow);
+      }
+      &.active {
         color: var(--color-yellow);
       }
     `}
