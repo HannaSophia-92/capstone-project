@@ -62,43 +62,47 @@ export default function FutureTripCard({
           </Button>
         </Form>
       ) : (
-        <Card>
-          <Date>
-            {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
-            {dayjs(endDate).format('DD-MM-YY')}
-          </Date>
-          <Destination>{destination}</Destination>
-          <Notes>{textNotes}</Notes>
+        <div>
+          <Card>
+            <Date>
+              {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
+              {dayjs(endDate).format('DD-MM-YY')}
+            </Date>
+            <Destination>{destination}</Destination>
+            <Notes>{textNotes}</Notes>
+            <ButtonWrapper>
+              <Button
+                variant="delete"
+                type="button"
+                aria-labelledby="Delete your trip"
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                <FiTrash size={25} />
+                <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
+              </Button>
 
-          <Button
-            variant="done"
-            type="button"
-            aria-labelledby="Finish your trip"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <FaRegCheckSquare size={25} />
-            <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
-          </Button>
+              <Button
+                variant="edit"
+                type="button"
+                aria-labelledby="Edit your card"
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                <FaEdit size={25} />
+                <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
+              </Button>
 
-          <Button
-            variant="edit"
-            type="button"
-            aria-labelledby="Edit your card"
-            onClick={() => setIsEditing(!isEditing)}
-          >
-            <FaEdit size={25} />
-            <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
-          </Button>
-          <Button
-            variant="delete"
-            type="button"
-            aria-labelledby="Delete your trip"
-            onClick={() => setIsVisible(!isVisible)}
-          >
-            <FiTrash size={25} />
-            <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
-          </Button>
-        </Card>
+              <Button
+                variant="done"
+                type="button"
+                aria-labelledby="Finish your trip"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <FaRegCheckSquare size={25} />
+                <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
+              </Button>
+            </ButtonWrapper>
+          </Card>
+        </div>
       )}
       {isVisible && (
         <Modal onDelete={onDelete} onKeep={() => setIsVisible(!isVisible)}>
@@ -134,13 +138,15 @@ export default function FutureTripCard({
 }
 
 const Card = styled.article`
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  padding: 15px 15px 5px 15px;
   margin: 20px 0;
   border-radius: 40px;
-  background-color: #2f2f2f;
-  color: #f6f6f6;
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
   height: 330px;
-  position: relative;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -155,7 +161,7 @@ const Date = styled.span`
 
 const Destination = styled.p`
   text-align: center;
-  border-bottom: 1px solid #f6f6f6;
+  border-bottom: 1px solid var(--color-white);
   padding: 10px;
 `;
 
@@ -194,4 +200,12 @@ const Textarea = styled.textarea`
 
 const Input = styled.input`
   width: 100%;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
 `;

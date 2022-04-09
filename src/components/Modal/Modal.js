@@ -36,8 +36,8 @@ const StyledModal = styled.section`
   padding: 15px;
   width: 70%;
   margin: 30vh auto;
-  background-color: #2f2f2f;
-  color: #f6f6f6;
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   border-radius: 18px;
 `;

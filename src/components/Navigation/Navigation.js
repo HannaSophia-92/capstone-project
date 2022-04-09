@@ -28,16 +28,16 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   height: 48px;
-  background-color: #2f2f2f;
+  background-color: var(--color-dark-gray);
 `;
 
 const NavLinkStyled = styled(NavLink)`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  color: #f6f6f6;
+  color: var(--color-white);
 
   &.active {
-    color: #ffcb74;
+    color: var(--color-yellow);
   }
 `;
