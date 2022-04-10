@@ -10,6 +10,7 @@ export default function PastTripStory({
   destination,
   textNotes,
   handleCardToggle,
+  _id,
 }) {
   return (
     <>
@@ -23,7 +24,7 @@ export default function PastTripStory({
         <ButtonWrapper>
           <Button
             variant="notes"
-            onClick={handleToggle}
+            onClick={() => handleCardToggle(_id)}
             aria-labelledby="Enter notes"
           >
             <ScreenReaderOnly>Notes</ScreenReaderOnly>
@@ -33,10 +34,6 @@ export default function PastTripStory({
       </Card>
     </>
   );
-
-  function handleToggle() {
-    handleCardToggle();
-  }
 }
 
 const Card = styled.li`

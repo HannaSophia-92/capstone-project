@@ -9,7 +9,7 @@ import HomePage from './pages/HomePage';
 
 function App() {
   const [notes, setNotes] = useLocalStorage('notes', []);
-  const [trips, setTrips] = useLocalStorage('trips', []);
+  const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function App() {
               notes={notes}
               onDeleteNote={handleDeleteNote}
               history={history}
-              trips={trips}
+              trips={futureTrips}
             />
           }
         />
@@ -37,7 +37,7 @@ function App() {
           path="/futurePage"
           element={
             <FuturePage
-              trips={trips}
+              trips={futureTrips}
               onDeleteCard={handleDeleteCard}
               onFinishTrip={handleFinishTrip}
               onEdit={handleEdit}
@@ -52,14 +52,14 @@ function App() {
   );
 
   function handleEdit(updatedValue) {
-    const newContent = trips.map(trip => {
+    const newContent = futureTrips.map(trip => {
       if (trip._id === updatedValue._id) {
         const newTripContent = { ...trip, ...updatedValue };
         return newTripContent;
       }
       return trip;
     });
-    setTrips(newContent);
+    setFutureTrips(newContent);
   }
 
   function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
@@ -67,17 +67,16 @@ function App() {
       { startDate, endDate, destination, textNotes, _id },
       ...history,
     ]);
-    setTrips(trips.filter(trip => trip._id !== _id));
+    setFutureTrips(futureTrips.filter(trip => trip._id !== _id));
     navigate('./');
-    console.log(handleFinishTrip);
   }
 
   function handleDeleteCard(tripId) {
-    setTrips(trips.filter(trip => trip._id !== tripId));
+    setFutureTrips(futureTrips.filter(trip => trip._id !== tripId));
   }
 
   function createTrip(formData) {
-    setTrips([...trips, formData]);
+    setFutureTrips([...futureTrips, formData]);
     navigate('/futurePage');
   }
 
