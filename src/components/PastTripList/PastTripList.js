@@ -6,7 +6,6 @@ import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import PastTripStory from '../PastTripStory';
-import { image } from '@cloudinary/url-gen/qualifiers/source';
 
 export default function PastTripList({
   notes,
@@ -20,7 +19,7 @@ export default function PastTripList({
     <>
       {isActive && (
         <>
-          <Card role="list" aria-label="past-trips">
+          {/* <Card role="list" aria-label="past-trips">
             {pastTripList?.map(({ country, city, _id, image }) => {
               return (
                 <PastTripCard
@@ -33,10 +32,18 @@ export default function PastTripList({
                 />
               );
             })}
-          </Card>
+          </Card> */}
           <Card>
             {history.map(
-              ({ destination, startDate, endDate, textNotes, _id }) => {
+              ({
+                destination,
+                startDate,
+                endDate,
+                textNotes,
+                _id,
+                image,
+                upload,
+              }) => {
                 return (
                   <PastTripStory
                     destination={destination}
@@ -46,6 +53,8 @@ export default function PastTripList({
                     _id={_id}
                     key={_id}
                     handleCardToggle={handleCardToggle}
+                    image={image}
+                    upload={() => upload()}
                   />
                 );
               }

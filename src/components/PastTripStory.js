@@ -3,6 +3,8 @@ import dayjs from 'dayjs';
 import Button from './Button/Button';
 import ScreenReaderOnly from './styledComponents/ScreenReaderOnly';
 import { MdOutlineNoteAlt } from 'react-icons/md';
+import { useState } from 'react';
+import UploadModal from '../components/Modal/UploadModal';
 
 export default function PastTripStory({
   startDate,
@@ -11,8 +13,10 @@ export default function PastTripStory({
   textNotes,
   handleCardToggle,
   _id,
-  image,
 }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [picture, setPicture] = useState('');
+
   return (
     <>
       <Card>
@@ -21,8 +25,12 @@ export default function PastTripStory({
           {dayjs(endDate).format('DD-MM-YY')}
         </Date>
         <Destination>{destination}</Destination>
-
         <Notes>{textNotes}</Notes>
+        {!picture ? (
+          <Button onClick={() => setIsVisible(!isVisible)}>Upload image</Button>
+        ) : (
+          <UploadedImage src={picture} alt=""></UploadedImage>
+        )}
         <ButtonWrapper>
           <Button
             variant="notes"
@@ -34,8 +42,21 @@ export default function PastTripStory({
           </Button>
         </ButtonWrapper>
       </Card>
+      {isVisible && (
+        <UploadModal
+          onCancel={() => setIsVisible(!isVisible)}
+          moveImage={handleImage}
+        >
+          Save Image?
+        </UploadModal>
+      )}
     </>
   );
+
+  function handleImage(picture) {
+    setPicture(picture);
+    setIsVisible(!isVisible);
+  }
 }
 
 const Card = styled.li`
@@ -47,9 +68,7 @@ const Card = styled.li`
   background-color: var(--color-dark-gray);
   color: var(--color-white);
   height: 330px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: var(--box-shadow);
 `;
 
 const Date = styled.span`
@@ -75,4 +94,9 @@ const ButtonWrapper = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
+`;
+
+const UploadedImage = styled.img`
+  width: 100%;
+  margin: 10px 0;
 `;

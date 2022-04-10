@@ -31,28 +31,21 @@ export default function PastTripNotes({ onHandleNewNote }) {
           rows="3"
           required
         />
-        <div>
-          {image ? (
-            <img
-              src={image}
-              alt=""
-              style={{
-                width: '90%',
-                margin: '5%',
-              }}
-            />
+        <ImageWrapper>
+          {Image ? (
+            <img src={image} alt="" />
           ) : (
             <input
               type="file"
               name="file"
-              aria-label="upload-your-picture"
+              aria-label="Upload a picture"
               onChange={upload}
             />
           )}
-        </div>
+        </ImageWrapper>
         <ButtonWrapper>
           <Button variant="add" type="submit">
-            Add notes
+            Save
           </Button>
         </ButtonWrapper>
       </Form>
@@ -99,4 +92,12 @@ const ButtonWrapper = styled.div`
 
 const Wrapper = styled.div`
   margin: 20px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+`;
+
+const ImageWrapper = styled.div`
+  margin: 10px;
 `;

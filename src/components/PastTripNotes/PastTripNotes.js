@@ -12,9 +12,11 @@ export default function PastTripNotes({ note, onDelete, image }) {
       <ListEntry>
         <p>{note}</p>
         <UploadedImage src={image} alt=""></UploadedImage>
-        <Delete onClick={() => setIsVisible(!isVisible)}>
-          <FiTrash size={20} />
-        </Delete>
+        <DeleteIcon>
+          <Delete onClick={() => setIsVisible(!isVisible)}>
+            <FiTrash size={20} />
+          </Delete>
+        </DeleteIcon>
       </ListEntry>
       {isVisible && (
         <Modal onDelete={handleDelete} onKeep={() => setIsVisible(!isVisible)}>
@@ -60,7 +62,9 @@ const Delete = styled.button`
 
 const UploadedImage = styled.img`
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px;
-  margin-left: -1px;
+  margin: 10px 0;
+`;
+
+const DeleteIcon = styled.span`
+  margin-top: 15px;
 `;
