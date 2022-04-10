@@ -84,10 +84,11 @@ function App() {
     setNotes(notes.filter(note => note._id !== noteId));
   }
 
-  function handleNewNote(note) {
+  function handleNewNote(note, image) {
     const newNotes = {
       _id: nanoid(),
       note,
+      image,
     };
     setNotes([...notes, newNotes]);
   }

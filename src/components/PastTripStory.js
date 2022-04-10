@@ -11,6 +11,7 @@ export default function PastTripStory({
   textNotes,
   handleCardToggle,
   _id,
+  image,
 }) {
   return (
     <>
@@ -20,6 +21,7 @@ export default function PastTripStory({
           {dayjs(endDate).format('DD-MM-YY')}
         </Date>
         <Destination>{destination}</Destination>
+
         <Notes>{textNotes}</Notes>
         <ButtonWrapper>
           <Button

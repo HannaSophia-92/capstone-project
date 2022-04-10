@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cloudinary/react": "^1.2.2",
+    "@cloudinary/url-gen": "^1.7.0",
     "@material-ui/pickers": "^3.3.10",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.1",
     "dayjs": "^1.11.0",
     "nanoid": "^3.3.2",
     "react": "^17.0.2",

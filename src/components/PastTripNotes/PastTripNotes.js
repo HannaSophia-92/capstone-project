@@ -4,13 +4,14 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
 
-export default function PastTripNotes({ note, onDelete }) {
+export default function PastTripNotes({ note, onDelete, image }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <>
       <ListEntry>
         <p>{note}</p>
+        <UploadedImage src={image} alt=""></UploadedImage>
         <Delete onClick={() => setIsVisible(!isVisible)}>
           <FiTrash size={20} />
         </Delete>
@@ -55,4 +56,11 @@ const Delete = styled.button`
   &:hover {
     color: #ffcb74;
   }
+`;
+
+const UploadedImage = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px;
+  margin-left: -1px;
 `;

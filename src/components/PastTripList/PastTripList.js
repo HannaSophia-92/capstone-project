@@ -6,6 +6,7 @@ import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import PastTripStory from '../PastTripStory';
+import { image } from '@cloudinary/url-gen/qualifiers/source';
 
 export default function PastTripList({
   notes,
@@ -69,12 +70,13 @@ export default function PastTripList({
         </>
       )}
       {!isActive &&
-        notes.map(({ note, _id }) => {
+        notes.map(({ note, _id, image }) => {
           return (
             <PastTripNotes
               key={_id}
               note={note}
               onDelete={() => onDelete(_id)}
+              image={image}
             />
           );
         })}
