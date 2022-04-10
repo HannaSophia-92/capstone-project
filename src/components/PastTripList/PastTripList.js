@@ -44,6 +44,7 @@ export default function PastTripList({
                     textNotes={textNotes}
                     _id={_id}
                     key={_id}
+                    handleCardToggle={handleCardToggle}
                   />
                 );
               }
@@ -89,7 +90,7 @@ const GoBackButton = styled.button`
   border: none;
   background: transparent;
   font-size: 20px;
-  color: #2f2f2f;
+  color: var(--color-dark-gray);
   padding: 10px 15px 0 15px;
 `;
 

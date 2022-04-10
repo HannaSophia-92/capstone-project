@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('Modal', () => {
   it('renders a warning message and two buttons when clicking on the delete button', () => {
-    render(<Modal />);
+    render(<Modal children={'Are you sure you want to delete this trip?'} />);
 
     const message = screen.getByText(
       'Are you sure you want to delete this trip?'

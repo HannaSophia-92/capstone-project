@@ -2,13 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import { Form, Label, Textarea } from '../styledComponents/StyledForm';
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [textInput, setTextInput] = useState('');
 
   return (
-    <>
-      <NotesForm
+    <Wrapper>
+      <Form
         aria-labelledby="notes-form"
         onSubmit={handleSubmit}
         autoComplete="off"
@@ -28,11 +29,13 @@ export default function PastTripNotes({ onHandleNewNote }) {
           rows="3"
           required
         />
-        <Button variant="add" type="submit">
-          Add notes
-        </Button>
-      </NotesForm>
-    </>
+        <ButtonWrapper>
+          <Button variant="add" type="submit">
+            Add notes
+          </Button>
+        </ButtonWrapper>
+      </Form>
+    </Wrapper>
   );
 
   function handleSubmit(event) {
@@ -45,17 +48,14 @@ export default function PastTripNotes({ onHandleNewNote }) {
   }
 }
 
-const NotesForm = styled.form`
+const ButtonWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 15px;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
 `;
 
-const Label = styled.label`
-  padding: 15px 0;
-`;
-
-const Textarea = styled.textarea`
-  padding: 5px;
-  margin-bottom: 10px;
+const Wrapper = styled.div`
+  margin: 20px;
 `;

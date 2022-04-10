@@ -16,10 +16,9 @@ export default function PastTripNotes({ note, onDelete }) {
         </Delete>
       </ListEntry>
       {isVisible && (
-        <Modal
-          onDelete={handleDelete}
-          onKeep={() => setIsVisible(!isVisible)}
-        />
+        <Modal onDelete={handleDelete} onKeep={() => setIsVisible(!isVisible)}>
+          Are you sure you want to delete this trip?
+        </Modal>
       )}
     </>
   );
@@ -34,21 +33,20 @@ const ListEntry = styled.li`
   display: flex;
   flex-direction: column;
   word-break: break-all;
-  margin: 15px;
+  margin: 20px;
   padding: 20px;
   border-radius: 20px;
   min-height: 110px;
-  background-color: #2f2f2f;
-  color: #f6f6f6;
+  background-color: var(--color-dark-gray);
+  color: var(--color-white);
   position: relative;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  box-shadow: var(--box-shadow);
 `;
 
 const Delete = styled.button`
   background: transparent;
   border: none;
-  color: #f6f6f6;
+  color: var(--color-white);
   position: absolute;
   bottom: 10px;
   right: 25px;

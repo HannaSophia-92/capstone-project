@@ -40,6 +40,7 @@ function App() {
               trips={trips}
               onDeleteCard={handleDeleteCard}
               onFinishTrip={handleFinishTrip}
+              onEdit={handleEdit}
             />
           }
         />
@@ -50,6 +51,17 @@ function App() {
     </Wrapper>
   );
 
+  function handleEdit(updatedValue) {
+    const newContent = trips.map(trip => {
+      if (trip._id === updatedValue._id) {
+        const newTripContent = { ...trip, ...updatedValue };
+        return newTripContent;
+      }
+      return trip;
+    });
+    setTrips(newContent);
+  }
+
   function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
     setHistory([
       { startDate, endDate, destination, textNotes, _id },
@@ -57,6 +69,7 @@ function App() {
     ]);
     setTrips(trips.filter(trip => trip._id !== _id));
     navigate('./');
+    console.log(handleFinishTrip);
   }
 
   function handleDeleteCard(tripId) {

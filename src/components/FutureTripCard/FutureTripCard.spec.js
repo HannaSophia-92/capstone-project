@@ -1,15 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import FutureTripCard from './FutureTripCard';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('FutureTripCard', () => {
   it('renders a destination, a start date, end date and notes', () => {
     render(
-      <FutureTripCard
-        destination="South Africa"
-        dateStart="06-04-22"
-        dateEnd="20-05-22"
-        notes="passport"
-      />
+      <MemoryRouter>
+        <FutureTripCard
+          destination="South Africa"
+          dateStart="06-04-22"
+          dateEnd="20-05-22"
+          textNotes="passport"
+        />
+      </MemoryRouter>
     );
 
     const destination = screen.getByText(/south africa/i);
@@ -25,11 +28,15 @@ describe('FutureTripCard', () => {
     expect(note).toBeInTheDocument();
   });
 
-  it('renders a delete button as icon', () => {
-    render(<FutureTripCard />);
+  it('renders three buttons', () => {
+    render(
+      <MemoryRouter>
+        <FutureTripCard />
+      </MemoryRouter>
+    );
 
-    const buttonDelete = screen.getByRole('button', { name: /delete/i });
+    const buttons = screen.getAllByRole('button');
 
-    expect(buttonDelete).toBeInTheDocument();
+    expect(buttons).toHaveLength(3);
   });
 });

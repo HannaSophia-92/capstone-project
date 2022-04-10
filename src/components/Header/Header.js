@@ -12,8 +12,8 @@ export default function Header() {
 }
 
 const Heading = styled.h1`
-  color: #2f2f2f;
-  border-bottom: 1px solid #2f2f2f;
+  color: var(--color-dark-gray);
+  border-bottom: 1px solid var(--color-dark-gray);
   text-align: center;
   margin: 10px;
 `;

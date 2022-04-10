@@ -1,21 +1,28 @@
 import Button from '../Button/Button';
 import styled from 'styled-components';
+import { HiHome } from 'react-icons/hi';
 
-export default function Modal({ onKeep, onDelete, children }) {
+export default function SaveModal({ onKeep, onFinishTrip, children }) {
   return (
     <Background>
       <StyledModal>
         <span>{children}</span>
-        <Button variant={'submit'} onClick={onKeep}>
-          no
+        <Button variant={'keep'} onClick={onKeep}>
+          No, keep it here!
         </Button>
-        <Button variant={'danger'} onClick={onDelete}>
-          yes
+        <Button variant={'save'} onClick={onFinishTrip}>
+          Save it! <HomeIcon size={15} />
         </Button>
       </StyledModal>
     </Background>
   );
 }
+
+const HomeIcon = styled(HiHome)`
+  position: absolute;
+  bottom: 26px;
+  right: 85px;
+`;
 
 const Background = styled.div`
   position: fixed;
@@ -32,6 +39,7 @@ const StyledModal = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   line-height: 1.5em;
   padding: 15px;
   width: 70%;

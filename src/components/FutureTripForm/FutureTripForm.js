@@ -4,6 +4,13 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import {
+  Form,
+  Label,
+  DateWrapper,
+  FormWrapper,
+  InputDate,
+} from '../styledComponents/StyledForm';
 
 export default function FutureTripForm({ onCreateTrip }) {
   const [formData, setFormData] = useState('');
@@ -25,66 +32,71 @@ export default function FutureTripForm({ onCreateTrip }) {
   };
 
   return (
-    <Form
-      aria-labelledby="future-trips-form"
-      autoComplete="off"
-      onSubmit={handleSubmit}
-    >
-      <h2 id="future-trips-form">New Trip</h2>
-      <Label htmlFor="destination">Add a new Destination:</Label>
-      <input
-        type="text"
-        id="destination"
-        name="destination"
-        onChange={handleOnChange}
-        maxLength="100"
-        placeholder="Country/City"
-        required
-      />
+    <FormWrapper>
+      <Form
+        aria-labelledby="future-trips-form"
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
+        <ScreenReaderOnly>
+          <h2 id="future-trips-form">New Trip</h2>
+        </ScreenReaderOnly>
+        <Label htmlFor="destination">Destination:</Label>
+        <input
+          type="text"
+          id="destination"
+          name="destination"
+          onChange={handleOnChange}
+          maxLength="100"
+          placeholder="Country/City"
+          required
+        />
 
-      <InputDateWrapper>
-        <div>
-          <Label htmlFor="startDate">Start:</Label>
-          <InputDate
-            type="date"
-            id="startDate"
-            name="startDate"
-            onChange={handleOnChange}
-            min={disablePastDate()}
-            required
-          />
-        </div>
-        <span>
-          <HiOutlineArrowNarrowRight size={20} />
-        </span>
-        <div>
-          <Label htmlFor="endDate">End:</Label>
-          <InputDate
-            type="date"
-            id="endDate"
-            name="endDate"
-            onChange={handleOnChange}
-            min={disablePastDate()}
-            required
-          />
-        </div>
-      </InputDateWrapper>
+        <DateWrapper>
+          <div>
+            <Label htmlFor="startDate">Start:</Label>
+            <InputDate
+              type="date"
+              id="startDate"
+              name="startDate"
+              onChange={handleOnChange}
+              min={disablePastDate()}
+              required
+            />
+          </div>
+          <span>
+            <ArrowIcon size={15} />
+          </span>
+          <div>
+            <Label htmlFor="endDate">End:</Label>
+            <InputDate
+              type="date"
+              id="endDate"
+              name="endDate"
+              onChange={handleOnChange}
+              min={disablePastDate()}
+              required
+            />
+          </div>
+        </DateWrapper>
 
-      <Label htmlFor="textNotes">Notes:</Label>
-      <ScreenReaderOnly id="textNotes">Enter notes</ScreenReaderOnly>
+        <Label htmlFor="textNotes">Notes:</Label>
+        <ScreenReaderOnly id="textNotes">Enter notes</ScreenReaderOnly>
 
-      <textarea
-        type="text"
-        id="textNotes"
-        name="textNotes"
-        placeholder="Documents, Visa, Packing List..."
-        onChange={handleOnChange}
-        maxLength="500"
-        rows="3"
-      />
-
-      <Button variant="add">Add Trip</Button>
-    </Form>
+        <textarea
+          type="text"
+          id="textNotes"
+          name="textNotes"
+          placeholder="Documents, Visa, Packing List..."
+          onChange={handleOnChange}
+          maxLength="500"
+          rows="3"
+        />
+        <ButtonWrapper>
+          <Button variant="add">Add Trip</Button>
+        </ButtonWrapper>
+      </Form>
+    </FormWrapper>
   );
 
   function handleSubmit(event) {
@@ -93,27 +105,12 @@ export default function FutureTripForm({ onCreateTrip }) {
   }
 }
 
-const Form = styled.form`
+const ButtonWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin: 20px;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  margin-top: 10px;
-`;
-
-const InputDateWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
-
-const InputDate = styled.input`
-  color: gray;
-  margin-top: 12px;
+const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
+  margin: 7px;
 `;

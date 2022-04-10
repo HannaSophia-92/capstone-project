@@ -10,15 +10,15 @@ export default function Navigation() {
     <Nav>
       <NavLinkStyled to="/">
         <ScreenReaderOnly>Past Trips</ScreenReaderOnly>
-        <HiHome size={35} />
+        <HiHome size={33} />
       </NavLinkStyled>
       <NavLinkStyled to="/formPage">
         <ScreenReaderOnly>Create new Trip</ScreenReaderOnly>
-        <IoIosCreate size={35} />
+        <IoIosCreate size={33} />
       </NavLinkStyled>
       <NavLinkStyled to="/futurePage">
         <ScreenReaderOnly>Future Trips</ScreenReaderOnly>
-        <FaCompass size={35} />
+        <FaCompass size={33} />
       </NavLinkStyled>
     </Nav>
   );
@@ -28,12 +28,16 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   height: 48px;
-  background-color: #2f2f2f;
+  background-color: var(--color-dark-gray);
 `;
 
 const NavLinkStyled = styled(NavLink)`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  color: #f6f6f6;
+  color: var(--color-white);
+
+  &.active {
+    color: var(--color-yellow);
+  }
 `;
