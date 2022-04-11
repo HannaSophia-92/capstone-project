@@ -12,6 +12,7 @@ export default function PastTripList({
   onHandleNewNote,
   onDelete,
   history,
+  savePicture,
 }) {
   const [isActive, setIsActive] = useState(true);
 
@@ -41,8 +42,7 @@ export default function PastTripList({
                 endDate,
                 textNotes,
                 _id,
-                image,
-                upload,
+                picture,
               }) => {
                 return (
                   <PastTripStory
@@ -53,8 +53,8 @@ export default function PastTripList({
                     _id={_id}
                     key={_id}
                     handleCardToggle={handleCardToggle}
-                    image={image}
-                    upload={() => upload()}
+                    picture={picture}
+                    savePicture={savePicture}
                   />
                 );
               }

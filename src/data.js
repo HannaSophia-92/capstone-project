@@ -29,12 +29,6 @@ const pastTripList = [
     country: 'Brasil',
     city: 'Rio de Janeiro',
   },
-  {
-    _id: '6',
-    image: 'https://source.unsplash.com/250x200/?China=123',
-    country: 'China',
-    city: 'Hongkong',
-  },
 ];
 
 export default pastTripList;

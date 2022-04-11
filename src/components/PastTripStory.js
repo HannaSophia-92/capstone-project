@@ -13,9 +13,13 @@ export default function PastTripStory({
   textNotes,
   handleCardToggle,
   _id,
+  savePicture,
+  picture,
 }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [picture, setPicture] = useState('');
+  // const [picture, setPicture] = useState('');
+
+  console.log(picture);
 
   return (
     <>
@@ -28,7 +32,11 @@ export default function PastTripStory({
         <Notes>{textNotes}</Notes>
         {!picture ? (
           <UploadButtonWrapper>
-            <Button onClick={() => setIsVisible(!isVisible)}>
+            <Button
+              type="button"
+              aria-labelledby="Upload image"
+              onClick={() => setIsVisible(!isVisible)}
+            >
               Upload image
             </Button>
           </UploadButtonWrapper>
@@ -58,7 +66,7 @@ export default function PastTripStory({
   );
 
   function handleImage(picture) {
-    setPicture(picture);
+    savePicture(picture, _id);
     setIsVisible(!isVisible);
   }
 }
@@ -107,7 +115,7 @@ const UploadedImage = styled.img`
 `;
 
 const UploadButtonWrapper = styled.div`
-  border: 1px dashed var(--color-white);
+  border: 1px dashed rgba(220, 220, 220, 0.3);
   border-radius: 16px;
   height: 150px;
   display: flex;

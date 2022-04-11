@@ -14,6 +14,8 @@ function App() {
 
   const navigate = useNavigate();
 
+  console.log(history);
+
   return (
     <Wrapper>
       <Routes>
@@ -26,6 +28,7 @@ function App() {
               onDeleteNote={handleDeleteNote}
               history={history}
               trips={futureTrips}
+              savePicture={handleSavePicture}
             />
           }
         />
@@ -62,13 +65,32 @@ function App() {
     setFutureTrips(newContent);
   }
 
-  function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
+  function handleFinishTrip(
+    startDate,
+    endDate,
+    destination,
+    textNotes,
+    _id,
+    picture
+  ) {
     setHistory([
-      { startDate, endDate, destination, textNotes, _id },
+      { startDate, endDate, destination, textNotes, _id, picture },
       ...history,
     ]);
     setFutureTrips(futureTrips.filter(trip => trip._id !== _id));
     navigate('./');
+  }
+
+  function handleSavePicture(picture, _id) {
+    setHistory(
+      history.map(card => {
+        if (card._id === _id) {
+          return { ...card, picture };
+        } else {
+          return card;
+        }
+      })
+    );
   }
 
   function handleDeleteCard(tripId) {
