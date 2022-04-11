@@ -1,6 +1,4 @@
-import pastTripList from '../../data';
 import styled from 'styled-components';
-import PastTripCard from '../PastTripCard/PastTripCard';
 import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
@@ -20,20 +18,6 @@ export default function PastTripList({
     <>
       {isActive && (
         <>
-          {/* <Card role="list" aria-label="past-trips">
-            {pastTripList?.map(({ country, city, _id, image }) => {
-              return (
-                <PastTripCard
-                  image={image}
-                  country={country}
-                  city={city}
-                  key={_id}
-                  handleCardToggle={handleCardToggle}
-                  _id={_id}
-                />
-              );
-            })}
-          </Card> */}
           <Card>
             {history.map(
               ({

@@ -40,6 +40,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
               name="file"
               aria-label="Upload a picture"
               onChange={upload}
+              multiple="multiple"
             />
           )}
         </ImageUpload>
@@ -64,6 +65,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
   function upload(event) {
     const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
     const formData = new FormData();
+
     formData.append('file', event.target.files[0]);
     formData.append('upload_preset', PRESET);
 

@@ -14,8 +14,6 @@ function App() {
 
   const navigate = useNavigate();
 
-  console.log(history);
-
   return (
     <Wrapper>
       <Routes>
