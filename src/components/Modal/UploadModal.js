@@ -13,7 +13,7 @@ export default function UploadModal({ onCancel, children, moveImage }) {
     <Background>
       <StyledModal>
         <span>{children}</span>
-        <div>
+        <ImageUpload>
           {image ? (
             <Image src={image} alt="" />
           ) : (
@@ -24,7 +24,7 @@ export default function UploadModal({ onCancel, children, moveImage }) {
               onChange={upload}
             />
           )}
-        </div>
+        </ImageUpload>
         <Button variant={'keep'} onClick={onCancel}>
           Cancel!
         </Button>
@@ -84,4 +84,12 @@ const StyledModal = styled.section`
 
 const Image = styled.img`
   width: 100%;
+`;
+
+const ImageUpload = styled.div`
+  margin: 10px;
+  input {
+    border-radius: 10px;
+    width: 100%;
+  }
 `;

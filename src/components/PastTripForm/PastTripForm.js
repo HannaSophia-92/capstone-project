@@ -31,9 +31,9 @@ export default function PastTripNotes({ onHandleNewNote }) {
           rows="3"
           required
         />
-        <ImageWrapper>
-          {Image ? (
-            <img src={image} alt="" />
+        <ImageUpload>
+          {image ? (
+            <Image src={image} alt="" />
           ) : (
             <input
               type="file"
@@ -42,7 +42,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
               onChange={upload}
             />
           )}
-        </ImageWrapper>
+        </ImageUpload>
         <ButtonWrapper>
           <Button variant="add" type="submit">
             Save
@@ -98,6 +98,10 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const ImageWrapper = styled.div`
+const ImageUpload = styled.div`
   margin: 10px;
+  input {
+    border-radius: 10px;
+    width: 100%;
+  }
 `;

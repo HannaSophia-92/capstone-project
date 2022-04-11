@@ -20,7 +20,7 @@ export default function PastTripNotes({ note, onDelete, image }) {
       </ListEntry>
       {isVisible && (
         <Modal onDelete={handleDelete} onKeep={() => setIsVisible(!isVisible)}>
-          Are you sure you want to delete this trip?
+          Are you sure you want to delete this note?
         </Modal>
       )}
     </>

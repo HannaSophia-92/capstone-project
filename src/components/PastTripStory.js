@@ -27,7 +27,11 @@ export default function PastTripStory({
         <Destination>{destination}</Destination>
         <Notes>{textNotes}</Notes>
         {!picture ? (
-          <Button onClick={() => setIsVisible(!isVisible)}>Upload image</Button>
+          <UploadButtonWrapper>
+            <Button onClick={() => setIsVisible(!isVisible)}>
+              Upload image
+            </Button>
+          </UploadButtonWrapper>
         ) : (
           <UploadedImage src={picture} alt=""></UploadedImage>
         )}
@@ -67,8 +71,9 @@ const Card = styled.li`
   border-radius: 40px;
   background-color: var(--color-dark-gray);
   color: var(--color-white);
-  height: 330px;
+  min-height: 330px;
   box-shadow: var(--box-shadow);
+  position: relative;
 `;
 
 const Date = styled.span`
@@ -93,10 +98,20 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: flex-end;
   width: 100%;
-  height: 100%;
 `;
 
 const UploadedImage = styled.img`
   width: 100%;
+  margin: 10px 0;
+  border-radius: 8px;
+`;
+
+const UploadButtonWrapper = styled.div`
+  border: 1px dashed var(--color-white);
+  border-radius: 16px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px 0;
 `;

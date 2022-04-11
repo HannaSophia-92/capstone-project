@@ -41,6 +41,7 @@ export default styled.button`
       background: transparent;
       border: none;
       color: var(--color-white);
+      margin: 0;
 
       &:hover {
         color: var(--color-yellow);
