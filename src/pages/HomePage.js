@@ -6,6 +6,7 @@ export default function HomePage({
   notes,
   onDeleteNote,
   history,
+  savePicture,
 }) {
   return (
     <>
@@ -15,6 +16,7 @@ export default function HomePage({
         onHandleNewNote={onHandleNewNote}
         onDelete={onDeleteNote}
         history={history}
+        savePicture={savePicture}
       />
     </>
   );

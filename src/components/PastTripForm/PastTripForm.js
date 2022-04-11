@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { Form, Label, Textarea } from '../styledComponents/StyledForm';
+import axios from 'axios';
+
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 export default function PastTripNotes({ onHandleNewNote }) {
-  const [textInput, setTextInput] = useState('');
+  const [image, setImage] = useState('');
 
   return (
     <Wrapper>
@@ -23,15 +27,26 @@ export default function PastTripNotes({ onHandleNewNote }) {
           id="notes"
           name="notes"
           placeholder="Enter your notes..."
-          value={textInput}
-          onChange={event => setTextInput(event.target.value)}
           maxLength="500"
           rows="3"
           required
         />
+        <ImageUpload>
+          {image ? (
+            <Image src={image} alt="" />
+          ) : (
+            <input
+              type="file"
+              name="file"
+              aria-label="Upload a picture"
+              onChange={upload}
+              multiple="multiple"
+            />
+          )}
+        </ImageUpload>
         <ButtonWrapper>
           <Button variant="add" type="submit">
-            Add notes
+            Save
           </Button>
         </ButtonWrapper>
       </Form>
@@ -42,9 +57,30 @@ export default function PastTripNotes({ onHandleNewNote }) {
     event.preventDefault();
     const form = event.target;
     const inputValue = form.elements.notes.value.trim();
-    onHandleNewNote(inputValue);
+    onHandleNewNote(inputValue, image);
     form.reset();
-    setTextInput('');
+    setImage('');
+  }
+
+  function upload(event) {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
+    const formData = new FormData();
+
+    formData.append('file', event.target.files[0]);
+    formData.append('upload_preset', PRESET);
+
+    axios
+      .post(url, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      })
+      .then(onImageSave)
+      .catch(err => console.error(err));
+  }
+
+  function onImageSave(response) {
+    setImage(response.data.url);
   }
 }
 
@@ -58,4 +94,16 @@ const ButtonWrapper = styled.div`
 
 const Wrapper = styled.div`
   margin: 20px;
+`;
+
+const Image = styled.img`
+  width: 100%;
+`;
+
+const ImageUpload = styled.div`
+  margin: 10px;
+  input {
+    border-radius: 10px;
+    width: 100%;
+  }
 `;

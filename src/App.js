@@ -26,6 +26,7 @@ function App() {
               onDeleteNote={handleDeleteNote}
               history={history}
               trips={futureTrips}
+              savePicture={handleSavePicture}
             />
           }
         />
@@ -62,13 +63,32 @@ function App() {
     setFutureTrips(newContent);
   }
 
-  function handleFinishTrip(startDate, endDate, destination, textNotes, _id) {
+  function handleFinishTrip(
+    startDate,
+    endDate,
+    destination,
+    textNotes,
+    _id,
+    picture
+  ) {
     setHistory([
-      { startDate, endDate, destination, textNotes, _id },
+      { startDate, endDate, destination, textNotes, _id, picture },
       ...history,
     ]);
     setFutureTrips(futureTrips.filter(trip => trip._id !== _id));
     navigate('./');
+  }
+
+  function handleSavePicture(picture, _id) {
+    setHistory(
+      history.map(card => {
+        if (card._id === _id) {
+          return { ...card, picture };
+        } else {
+          return card;
+        }
+      })
+    );
   }
 
   function handleDeleteCard(tripId) {
@@ -84,10 +104,11 @@ function App() {
     setNotes(notes.filter(note => note._id !== noteId));
   }
 
-  function handleNewNote(note) {
+  function handleNewNote(note, image) {
     const newNotes = {
       _id: nanoid(),
       note,
+      image,
     };
     setNotes([...notes, newNotes]);
   }

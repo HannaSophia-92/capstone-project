@@ -1,6 +1,4 @@
-import pastTripList from '../../data';
 import styled from 'styled-components';
-import PastTripCard from '../PastTripCard/PastTripCard';
 import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
@@ -12,6 +10,7 @@ export default function PastTripList({
   onHandleNewNote,
   onDelete,
   history,
+  savePicture,
 }) {
   const [isActive, setIsActive] = useState(true);
 
@@ -19,23 +18,16 @@ export default function PastTripList({
     <>
       {isActive && (
         <>
-          <Card role="list" aria-label="past-trips">
-            {pastTripList?.map(({ country, city, _id, image }) => {
-              return (
-                <PastTripCard
-                  image={image}
-                  country={country}
-                  city={city}
-                  key={_id}
-                  handleCardToggle={handleCardToggle}
-                  _id={_id}
-                />
-              );
-            })}
-          </Card>
           <Card>
             {history.map(
-              ({ destination, startDate, endDate, textNotes, _id }) => {
+              ({
+                destination,
+                startDate,
+                endDate,
+                textNotes,
+                _id,
+                picture,
+              }) => {
                 return (
                   <PastTripStory
                     destination={destination}
@@ -45,6 +37,8 @@ export default function PastTripList({
                     _id={_id}
                     key={_id}
                     handleCardToggle={handleCardToggle}
+                    picture={picture}
+                    savePicture={savePicture}
                   />
                 );
               }
@@ -69,12 +63,13 @@ export default function PastTripList({
         </>
       )}
       {!isActive &&
-        notes.map(({ note, _id }) => {
+        notes.map(({ note, _id, image }) => {
           return (
             <PastTripNotes
               key={_id}
               note={note}
               onDelete={() => onDelete(_id)}
+              image={image}
             />
           );
         })}
