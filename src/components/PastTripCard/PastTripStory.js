@@ -90,8 +90,9 @@ export default function PastTripStory({
             <PastTripNotes
               key={_id}
               note={note}
-              onDelete={() => onDelete(_id)}
+              onDelete={onDelete}
               image={image}
+              _id={_id}
             />
           );
         })}

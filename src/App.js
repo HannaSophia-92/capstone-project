@@ -8,10 +8,10 @@ import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
 
 function App() {
-  const [notes, setNotes] = useLocalStorage('notes', []);
+  // const [notes, setNotes] = useLocalStorage('notes', []);
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
-  console.log(history);
+
   const navigate = useNavigate();
 
   return (
@@ -100,7 +100,13 @@ function App() {
   }
 
   function handleDeleteNote(noteId) {
-    setNotes(notes.filter(note => note._id !== noteId));
+    setHistory(
+      history?.map(card => {
+        console.log(card.notes[0]);
+        console.log(card.notes[0]._id);
+        return card.notes.filter(note => note._id !== noteId);
+      })
+    );
   }
 
   function handleNewNote(note, _id) {
