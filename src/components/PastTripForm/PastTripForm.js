@@ -10,6 +10,8 @@ const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 export default function PastTripNotes({ onHandleNewNote }) {
   const [image, setImage] = useState('');
+  const [process, setProcess] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Wrapper>
@@ -31,6 +33,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
           rows="3"
           required
         />
+        {loading && <div>Uploading Image...{process}%</div>}
         <ImageUpload>
           {image ? (
             <Image src={image} alt="" />
@@ -74,6 +77,13 @@ export default function PastTripNotes({ onHandleNewNote }) {
         headers: {
           'Content-type': 'multipart/form-data',
         },
+        onUploadProgress: progressEvent => {
+          setLoading(true);
+          let percent = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProcess(percent);
+        },
       })
       .then(onImageSave)
       .catch(err => console.error(err));
@@ -81,6 +91,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
 
   function onImageSave(response) {
     setImage(response.data.url);
+    setLoading(false);
   }
 }
 

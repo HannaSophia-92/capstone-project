@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
-import PastTripStory from '../PastTripStory';
+import PastTripStory from '../PastTripCard/PastTripStory';
 
 export default function PastTripList({
   notes,
