@@ -51,7 +51,7 @@ export default function PastTripList({
       )}
       {!isActive && (
         <GoBackButton
-          aria-labelledby="Go back"
+          aria-labelledby="Return to home page"
           onClick={() => handleCardToggle()}
         >
           <MdKeyboardBackspace size={30} />
