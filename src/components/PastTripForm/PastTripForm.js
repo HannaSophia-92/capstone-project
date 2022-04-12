@@ -8,7 +8,7 @@ import axios from 'axios';
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
-export default function PastTripNotes({ onHandleNewNote }) {
+export default function PastTripNotes({ onHandleNewNote, _id }) {
   const [image, setImage] = useState('');
   const [process, setProcess] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -60,7 +60,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
     event.preventDefault();
     const form = event.target;
     const inputValue = form.elements.notes.value.trim();
-    onHandleNewNote(inputValue, image);
+    onHandleNewNote({ note: inputValue, image }, _id);
     form.reset();
     setImage('');
   }
@@ -79,7 +79,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
         },
         onUploadProgress: progressEvent => {
           setLoading(true);
-          let percent = Math.round(
+          const percent = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
           setProcess(percent);

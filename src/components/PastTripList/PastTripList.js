@@ -19,37 +19,41 @@ export default function PastTripList({
   }
   return (
     <>
-      {isActive && (
-        <>
-          <Card>
-            {history.map(
-              ({
-                destination,
-                startDate,
-                endDate,
-                textNotes,
-                _id,
-                picture,
-              }) => {
-                return (
-                  <PastTripStory
-                    destination={destination}
-                    startDate={startDate}
-                    endDate={endDate}
-                    textNotes={textNotes}
-                    _id={_id}
-                    key={_id}
-                    handleCardToggle={handleCardToggle}
-                    picture={picture}
-                    savePicture={savePicture}
-                  />
-                );
-              }
-            )}
-          </Card>
-        </>
-      )}
-      {!isActive && (
+      {/* {isActive && ( */}
+      <>
+        <Card>
+          {history.map(
+            ({
+              destination,
+              startDate,
+              endDate,
+              textNotes,
+              _id,
+              picture,
+              notes,
+            }) => {
+              return (
+                <PastTripStory
+                  destination={destination}
+                  startDate={startDate}
+                  endDate={endDate}
+                  textNotes={textNotes}
+                  _id={_id}
+                  key={_id}
+                  handleCardToggle={handleCardToggle}
+                  picture={picture}
+                  savePicture={savePicture}
+                  notes={notes}
+                  onHandleNewNote={onHandleNewNote}
+                  onDelete={onDelete}
+                />
+              );
+            }
+          )}
+        </Card>
+      </>
+      {/* )} */}
+      {/* {!isActive && (
         <GoBackButton
           aria-labelledby="Return to home page"
           onClick={() => handleCardToggle()}
@@ -75,7 +79,7 @@ export default function PastTripList({
               image={image}
             />
           );
-        })}
+        })} */}
     </>
   );
 

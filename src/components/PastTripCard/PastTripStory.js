@@ -5,52 +5,60 @@ import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { MdOutlineNoteAlt } from 'react-icons/md';
 import { useState } from 'react';
 import UploadModal from '../Modal/UploadModal';
+import PastTripForm from '../PastTripForm/PastTripForm';
+import PastTripNotes from '../PastTripNotes/PastTripNotes';
+import { MdKeyboardBackspace } from 'react-icons/md';
 
 export default function PastTripStory({
   startDate,
   endDate,
   destination,
   textNotes,
-  handleCardToggle,
   _id,
   savePicture,
   picture,
+  onHandleNewNote,
+  onDelete,
+  notes,
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <>
-      <Card>
-        <Date>
-          {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
-          {dayjs(endDate).format('DD-MM-YY')}
-        </Date>
-        <Destination>{destination}</Destination>
-        <Notes>{textNotes}</Notes>
-        {!picture ? (
-          <UploadButtonWrapper>
+      {isActive && (
+        <Card>
+          <Date>
+            {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
+            {dayjs(endDate).format('DD-MM-YY')}
+          </Date>
+          <Destination>{destination}</Destination>
+          <Notes>{textNotes}</Notes>
+          {!picture ? (
+            <UploadButtonWrapper>
+              <Button
+                type="button"
+                aria-labelledby="Upload image"
+                onClick={() => setIsVisible(!isVisible)}
+              >
+                Upload image
+              </Button>
+            </UploadButtonWrapper>
+          ) : (
+            <UploadedImage src={picture} alt=""></UploadedImage>
+          )}
+          <ButtonWrapper>
             <Button
-              type="button"
-              aria-labelledby="Upload image"
-              onClick={() => setIsVisible(!isVisible)}
+              variant="notes"
+              onClick={() => handleCardToggle(_id)}
+              aria-labelledby="Enter notes"
             >
-              Upload image
+              <ScreenReaderOnly>Notes</ScreenReaderOnly>
+              <MdOutlineNoteAlt size={25} />
             </Button>
-          </UploadButtonWrapper>
-        ) : (
-          <UploadedImage src={picture} alt=""></UploadedImage>
-        )}
-        <ButtonWrapper>
-          <Button
-            variant="notes"
-            onClick={() => handleCardToggle(_id)}
-            aria-labelledby="Enter notes"
-          >
-            <ScreenReaderOnly>Notes</ScreenReaderOnly>
-            <MdOutlineNoteAlt size={25} />
-          </Button>
-        </ButtonWrapper>
-      </Card>
+          </ButtonWrapper>
+        </Card>
+      )}
       {isVisible && (
         <UploadModal
           onCancel={() => setIsVisible(!isVisible)}
@@ -59,12 +67,43 @@ export default function PastTripStory({
           Save Image?
         </UploadModal>
       )}
+      {!isActive && (
+        <GoBackButton
+          aria-labelledby="Return to home page"
+          onClick={() => handleCardToggle()}
+        >
+          <MdKeyboardBackspace size={30} />
+        </GoBackButton>
+      )}
+      {!isActive && (
+        <>
+          <PastTripForm
+            onHandleNewNote={onHandleNewNote}
+            onClick={() => handleCardToggle()}
+            _id={_id}
+          />
+        </>
+      )}
+      {!isActive &&
+        notes?.map(({ note, _id, image }) => {
+          return (
+            <PastTripNotes
+              key={_id}
+              note={note}
+              onDelete={() => onDelete(_id)}
+              image={image}
+            />
+          );
+        })}
     </>
   );
 
   function handleImage(picture) {
     savePicture(picture, _id);
     setIsVisible(!isVisible);
+  }
+  function handleCardToggle() {
+    setIsActive(!isActive);
   }
 }
 
@@ -119,4 +158,12 @@ const UploadButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px 0;
+`;
+
+const GoBackButton = styled.button`
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--color-dark-gray);
+  padding: 10px 15px 0 15px;
 `;
