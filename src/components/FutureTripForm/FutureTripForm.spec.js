@@ -6,7 +6,7 @@ describe('FutureTripForm', () => {
   it('renders three input fields with placeholder and a button', () => {
     render(<FutureTripForm />);
 
-    const inputDestination = screen.getByLabelText(/Add a new Destination:/i);
+    const inputDestination = screen.getByLabelText(/Destination:/i);
     expect(inputDestination).toHaveAttribute('placeholder', 'Country/City');
 
     const inputStartDate = screen.getByLabelText(/Start:/i);
@@ -30,7 +30,7 @@ describe('FutureTripForm', () => {
     const neverCalled = jest.fn();
     render(<FutureTripForm onSubmit={neverCalled} />);
 
-    const inputDestination = screen.getByLabelText(/Add a new Destination:/i);
+    const inputDestination = screen.getByLabelText(/Destination:/i);
 
     userEvent.type(inputDestination, '{enter}');
 

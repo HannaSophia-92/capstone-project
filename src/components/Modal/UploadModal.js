@@ -8,11 +8,14 @@ const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
 export default function UploadModal({ onCancel, children, moveImage }) {
   const [image, setImage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [process, setProcess] = useState(0);
 
   return (
     <Background>
       <StyledModal>
         <span>{children}</span>
+        {loading && <div>Uploading Image...{process}%</div>}
         <ImageUpload>
           {image ? (
             <Image src={image} alt="" />
@@ -46,6 +49,13 @@ export default function UploadModal({ onCancel, children, moveImage }) {
         headers: {
           'Content-type': 'multipart/form-data',
         },
+        onUploadProgress: progressEvent => {
+          setLoading(true);
+          let percent = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProcess(percent);
+        },
       })
       .then(onImageSave)
       .catch(err => console.error(err));
@@ -53,6 +63,7 @@ export default function UploadModal({ onCancel, children, moveImage }) {
 
   function onImageSave(response) {
     setImage(response.data.url);
+    setLoading(false);
   }
 }
 

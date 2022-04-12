@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace } from 'react-icons/md';
-import PastTripStory from '../PastTripStory';
+import PastTripStory from '../PastTripCard/PastTripStory';
 
 export default function PastTripList({
   notes,
@@ -14,6 +14,9 @@ export default function PastTripList({
 }) {
   const [isActive, setIsActive] = useState(true);
 
+  if (!history || history.length === 0) {
+    return <Message>Seems like you don't have any past trips yet.</Message>;
+  }
   return (
     <>
       {isActive && (
@@ -94,5 +97,10 @@ const Card = styled.ul`
   flex-direction: column;
   gap: 20px;
   list-style: none;
+  margin: 20px;
+`;
+
+const Message = styled.p`
+  text-align: center;
   margin: 20px;
 `;

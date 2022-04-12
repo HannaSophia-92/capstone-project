@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import Button from './Button/Button';
-import ScreenReaderOnly from './styledComponents/ScreenReaderOnly';
+import Button from '../Button/Button';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { MdOutlineNoteAlt } from 'react-icons/md';
 import { useState } from 'react';
-import UploadModal from '../components/Modal/UploadModal';
+import UploadModal from '../Modal/UploadModal';
 
 export default function PastTripStory({
   startDate,
@@ -17,9 +17,6 @@ export default function PastTripStory({
   picture,
 }) {
   const [isVisible, setIsVisible] = useState(false);
-  // const [picture, setPicture] = useState('');
-
-  console.log(picture);
 
   return (
     <>
