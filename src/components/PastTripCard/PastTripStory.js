@@ -45,7 +45,7 @@ export default function PastTripStory({
               </Button>
             </UploadButtonWrapper>
           ) : (
-            <UploadedImage src={picture} alt=""></UploadedImage>
+            <UploadedImage src={picture} alt="" />
           )}
           <ButtonWrapper>
             <Button
