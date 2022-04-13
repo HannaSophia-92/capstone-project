@@ -27,11 +27,6 @@ export default function PastTripNotes({ note, onDelete, image, _id }) {
       )}
     </>
   );
-
-  // function handleDelete(_id) {
-  //   onDelete(_id);
-  //   setIsVisible(!isVisible);
-  // }
 }
 
 const ListEntry = styled.li`

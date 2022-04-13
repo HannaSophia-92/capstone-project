@@ -2,6 +2,9 @@ import Button from '../Button/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
+import { ImageUpload, Label } from '../styledComponents/StyledForm';
+import { MdOutlineCloudUpload } from 'react-icons/md';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -20,12 +23,20 @@ export default function UploadModal({ onCancel, children, moveImage }) {
           {image ? (
             <Image src={image} alt="" />
           ) : (
-            <input
-              type="file"
-              name="file"
-              aria-label="Upload a picture"
-              onChange={upload}
-            />
+            <>
+              <input
+                type="file"
+                name="file"
+                aria-label="Upload a picture"
+                onChange={upload}
+                id="files"
+              />
+              <Label htmlFor="files">
+                Upload image
+                <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
+                <UploadIcon size={25} />
+              </Label>
+            </>
           )}
         </ImageUpload>
         <Button variant={'keep'} onClick={onCancel}>
@@ -97,10 +108,9 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const ImageUpload = styled.div`
-  margin: 10px;
-  input {
-    border-radius: 10px;
-    width: 100%;
-  }
+const UploadIcon = styled(MdOutlineCloudUpload)`
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  color: var(--color-yellow);
 `;

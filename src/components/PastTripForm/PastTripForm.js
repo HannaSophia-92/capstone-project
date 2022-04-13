@@ -2,8 +2,14 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { Form, Label, Textarea } from '../styledComponents/StyledForm';
+import {
+  Form,
+  Label,
+  Textarea,
+  ImageUpload,
+} from '../styledComponents/StyledForm';
 import axios from 'axios';
+import { MdOutlineCloudUpload } from 'react-icons/md';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -38,13 +44,21 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
           {image ? (
             <Image src={image} alt="" />
           ) : (
-            <input
-              type="file"
-              name="file"
-              aria-label="Upload a picture"
-              onChange={upload}
-              multiple="multiple"
-            />
+            <>
+              <input
+                type="file"
+                name="file"
+                aria-label="Upload a picture"
+                onChange={upload}
+                multiple="multiple"
+                id="files"
+              />
+              <Label htmlFor="files">
+                Upload image
+                <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
+                <UploadIcon size={25} />
+              </Label>
+            </>
           )}
         </ImageUpload>
         <ButtonWrapper>
@@ -111,10 +125,9 @@ const Image = styled.img`
   width: 100%;
 `;
 
-const ImageUpload = styled.div`
-  margin: 10px;
-  input {
-    border-radius: 10px;
-    width: 100%;
-  }
+const UploadIcon = styled(MdOutlineCloudUpload)`
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  color: var(--color-yellow);
 `;

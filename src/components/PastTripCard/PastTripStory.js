@@ -162,9 +162,10 @@ const UploadButtonWrapper = styled.div`
 `;
 
 const GoBackButton = styled.button`
+  display: flex;
+  justify-content: flex-start;
   border: none;
   background: transparent;
   font-size: 20px;
   color: var(--color-dark-gray);
-  padding: 10px 15px 0 15px;
 `;
