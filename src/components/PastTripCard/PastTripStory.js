@@ -21,12 +21,12 @@ export default function PastTripStory({
   onDelete,
   notes,
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [notesVisible, setNotesVisible] = useState(true);
 
   return (
     <>
-      {isActive && (
+      {notesVisible && (
         <Card>
           <Date>
             {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
@@ -39,7 +39,7 @@ export default function PastTripStory({
               <Button
                 type="button"
                 aria-labelledby="Upload image"
-                onClick={() => setIsVisible(!isVisible)}
+                onClick={() => setImageModalVisible(!imageModalVisible)}
               >
                 Upload image
               </Button>
@@ -59,15 +59,15 @@ export default function PastTripStory({
           </ButtonWrapper>
         </Card>
       )}
-      {isVisible && (
+      {imageModalVisible && (
         <UploadModal
-          onCancel={() => setIsVisible(!isVisible)}
+          onCancel={() => setImageModalVisible(!imageModalVisible)}
           moveImage={handleImage}
         >
           Save Image?
         </UploadModal>
       )}
-      {!isActive && (
+      {!notesVisible && (
         <GoBackButton
           aria-labelledby="Return to home page"
           onClick={() => handleCardToggle()}
@@ -75,7 +75,7 @@ export default function PastTripStory({
           <MdKeyboardBackspace size={30} />
         </GoBackButton>
       )}
-      {!isActive && (
+      {!notesVisible && (
         <>
           <PastTripForm
             onHandleNewNote={onHandleNewNote}
@@ -84,7 +84,7 @@ export default function PastTripStory({
           />
         </>
       )}
-      {!isActive &&
+      {!notesVisible &&
         notes?.map(({ note, _id, image }) => {
           return (
             <PastTripNotes
@@ -101,10 +101,10 @@ export default function PastTripStory({
 
   function handleImage(picture) {
     savePicture(picture, _id);
-    setIsVisible(!isVisible);
+    setImageModalVisible(!imageModalVisible);
   }
   function handleCardToggle() {
-    setIsActive(!isActive);
+    setNotesVisible(!notesVisible);
   }
 }
 

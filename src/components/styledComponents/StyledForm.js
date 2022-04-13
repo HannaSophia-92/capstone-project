@@ -57,12 +57,12 @@ const ImageUpload = styled.div`
     position: relative;
     font-size: 14px;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
     border-radius: 5px;
     box-shadow: var(--box-shadow);
     background-color: var(--color-gray);
     color: var(--color-light-gray);
-    min-width: 200px;
+    width: 170px;
   }
 `;
 

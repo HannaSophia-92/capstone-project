@@ -20,7 +20,7 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
   const [loading, setLoading] = useState(false);
 
   return (
-    <Wrapper>
+    <>
       <Form
         aria-labelledby="notes-form"
         onSubmit={handleSubmit}
@@ -67,7 +67,7 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
           </Button>
         </ButtonWrapper>
       </Form>
-    </Wrapper>
+    </>
   );
 
   function handleSubmit(event) {
@@ -115,10 +115,6 @@ const ButtonWrapper = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-`;
-
-const Wrapper = styled.div`
-  margin: 20px;
 `;
 
 const Image = styled.img`
