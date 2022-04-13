@@ -3,6 +3,7 @@ import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { HiHome } from 'react-icons/hi';
 import { FaCompass } from 'react-icons/fa';
 import { IoIosCreate } from 'react-icons/io';
+import { GoGlobe } from 'react-icons/go';
 import styled from 'styled-components';
 
 export default function Navigation() {
@@ -19,6 +20,10 @@ export default function Navigation() {
       <NavLinkStyled to="/futurePage">
         <ScreenReaderOnly>Future Trips</ScreenReaderOnly>
         <FaCompass size={33} />
+      </NavLinkStyled>
+      <NavLinkStyled to="/mapPage">
+        <ScreenReaderOnly>Map</ScreenReaderOnly>
+        <GoGlobe size={33} />
       </NavLinkStyled>
     </Nav>
   );

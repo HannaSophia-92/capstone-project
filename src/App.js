@@ -6,6 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
+import MapPage from './pages/MapPage';
 
 function App() {
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
@@ -43,6 +44,7 @@ function App() {
             />
           }
         />
+        <Route path="/mapPage" element={<MapPage />} />
       </Routes>
       <Footer>
         <Navigation />
