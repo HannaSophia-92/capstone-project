@@ -42,4 +42,36 @@ const InputDate = styled.input`
   margin-top: 12px;
 `;
 
-export { Form, Label, Textarea, DateWrapper, FormWrapper, InputDate };
+const ImageUpload = styled.div`
+  input[type='file'] {
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 0.1px;
+    height: 0.1px;
+  }
+
+  label[for='files'] {
+    position: relative;
+    font-size: 14px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-gray);
+    color: var(--color-light-gray);
+    width: 170px;
+  }
+`;
+
+export {
+  Form,
+  Label,
+  Textarea,
+  DateWrapper,
+  FormWrapper,
+  InputDate,
+  ImageUpload,
+};

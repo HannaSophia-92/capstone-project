@@ -2,19 +2,25 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { Form, Label, Textarea } from '../styledComponents/StyledForm';
+import {
+  Form,
+  Label,
+  Textarea,
+  ImageUpload,
+} from '../styledComponents/StyledForm';
 import axios from 'axios';
+import { MdOutlineCloudUpload } from 'react-icons/md';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
 
-export default function PastTripNotes({ onHandleNewNote }) {
+export default function PastTripNotes({ onHandleNewNote, _id }) {
   const [image, setImage] = useState('');
   const [process, setProcess] = useState(0);
   const [loading, setLoading] = useState(false);
 
   return (
-    <Wrapper>
+    <>
       <Form
         aria-labelledby="notes-form"
         onSubmit={handleSubmit}
@@ -38,13 +44,21 @@ export default function PastTripNotes({ onHandleNewNote }) {
           {image ? (
             <Image src={image} alt="" />
           ) : (
-            <input
-              type="file"
-              name="file"
-              aria-label="Upload a picture"
-              onChange={upload}
-              multiple="multiple"
-            />
+            <>
+              <input
+                type="file"
+                name="file"
+                aria-label="Upload a picture"
+                onChange={upload}
+                multiple="multiple"
+                id="files"
+              />
+              <Label htmlFor="files">
+                Upload image
+                <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
+                <UploadIcon size={25} />
+              </Label>
+            </>
           )}
         </ImageUpload>
         <ButtonWrapper>
@@ -53,14 +67,14 @@ export default function PastTripNotes({ onHandleNewNote }) {
           </Button>
         </ButtonWrapper>
       </Form>
-    </Wrapper>
+    </>
   );
 
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const inputValue = form.elements.notes.value.trim();
-    onHandleNewNote(inputValue, image);
+    onHandleNewNote({ note: inputValue, image }, _id);
     form.reset();
     setImage('');
   }
@@ -79,7 +93,7 @@ export default function PastTripNotes({ onHandleNewNote }) {
         },
         onUploadProgress: progressEvent => {
           setLoading(true);
-          let percent = Math.round(
+          const percent = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
           );
           setProcess(percent);
@@ -103,18 +117,13 @@ const ButtonWrapper = styled.div`
   height: 100%;
 `;
 
-const Wrapper = styled.div`
-  margin: 20px;
-`;
-
 const Image = styled.img`
-  width: 100%;
+  width: 50%;
 `;
 
-const ImageUpload = styled.div`
-  margin: 10px;
-  input {
-    border-radius: 10px;
-    width: 100%;
-  }
+const UploadIcon = styled(MdOutlineCloudUpload)`
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  color: var(--color-yellow);
 `;

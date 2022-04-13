@@ -1,81 +1,49 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import PastTripForm from '../PastTripForm/PastTripForm';
-import PastTripNotes from '../PastTripNotes/PastTripNotes';
-import { MdKeyboardBackspace } from 'react-icons/md';
 import PastTripStory from '../PastTripCard/PastTripStory';
 
 export default function PastTripList({
-  notes,
   onHandleNewNote,
   onDelete,
   history,
   savePicture,
 }) {
   const [isActive, setIsActive] = useState(true);
-
   if (!history || history.length === 0) {
     return <Message>Seems like you don't have any past trips yet.</Message>;
   }
   return (
     <>
-      {isActive && (
-        <>
-          <Card>
-            {history.map(
-              ({
-                destination,
-                startDate,
-                endDate,
-                textNotes,
-                _id,
-                picture,
-              }) => {
-                return (
-                  <PastTripStory
-                    destination={destination}
-                    startDate={startDate}
-                    endDate={endDate}
-                    textNotes={textNotes}
-                    _id={_id}
-                    key={_id}
-                    handleCardToggle={handleCardToggle}
-                    picture={picture}
-                    savePicture={savePicture}
-                  />
-                );
-              }
-            )}
-          </Card>
-        </>
-      )}
-      {!isActive && (
-        <GoBackButton
-          aria-labelledby="Go back"
-          onClick={() => handleCardToggle()}
-        >
-          <MdKeyboardBackspace size={30} />
-        </GoBackButton>
-      )}
-      {!isActive && (
-        <>
-          <PastTripForm
-            onHandleNewNote={onHandleNewNote}
-            onClick={() => handleCardToggle()}
-          />
-        </>
-      )}
-      {!isActive &&
-        notes.map(({ note, _id, image }) => {
-          return (
-            <PastTripNotes
-              key={_id}
-              note={note}
-              onDelete={() => onDelete(_id)}
-              image={image}
-            />
-          );
-        })}
+      <Card>
+        {history.map(
+          ({
+            destination,
+            startDate,
+            endDate,
+            textNotes,
+            _id,
+            picture,
+            notes,
+          }) => {
+            return (
+              <PastTripStory
+                destination={destination}
+                startDate={startDate}
+                endDate={endDate}
+                textNotes={textNotes}
+                _id={_id}
+                key={_id}
+                handleCardToggle={handleCardToggle}
+                picture={picture}
+                savePicture={savePicture}
+                notes={notes}
+                onHandleNewNote={onHandleNewNote}
+                onDelete={onDelete}
+              />
+            );
+          }
+        )}
+      </Card>
     </>
   );
 
@@ -83,14 +51,6 @@ export default function PastTripList({
     setIsActive(!isActive);
   }
 }
-
-const GoBackButton = styled.button`
-  border: none;
-  background: transparent;
-  font-size: 20px;
-  color: var(--color-dark-gray);
-  padding: 10px 15px 0 15px;
-`;
 
 const Card = styled.ul`
   display: flex;

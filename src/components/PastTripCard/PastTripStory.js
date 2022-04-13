@@ -5,66 +5,106 @@ import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { MdOutlineNoteAlt } from 'react-icons/md';
 import { useState } from 'react';
 import UploadModal from '../Modal/UploadModal';
+import PastTripForm from '../PastTripForm/PastTripForm';
+import PastTripNotes from '../PastTripNotes/PastTripNotes';
+import { MdKeyboardBackspace } from 'react-icons/md';
 
 export default function PastTripStory({
   startDate,
   endDate,
   destination,
   textNotes,
-  handleCardToggle,
   _id,
   savePicture,
   picture,
+  onHandleNewNote,
+  onDelete,
+  notes,
 }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [notesVisible, setNotesVisible] = useState(true);
 
   return (
     <>
-      <Card>
-        <Date>
-          {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
-          {dayjs(endDate).format('DD-MM-YY')}
-        </Date>
-        <Destination>{destination}</Destination>
-        <Notes>{textNotes}</Notes>
-        {!picture ? (
-          <UploadButtonWrapper>
+      {notesVisible && (
+        <Card>
+          <Date>
+            {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
+            {dayjs(endDate).format('DD-MM-YY')}
+          </Date>
+          <Destination>{destination}</Destination>
+          <Notes>{textNotes}</Notes>
+          {!picture ? (
+            <UploadButtonWrapper>
+              <Button
+                type="button"
+                aria-labelledby="Upload image"
+                onClick={() => setImageModalVisible(!imageModalVisible)}
+              >
+                Upload image
+              </Button>
+            </UploadButtonWrapper>
+          ) : (
+            <UploadedImage src={picture} alt="" />
+          )}
+          <ButtonWrapper>
             <Button
-              type="button"
-              aria-labelledby="Upload image"
-              onClick={() => setIsVisible(!isVisible)}
+              variant="notes"
+              onClick={() => handleCardToggle(_id)}
+              aria-labelledby="Enter notes"
             >
-              Upload image
+              <ScreenReaderOnly>Notes</ScreenReaderOnly>
+              <MdOutlineNoteAlt size={25} />
             </Button>
-          </UploadButtonWrapper>
-        ) : (
-          <UploadedImage src={picture} alt=""></UploadedImage>
-        )}
-        <ButtonWrapper>
-          <Button
-            variant="notes"
-            onClick={() => handleCardToggle(_id)}
-            aria-labelledby="Enter notes"
-          >
-            <ScreenReaderOnly>Notes</ScreenReaderOnly>
-            <MdOutlineNoteAlt size={25} />
-          </Button>
-        </ButtonWrapper>
-      </Card>
-      {isVisible && (
+          </ButtonWrapper>
+        </Card>
+      )}
+      {imageModalVisible && (
         <UploadModal
-          onCancel={() => setIsVisible(!isVisible)}
+          onCancel={() => setImageModalVisible(!imageModalVisible)}
           moveImage={handleImage}
         >
           Save Image?
         </UploadModal>
       )}
+      {!notesVisible && (
+        <GoBackButton
+          aria-labelledby="Return to home page"
+          onClick={() => handleCardToggle()}
+        >
+          <MdKeyboardBackspace size={30} />
+        </GoBackButton>
+      )}
+      {!notesVisible && (
+        <>
+          <PastTripForm
+            onHandleNewNote={onHandleNewNote}
+            onClick={() => handleCardToggle()}
+            _id={_id}
+          />
+        </>
+      )}
+      {!notesVisible &&
+        notes?.map(({ note, _id, image }) => {
+          return (
+            <PastTripNotes
+              key={_id}
+              note={note}
+              onDelete={onDelete}
+              image={image}
+              _id={_id}
+            />
+          );
+        })}
     </>
   );
 
   function handleImage(picture) {
     savePicture(picture, _id);
-    setIsVisible(!isVisible);
+    setImageModalVisible(!imageModalVisible);
+  }
+  function handleCardToggle() {
+    setNotesVisible(!notesVisible);
   }
 }
 
@@ -119,4 +159,13 @@ const UploadButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px 0;
+`;
+
+const GoBackButton = styled.button`
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: var(--color-dark-gray);
 `;

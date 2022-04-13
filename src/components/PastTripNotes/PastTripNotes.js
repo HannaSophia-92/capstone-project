@@ -4,9 +4,8 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
 
-export default function PastTripNotes({ note, onDelete, image }) {
+export default function PastTripNotes({ note, onDelete, image, _id }) {
   const [isVisible, setIsVisible] = useState(false);
-
   return (
     <>
       <ListEntry>
@@ -19,17 +18,15 @@ export default function PastTripNotes({ note, onDelete, image }) {
         </DeleteIcon>
       </ListEntry>
       {isVisible && (
-        <Modal onDelete={handleDelete} onKeep={() => setIsVisible(!isVisible)}>
+        <Modal
+          onDelete={() => onDelete(_id)}
+          onKeep={() => setIsVisible(!isVisible)}
+        >
           Are you sure you want to delete this note?
         </Modal>
       )}
     </>
   );
-
-  function handleDelete() {
-    onDelete();
-    setIsVisible(!isVisible);
-  }
 }
 
 const ListEntry = styled.li`
