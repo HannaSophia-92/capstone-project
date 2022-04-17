@@ -24,6 +24,7 @@ const Label = styled.label`
   flex-direction: column;
   font-size: 16px;
   margin-top: 10px;
+  position: relative;
 `;
 
 const Textarea = styled.textarea`

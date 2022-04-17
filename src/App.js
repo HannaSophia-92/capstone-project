@@ -6,11 +6,16 @@ import Navigation from './components/Navigation/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
-import MapPage from './pages/MapPage';
+import Map from './pages/Map';
+import { useState } from 'react';
 
 function App() {
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
+  const [locationInfos, setLocationInfos] = useState('');
+
+  console.log(futureTrips);
+  console.log(locationInfos);
 
   const navigate = useNavigate();
 
@@ -31,7 +36,9 @@ function App() {
         />
         <Route
           path="/formPage"
-          element={<FormPage onCreateTrip={createTrip} />}
+          element={
+            <FormPage onCreateTrip={createTrip} locationInfos={locationInfos} />
+          }
         />
         <Route
           path="/futurePage"
@@ -44,13 +51,22 @@ function App() {
             />
           }
         />
-        <Route path="/mapPage" element={<MapPage />} />
+        <Route
+          path="/mapPage"
+          element={
+            <Map onPopupClick={handlePopupClick} futureTrips={futureTrips} />
+          }
+        />
       </Routes>
       <Footer>
         <Navigation />
       </Footer>
     </Wrapper>
   );
+
+  function handlePopupClick(locationInfos) {
+    setLocationInfos(locationInfos);
+  }
 
   function handleEdit(updatedValue) {
     const newContent = futureTrips.map(trip => {

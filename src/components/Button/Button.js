@@ -110,4 +110,12 @@ export default styled.button`
       color: var(--color-dark-gray);
       text-transform: uppercase;
     `}
+
+    ${props =>
+    props.variant === 'goToMap' &&
+    css`
+      background-color: transparent;
+      color: var(--color-yellow);
+      text-transform: uppercase;
+    `}
 `;
