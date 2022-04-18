@@ -97,7 +97,7 @@ const StyledModal = styled.section`
   line-height: 1.5em;
   padding: 15px;
   width: 70%;
-  margin: 30vh auto;
+  margin: 15vh auto;
   background-color: var(--color-dark-gray);
   color: var(--color-white);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
@@ -105,7 +105,7 @@ const StyledModal = styled.section`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  width: 70%;
 `;
 
 const UploadIcon = styled(MdOutlineCloudUpload)`

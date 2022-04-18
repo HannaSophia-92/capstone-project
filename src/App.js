@@ -29,6 +29,7 @@ function App() {
               history={history}
               trips={futureTrips}
               savePicture={handleSavePicture}
+              onViewPort={handleViewPort}
             />
           }
         />
@@ -135,6 +136,7 @@ function App() {
     setHistory(
       history.map(card => {
         const filteredNotes = card.notes.filter(note => note._id !== noteId);
+        console.log(card.notes);
         return { ...card, notes: filteredNotes };
       })
     );

@@ -5,13 +5,13 @@ import SaveModal from '../Modal/SaveModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { FaRegCheckSquare } from 'react-icons/fa';
-import { FaEdit } from 'react-icons/fa';
+import { FaRegCheckSquare as Checkbox } from 'react-icons/fa';
+import { FaEdit as Edit } from 'react-icons/fa';
 import Button from '../Button/Button';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { HiOutlineArrowNarrowRight as Arrow } from 'react-icons/hi';
 import { Form } from '../styledComponents/StyledForm';
 import { Link } from 'react-router-dom';
-import { MdLocationOn } from 'react-icons/md';
+import { MdLocationOn as Location } from 'react-icons/md';
 
 export default function FutureTripCard({
   onDelete,
@@ -112,7 +112,7 @@ export default function FutureTripCard({
                 aria-labelledby="Edit your card"
                 onClick={() => setIsEditing(!isEditing)}
               >
-                <FaEdit size={25} />
+                <Edit size={25} />
                 <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
               </Button>
 
@@ -122,7 +122,7 @@ export default function FutureTripCard({
                 aria-labelledby="Finish your trip"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <FaRegCheckSquare size={25} />
+                <Checkbox size={25} />
                 <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
               </Button>
             </ButtonWrapper>
@@ -236,7 +236,7 @@ const ButtonWrapper = styled.div`
   height: 100%;
 `;
 
-const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
+const ArrowIcon = styled(Arrow)`
   margin: 7px;
 `;
 
@@ -248,7 +248,7 @@ const StyledLink = styled(Link)`
   position: relative;
 `;
 
-const LocationIcon = styled(MdLocationOn)`
+const LocationIcon = styled(Location)`
   position: relative;
   bottom: -3px;
   margin: 0 5px;

@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useRef } from 'react';
 import styled from 'styled-components';
-import { RiSendPlaneFill } from 'react-icons/ri';
+import { RiSendPlaneFill as PaperPlane } from 'react-icons/ri';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
 import L from 'leaflet';
@@ -19,7 +19,6 @@ export default function BasicMap({
   history,
   viewPort,
 }) {
-  console.log(viewPort);
   mapboxgl.accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
   const markerIconBlack = new L.Icon({
@@ -170,7 +169,7 @@ const StyledLink = styled(Link)`
   color: darkslategray;
 `;
 
-const AddDestination = styled(RiSendPlaneFill)`
+const AddDestination = styled(PaperPlane)`
   color: var(--color-dark-gray);
   margin: 5px;
 `;

@@ -43,11 +43,13 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
             name="destination"
             maxLength="150"
             placeholder="Country/City - click to search on map"
+            required
           />
           <StyledLink to="/mapPage">
             <LocationIcon size={25} />
           </StyledLink>
         </Label>
+
         <DateWrapper>
           <div>
             <Label htmlFor="startDate">Start:</Label>
@@ -56,6 +58,7 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
               id="startDate"
               name="startDate"
               min={disablePastDate()}
+              required
             />
           </div>
           <span>
@@ -68,6 +71,7 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
               id="endDate"
               name="endDate"
               min={disablePastDate()}
+              required
             />
           </div>
         </DateWrapper>
@@ -115,12 +119,13 @@ const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
 
 const LocationIcon = styled(MdLocationOn)`
   position: absolute;
-  right: 10px;
+
   top: 35px;
 `;
 
 const Input = styled.input`
   margin-top: 10px;
+  padding-left: 30px;
 `;
 
 const StyledLink = styled(Link)`

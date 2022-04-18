@@ -9,7 +9,7 @@ import {
   ImageUpload,
 } from '../styledComponents/StyledForm';
 import axios from 'axios';
-import { MdOutlineCloudUpload } from 'react-icons/md';
+import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -36,7 +36,7 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
           name="notes"
           placeholder="Enter your notes..."
           maxLength="500"
-          rows="3"
+          rows="5"
           required
         />
         {loading && <div>Uploading Image...{process}%</div>}
@@ -118,10 +118,10 @@ const ButtonWrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 50%;
+  width: 70%;
 `;
 
-const UploadIcon = styled(MdOutlineCloudUpload)`
+const UploadIcon = styled(Upload)`
   position: absolute;
   bottom: 5px;
   right: 20px;

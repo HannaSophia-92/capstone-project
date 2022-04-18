@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import PastTripStory from '../PastTripCard/PastTripStory';
+import PastTripCard from '../PastTripCard/PastTripCard';
 
 export default function PastTripList({
   onHandleNewNote,
   onDelete,
   history,
   savePicture,
+  onViewPort,
 }) {
   const [isActive, setIsActive] = useState(true);
   if (!history || history.length === 0) {
@@ -24,9 +25,10 @@ export default function PastTripList({
             _id,
             picture,
             notes,
+            coordinates,
           }) => {
             return (
-              <PastTripStory
+              <PastTripCard
                 destination={destination}
                 startDate={startDate}
                 endDate={endDate}
@@ -39,6 +41,8 @@ export default function PastTripList({
                 notes={notes}
                 onHandleNewNote={onHandleNewNote}
                 onDelete={onDelete}
+                onViewPort={onViewPort}
+                coordinates={coordinates}
               />
             );
           }

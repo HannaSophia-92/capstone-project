@@ -7,6 +7,7 @@ export default function HomePage({
   onDeleteNote,
   history,
   savePicture,
+  onViewPort,
 }) {
   return (
     <>
@@ -17,6 +18,7 @@ export default function HomePage({
         onDelete={onDeleteNote}
         history={history}
         savePicture={savePicture}
+        onViewPort={onViewPort}
       />
     </>
   );
