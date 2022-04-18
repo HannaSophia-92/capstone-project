@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
@@ -15,9 +14,6 @@ import {
 import { Link } from 'react-router-dom';
 
 export default function FutureTripForm({ onCreateTrip, locationInfos }) {
-  console.log(locationInfos);
-  const [formData, setFormData] = useState('');
-
   const disablePastDate = () => {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -36,21 +32,24 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
         <ScreenReaderOnly>
           <h2 id="future-trips-form">New Trip</h2>
         </ScreenReaderOnly>
-        <Label htmlFor="destination"></Label>
-        Destination:
-        <Input
-          defaultValue={locationInfos ? locationInfos[2].text : undefined}
-          type="text"
-          id="destination"
-          name="destination"
-          maxLength="100"
-          placeholder="Country/City"
-        />
-        <Button variant={'goToMap'}>
-          <StyledLink to="/mapPage">
-            <LocationIcon size={25} />
-          </StyledLink>
-        </Button>
+        <Label htmlFor="destination">
+          Destination:
+          <Input
+            defaultValue={
+              locationInfos ? locationInfos[2].place_name : undefined
+            }
+            type="text"
+            id="destination"
+            name="destination"
+            maxLength="150"
+            placeholder="Country/City"
+          />
+          <Button variant={'goToMap'}>
+            <StyledLink to="/mapPage">
+              <LocationIcon size={25} />
+            </StyledLink>
+          </Button>
+        </Label>
         <DateWrapper>
           <div>
             <Label htmlFor="startDate">Start:</Label>

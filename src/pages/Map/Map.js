@@ -1,11 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { useRef } from 'react';
 import styled from 'styled-components';
-import { FaCheck as Create } from 'react-icons/fa';
-import { IoMdArrowRoundBack as ArrowBack } from 'react-icons/io';
+import { RiSendPlaneFill } from 'react-icons/ri';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
-import ScreenReaderOnly from '../components/styledComponents/ScreenReaderOnly';
 import L from 'leaflet';
 import osm from './osm-providers';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -13,12 +11,19 @@ import mapboxgl from 'mapbox-gl';
 import { useEffect } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 
-export default function BasicMap({ onPopupClick, futureTrips }) {
+export default function BasicMap({ onPopupClick, futureTrips, history }) {
   mapboxgl.accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
-  const markerIcon = new L.Icon({
-    iconUrl: require('./icon.png'),
+  const markerIconBlack = new L.Icon({
+    iconUrl: require('../../images/icon-black.png'),
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
+
+  const markerIconYellow = new L.Icon({
+    iconUrl: require('../../images/icon-yellow.png'),
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });
@@ -30,6 +35,7 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
   const mapRef = useRef();
   const center = { lat: destinationMapbox[0], lng: destinationMapbox[1] };
   const position = [destinationMapbox[0], destinationMapbox[1]];
+
   const tripCoordinates = futureTrips.filter(
     futureTrip => futureTrip.coordinates[0] !== null
   );
@@ -39,7 +45,7 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
       accessToken: mapboxgl.accessToken,
       types: 'country, region, place, poi',
       limit: 5,
-      placeholder: 'e.g. Lissabon',
+      placeholder: 'Search for destinations...',
       minLength: 2,
     });
     geocoderDestination.on('result', e => {
@@ -59,15 +65,15 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
         />
-        <Marker position={position} icon={markerIcon}>
+        <Marker position={position} icon={markerIconBlack}>
           <Popup>
-            Add new destination?
+            <PopupText>Add new destination?</PopupText>
             <StyledLink
               to="/formPage"
               aria-label="add-new-destination"
               onClick={() => onPopupClick(destinationMapbox)}
             >
-              <Create size={20} alt="create" />
+              <AddDestination size={20} alt="create" />
             </StyledLink>
           </Popup>
         </Marker>
@@ -75,14 +81,29 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
           <Marker
             key={trip.coordinates}
             position={trip.coordinates}
-            icon={markerIcon}
+            icon={markerIconBlack}
           >
             <Popup>
-              <p>divespot: {trip.divespot}</p>
+              <PopupText>{trip.destination}</PopupText>
+              <PopupText>
+                {dayjs(trip.startDate).format('DD-MM-YY')} <span>- </span>
+                {dayjs(trip.endDate).format('DD-MM-YY')}
+              </PopupText>
+            </Popup>
+          </Marker>
+        ))}
+        {history?.map(trip => (
+          <Marker
+            key={trip.coordinates}
+            position={trip.coordinates}
+            icon={markerIconYellow}
+          >
+            <Popup>
+              <p>{trip.destination}</p>
               <p>
-                location: {trip.location}, {trip.country}
+                {dayjs(trip.startDate).format('DD-MM-YY')} <span>to </span>
+                {dayjs(trip.endDate).format('DD-MM-YY')}
               </p>
-              <p>{trip.date}</p>
             </Popup>
           </Marker>
         ))}
@@ -92,12 +113,7 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
           id={'geocoderdestination'}
           onKeyDown={handleEnterClick}
         ></GeoCoderDestination>
-        <SearchButton type="submit">search</SearchButton>
       </SearchWrapper>
-      <LinkBack to="/" name="back">
-        <ArrowBack />
-        <ScreenReaderOnly>back to trips</ScreenReaderOnly>
-      </LinkBack>
     </>
   );
 
@@ -113,19 +129,9 @@ export default function BasicMap({ onPopupClick, futureTrips }) {
 const SearchWrapper = styled.form`
   position: absolute;
   top: 0;
-  right: 0;
-  max-width: 90vw;
-  color: white;
-  display: flex;
+  right: 10px;
+  max-width: 80vw;
   z-index: 400;
-`;
-
-const SearchButton = styled.button`
-  height: 28px;
-  width: 55px;
-  margin-top: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 14px;
 `;
 
 const GeoCoderDestination = styled.div`
@@ -142,15 +148,11 @@ const StyledLink = styled(Link)`
   color: darkslategray;
 `;
 
-const LinkBack = styled(Link)`
-  position: absolute;
-  left: 12px;
-  top: 80px;
-  height: 30px;
-  color: white;
-  font-size: 1.8rem;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 900;
+const AddDestination = styled(RiSendPlaneFill)`
+  color: var(--color-dark-gray);
+  margin: 5px;
+`;
+
+const PopupText = styled.p`
+  font-size: 16px;
 `;

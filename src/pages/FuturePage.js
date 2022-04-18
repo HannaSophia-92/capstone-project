@@ -11,21 +11,31 @@ export default function FuturePage({
     <>
       <h2>Future Trips</h2>
       <Card>
-        {trips.map(({ startDate, endDate, destination, textNotes, _id }) => {
-          return (
-            <FutureTripCard
-              onDelete={() => onDeleteCard(_id)}
-              onFinishTrip={onFinishTrip}
-              onEdit={onEdit}
-              _id={_id}
-              key={_id}
-              startDate={startDate}
-              endDate={endDate}
-              destination={destination}
-              textNotes={textNotes}
-            />
-          );
-        })}
+        {trips.map(
+          ({
+            startDate,
+            endDate,
+            destination,
+            textNotes,
+            _id,
+            coordinates,
+          }) => {
+            return (
+              <FutureTripCard
+                onDelete={() => onDeleteCard(_id)}
+                onFinishTrip={onFinishTrip}
+                onEdit={onEdit}
+                _id={_id}
+                key={_id}
+                startDate={startDate}
+                endDate={endDate}
+                destination={destination}
+                textNotes={textNotes}
+                coordinates={coordinates}
+              />
+            );
+          }
+        )}
       </Card>
     </>
   );

@@ -6,16 +6,13 @@ import Navigation from './components/Navigation/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
-import Map from './pages/Map';
+import Map from './pages/Map/Map';
 import { useState } from 'react';
 
 function App() {
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
   const [locationInfos, setLocationInfos] = useState('');
-
-  console.log(futureTrips);
-  console.log(locationInfos);
 
   const navigate = useNavigate();
 
@@ -54,7 +51,11 @@ function App() {
         <Route
           path="/mapPage"
           element={
-            <Map onPopupClick={handlePopupClick} futureTrips={futureTrips} />
+            <Map
+              onPopupClick={handlePopupClick}
+              futureTrips={futureTrips}
+              history={history}
+            />
           }
         />
       </Routes>
@@ -85,10 +86,17 @@ function App() {
     destination,
     textNotes,
     _id,
-    picture
+    coordinates
   ) {
     setHistory([
-      { startDate, endDate, destination, textNotes, _id, picture },
+      {
+        startDate,
+        endDate,
+        destination,
+        textNotes,
+        _id,
+        coordinates,
+      },
       ...history,
     ]);
     setFutureTrips(futureTrips.filter(trip => trip._id !== _id));

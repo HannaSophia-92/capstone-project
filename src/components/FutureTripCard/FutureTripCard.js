@@ -20,6 +20,7 @@ export default function FutureTripCard({
   onFinishTrip,
   _id,
   onEdit,
+  coordinates,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -123,7 +124,14 @@ export default function FutureTripCard({
         <SaveModal
           onKeep={() => setIsOpen(!isOpen)}
           onFinishTrip={() =>
-            onFinishTrip(startDate, endDate, destination, textNotes, _id)
+            onFinishTrip(
+              startDate,
+              endDate,
+              destination,
+              textNotes,
+              _id,
+              coordinates
+            )
           }
         >
           Back home? Your trip will be saved to your history
