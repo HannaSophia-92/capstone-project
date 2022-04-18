@@ -42,13 +42,11 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
             id="destination"
             name="destination"
             maxLength="150"
-            placeholder="Country/City"
+            placeholder="Country/City - click to search on map"
           />
-          <Button variant={'goToMap'}>
-            <StyledLink to="/mapPage">
-              <LocationIcon size={25} />
-            </StyledLink>
-          </Button>
+          <StyledLink to="/mapPage">
+            <LocationIcon size={25} />
+          </StyledLink>
         </Label>
         <DateWrapper>
           <div>

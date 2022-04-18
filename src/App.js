@@ -13,6 +13,7 @@ function App() {
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
   const [locationInfos, setLocationInfos] = useState('');
+  const [viewPort, setViewPort] = useState('');
 
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ function App() {
               onDeleteCard={handleDeleteCard}
               onFinishTrip={handleFinishTrip}
               onEdit={handleEdit}
+              onViewPort={handleViewPort}
             />
           }
         />
@@ -55,6 +57,7 @@ function App() {
               onPopupClick={handlePopupClick}
               futureTrips={futureTrips}
               history={history}
+              viewPort={viewPort}
             />
           }
         />
@@ -64,6 +67,10 @@ function App() {
       </Footer>
     </Wrapper>
   );
+
+  function handleViewPort(coordinates) {
+    setViewPort(coordinates);
+  }
 
   function handlePopupClick(locationInfos) {
     setLocationInfos(locationInfos);

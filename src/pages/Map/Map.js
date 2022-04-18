@@ -13,7 +13,13 @@ import { useLocalStorage } from 'usehooks-ts';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-export default function BasicMap({ onPopupClick, futureTrips, history }) {
+export default function BasicMap({
+  onPopupClick,
+  futureTrips,
+  history,
+  viewPort,
+}) {
+  console.log(viewPort);
   mapboxgl.accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
   const markerIconBlack = new L.Icon({
@@ -33,7 +39,10 @@ export default function BasicMap({ onPopupClick, futureTrips, history }) {
   );
   const ZOOM_LEVEL = 8;
   const mapRef = useRef();
-  const center = { lat: destinationMapbox[0], lng: destinationMapbox[1] };
+  const [center, setCenter] = useLocalStorage({
+    lat: destinationMapbox[0],
+    lng: destinationMapbox[1],
+  });
   const position = [destinationMapbox[0], destinationMapbox[1]];
 
   const tripCoordinates = futureTrips.filter(
@@ -48,6 +57,7 @@ export default function BasicMap({ onPopupClick, futureTrips, history }) {
       placeholder: 'Search for destinations...',
       minLength: 2,
     });
+    handleShowOnMap(viewPort);
     geocoderDestination.on('result', e => {
       return setDestinationMapbox([
         e.result.center[1],
@@ -67,13 +77,13 @@ export default function BasicMap({ onPopupClick, futureTrips, history }) {
         />
         <Marker position={position} icon={markerIconBlack}>
           <Popup>
-            <PopupText>Add new destination?</PopupText>
+            <PopupText>Add new trip?</PopupText>
             <StyledLink
               to="/formPage"
               aria-label="add-new-destination"
               onClick={() => onPopupClick(destinationMapbox)}
             >
-              <AddDestination size={20} alt="create" />
+              <AddDestination size={20} />
             </StyledLink>
           </Popup>
         </Marker>
@@ -117,10 +127,22 @@ export default function BasicMap({ onPopupClick, futureTrips, history }) {
     </>
   );
 
+  function handleShowOnMap(viewPort) {
+    if (viewPort !== '') {
+      return (
+        setCenter({ lat: viewPort[0], lng: viewPort[1] }),
+        window.location.reload()
+      );
+    } else {
+      return;
+    }
+  }
+
   function handleEnterClick(event) {
     let code = 0;
     code = event.keyCode;
     if (code === 13) {
+      setCenter({ lat: destinationMapbox[0], lng: destinationMapbox[1] });
       window.location.reload();
     }
   }

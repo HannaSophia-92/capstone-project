@@ -10,6 +10,8 @@ import { FaEdit } from 'react-icons/fa';
 import Button from '../Button/Button';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { Form } from '../styledComponents/StyledForm';
+import { Link } from 'react-router-dom';
+import { MdLocationOn } from 'react-icons/md';
 
 export default function FutureTripCard({
   onDelete,
@@ -21,6 +23,7 @@ export default function FutureTripCard({
   _id,
   onEdit,
   coordinates,
+  onViewPort,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +82,18 @@ export default function FutureTripCard({
               {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
               {dayjs(endDate).format('DD-MM-YY')}
             </Date>
-            <Destination>{destination}</Destination>
+            <Destination>
+              {destination}
+              <StyledLink
+                to="/mapPage"
+                aria-label="show-on-map"
+                onClick={() => onViewPort(coordinates)}
+              >
+                <LocationIcon size={25} />
+                <ScreenReaderOnly>show on map</ScreenReaderOnly>
+              </StyledLink>
+            </Destination>
+
             <Notes>{textNotes}</Notes>
             <ButtonWrapper>
               <Button
@@ -176,9 +190,10 @@ const Date = styled.span`
 `;
 
 const Destination = styled.p`
+  display: flex;
+  flex-direction: column;
   text-align: center;
   border-bottom: 1px solid var(--color-white);
-  padding: 10px;
 `;
 
 const Notes = styled.p`
@@ -223,4 +238,18 @@ const ButtonWrapper = styled.div`
 
 const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
   margin: 7px;
+`;
+
+const StyledLink = styled(Link)`
+  color: var(--color-yellow);
+  text-decoration: none;
+  text-align: center;
+  margin: 5px;
+  position: relative;
+`;
+
+const LocationIcon = styled(MdLocationOn)`
+  position: relative;
+  bottom: -3px;
+  margin: 0 5px;
 `;

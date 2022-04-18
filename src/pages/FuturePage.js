@@ -6,6 +6,7 @@ export default function FuturePage({
   onDeleteCard,
   onFinishTrip,
   onEdit,
+  onViewPort,
 }) {
   return (
     <>
@@ -32,6 +33,7 @@ export default function FuturePage({
                 destination={destination}
                 textNotes={textNotes}
                 coordinates={coordinates}
+                onViewPort={onViewPort}
               />
             );
           }
