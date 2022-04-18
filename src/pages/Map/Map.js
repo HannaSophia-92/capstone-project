@@ -39,7 +39,7 @@ export default function BasicMap({
   );
   const ZOOM_LEVEL = 8;
   const mapRef = useRef();
-  const [center, setCenter] = useLocalStorage({
+  const [center, setCenter] = useLocalStorage('center', {
     lat: destinationMapbox[0],
     lng: destinationMapbox[1],
   });
