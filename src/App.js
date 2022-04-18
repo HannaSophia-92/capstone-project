@@ -6,10 +6,14 @@ import Navigation from './components/Navigation/Navigation';
 import FuturePage from './pages/FuturePage';
 import { useLocalStorage } from 'usehooks-ts';
 import HomePage from './pages/HomePage';
+import Map from './pages/Map/Map';
+import { useState } from 'react';
 
 function App() {
   const [futureTrips, setFutureTrips] = useLocalStorage('trips', []);
   const [history, setHistory] = useLocalStorage('history', []);
+  const [locationInfos, setLocationInfos] = useState('');
+  const [viewPort, setViewPort] = useState('');
 
   const navigate = useNavigate();
 
@@ -25,12 +29,15 @@ function App() {
               history={history}
               trips={futureTrips}
               savePicture={handleSavePicture}
+              onViewPort={handleViewPort}
             />
           }
         />
         <Route
           path="/formPage"
-          element={<FormPage onCreateTrip={createTrip} />}
+          element={
+            <FormPage onCreateTrip={createTrip} locationInfos={locationInfos} />
+          }
         />
         <Route
           path="/futurePage"
@@ -40,6 +47,18 @@ function App() {
               onDeleteCard={handleDeleteCard}
               onFinishTrip={handleFinishTrip}
               onEdit={handleEdit}
+              onViewPort={handleViewPort}
+            />
+          }
+        />
+        <Route
+          path="/mapPage"
+          element={
+            <Map
+              onPopupClick={handlePopupClick}
+              futureTrips={futureTrips}
+              history={history}
+              viewPort={viewPort}
             />
           }
         />
@@ -49,6 +68,14 @@ function App() {
       </Footer>
     </Wrapper>
   );
+
+  function handleViewPort(coordinates) {
+    setViewPort(coordinates);
+  }
+
+  function handlePopupClick(locationInfos) {
+    setLocationInfos(locationInfos);
+  }
 
   function handleEdit(updatedValue) {
     const newContent = futureTrips.map(trip => {
@@ -67,10 +94,17 @@ function App() {
     destination,
     textNotes,
     _id,
-    picture
+    coordinates
   ) {
     setHistory([
-      { startDate, endDate, destination, textNotes, _id, picture },
+      {
+        startDate,
+        endDate,
+        destination,
+        textNotes,
+        _id,
+        coordinates,
+      },
       ...history,
     ]);
     setFutureTrips(futureTrips.filter(trip => trip._id !== _id));
@@ -102,6 +136,7 @@ function App() {
     setHistory(
       history.map(card => {
         const filteredNotes = card.notes.filter(note => note._id !== noteId);
+        console.log(card.notes);
         return { ...card, notes: filteredNotes };
       })
     );

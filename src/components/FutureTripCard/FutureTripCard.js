@@ -5,11 +5,13 @@ import SaveModal from '../Modal/SaveModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { FaRegCheckSquare } from 'react-icons/fa';
-import { FaEdit } from 'react-icons/fa';
+import { FaRegCheckSquare as Checkbox } from 'react-icons/fa';
+import { FaEdit as Edit } from 'react-icons/fa';
 import Button from '../Button/Button';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { HiOutlineArrowNarrowRight as Arrow } from 'react-icons/hi';
 import { Form } from '../styledComponents/StyledForm';
+import { Link } from 'react-router-dom';
+import { MdLocationOn as Location } from 'react-icons/md';
 
 export default function FutureTripCard({
   onDelete,
@@ -20,6 +22,8 @@ export default function FutureTripCard({
   onFinishTrip,
   _id,
   onEdit,
+  coordinates,
+  onViewPort,
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +82,18 @@ export default function FutureTripCard({
               {dayjs(startDate).format('DD-MM-YY')} <span> to </span>
               {dayjs(endDate).format('DD-MM-YY')}
             </Date>
-            <Destination>{destination}</Destination>
+            <Destination>
+              {destination}
+              <StyledLink
+                to="/mapPage"
+                aria-label="show-on-map"
+                onClick={() => onViewPort(coordinates)}
+              >
+                <LocationIcon size={25} />
+                <ScreenReaderOnly>show on map</ScreenReaderOnly>
+              </StyledLink>
+            </Destination>
+
             <Notes>{textNotes}</Notes>
             <ButtonWrapper>
               <Button
@@ -97,7 +112,7 @@ export default function FutureTripCard({
                 aria-labelledby="Edit your card"
                 onClick={() => setIsEditing(!isEditing)}
               >
-                <FaEdit size={25} />
+                <Edit size={25} />
                 <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
               </Button>
 
@@ -107,7 +122,7 @@ export default function FutureTripCard({
                 aria-labelledby="Finish your trip"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <FaRegCheckSquare size={25} />
+                <Checkbox size={25} />
                 <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
               </Button>
             </ButtonWrapper>
@@ -123,7 +138,14 @@ export default function FutureTripCard({
         <SaveModal
           onKeep={() => setIsOpen(!isOpen)}
           onFinishTrip={() =>
-            onFinishTrip(startDate, endDate, destination, textNotes, _id)
+            onFinishTrip(
+              startDate,
+              endDate,
+              destination,
+              textNotes,
+              _id,
+              coordinates
+            )
           }
         >
           Back home? Your trip will be saved to your history
@@ -168,9 +190,10 @@ const Date = styled.span`
 `;
 
 const Destination = styled.p`
+  display: flex;
+  flex-direction: column;
   text-align: center;
   border-bottom: 1px solid var(--color-white);
-  padding: 10px;
 `;
 
 const Notes = styled.p`
@@ -213,6 +236,20 @@ const ButtonWrapper = styled.div`
   height: 100%;
 `;
 
-const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
+const ArrowIcon = styled(Arrow)`
   margin: 7px;
+`;
+
+const StyledLink = styled(Link)`
+  color: var(--color-yellow);
+  text-decoration: none;
+  text-align: center;
+  margin: 5px;
+  position: relative;
+`;
+
+const LocationIcon = styled(Location)`
+  position: relative;
+  bottom: -3px;
+  margin: 0 5px;
 `;

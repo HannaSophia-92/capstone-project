@@ -24,11 +24,11 @@ const Label = styled.label`
   flex-direction: column;
   font-size: 16px;
   margin-top: 10px;
+  position: relative;
 `;
 
 const Textarea = styled.textarea`
   padding: 5px;
-  margin-bottom: 10px;
 `;
 
 const DateWrapper = styled.div`
@@ -43,6 +43,10 @@ const InputDate = styled.input`
 `;
 
 const ImageUpload = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
   input[type='file'] {
     opacity: 0;
     z-index: -1;

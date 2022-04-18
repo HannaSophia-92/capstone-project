@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
-import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { MdLocationOn } from 'react-icons/md';
 import {
   Form,
   Label,
@@ -11,18 +11,9 @@ import {
   FormWrapper,
   InputDate,
 } from '../styledComponents/StyledForm';
+import { Link } from 'react-router-dom';
 
-export default function FutureTripForm({ onCreateTrip }) {
-  const [formData, setFormData] = useState('');
-
-  const handleOnChange = event => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value.trim(),
-    });
-  };
-
+export default function FutureTripForm({ onCreateTrip, locationInfos }) {
   const disablePastDate = () => {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -41,16 +32,23 @@ export default function FutureTripForm({ onCreateTrip }) {
         <ScreenReaderOnly>
           <h2 id="future-trips-form">New Trip</h2>
         </ScreenReaderOnly>
-        <Label htmlFor="destination">Destination:</Label>
-        <input
-          type="text"
-          id="destination"
-          name="destination"
-          onChange={handleOnChange}
-          maxLength="100"
-          placeholder="Country/City"
-          required
-        />
+        <Label htmlFor="destination">
+          Destination:
+          <Input
+            defaultValue={
+              locationInfos ? locationInfos[2].place_name : undefined
+            }
+            type="text"
+            id="destination"
+            name="destination"
+            maxLength="150"
+            placeholder="Country/City - click to search on map"
+            required
+          />
+          <StyledLink to="/mapPage">
+            <LocationIcon size={25} />
+          </StyledLink>
+        </Label>
 
         <DateWrapper>
           <div>
@@ -59,7 +57,6 @@ export default function FutureTripForm({ onCreateTrip }) {
               type="date"
               id="startDate"
               name="startDate"
-              onChange={handleOnChange}
               min={disablePastDate()}
               required
             />
@@ -73,22 +70,18 @@ export default function FutureTripForm({ onCreateTrip }) {
               type="date"
               id="endDate"
               name="endDate"
-              onChange={handleOnChange}
               min={disablePastDate()}
               required
             />
           </div>
         </DateWrapper>
-
         <Label htmlFor="textNotes">Notes:</Label>
         <ScreenReaderOnly id="textNotes">Enter notes</ScreenReaderOnly>
-
         <textarea
           type="text"
           id="textNotes"
           name="textNotes"
           placeholder="Documents, Visa, Packing List..."
-          onChange={handleOnChange}
           maxLength="500"
           rows="3"
         />
@@ -101,7 +94,16 @@ export default function FutureTripForm({ onCreateTrip }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onCreateTrip({ ...formData, _id: nanoid() });
+    const { destination, startDate, endDate, textNotes } =
+      event.target.elements;
+    onCreateTrip({
+      destination: destination.value,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      textNotes: textNotes.value,
+      coordinates: [locationInfos[0], locationInfos[1]],
+      _id: nanoid(),
+    });
   }
 }
 
@@ -113,4 +115,19 @@ const ButtonWrapper = styled.div`
 
 const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
   margin: 7px;
+`;
+
+const LocationIcon = styled(MdLocationOn)`
+  position: absolute;
+
+  top: 35px;
+`;
+
+const Input = styled.input`
+  margin-top: 10px;
+  padding-left: 30px;
+`;
+
+const StyledLink = styled(Link)`
+  color: var(--color-yellow);
 `;

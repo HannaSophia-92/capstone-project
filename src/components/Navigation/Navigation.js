@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { HiHome } from 'react-icons/hi';
-import { FaCompass } from 'react-icons/fa';
-import { IoIosCreate } from 'react-icons/io';
+import { HiHome as Home } from 'react-icons/hi';
+import { FaCompass as Compass } from 'react-icons/fa';
+import { IoIosCreate as Create } from 'react-icons/io';
+import { GoGlobe as Globe } from 'react-icons/go';
 import styled from 'styled-components';
 
 export default function Navigation() {
@@ -10,15 +11,19 @@ export default function Navigation() {
     <Nav>
       <NavLinkStyled to="/">
         <ScreenReaderOnly>Past Trips</ScreenReaderOnly>
-        <HiHome size={33} />
+        <Home size={33} />
       </NavLinkStyled>
       <NavLinkStyled to="/formPage">
         <ScreenReaderOnly>Create new Trip</ScreenReaderOnly>
-        <IoIosCreate size={33} />
+        <Create size={33} />
       </NavLinkStyled>
       <NavLinkStyled to="/futurePage">
         <ScreenReaderOnly>Future Trips</ScreenReaderOnly>
-        <FaCompass size={33} />
+        <Compass size={33} />
+      </NavLinkStyled>
+      <NavLinkStyled to="/mapPage">
+        <ScreenReaderOnly>Map</ScreenReaderOnly>
+        <Globe size={33} />
       </NavLinkStyled>
     </Nav>
   );
@@ -27,7 +32,7 @@ export default function Navigation() {
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  height: 48px;
+  height: 7vh;
   background-color: var(--color-dark-gray);
 `;
 
