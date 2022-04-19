@@ -4,18 +4,62 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
 import Button from '../Button/Button';
+import { FaEdit as Edit } from 'react-icons/fa';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 
-export default function PastTripNotes({ note, onDelete, image, _id }) {
+export default function PastTripNotes({
+  note,
+  onDelete,
+  image,
+  _id,
+  onEditNotes,
+}) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  console.log(_id);
+
   return (
     <>
-      <ListEntry>
-        <p>{note}</p>
-        <UploadedImage src={image} alt=""></UploadedImage>
-        <Button variant="delete" onClick={() => setIsVisible(!isVisible)}>
-          <DeleteIcon size={20} />
-        </Button>
-      </ListEntry>
+      {isEditing ? (
+        <form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          aria-labelledby="edit-form"
+        >
+          <ScreenReaderOnly>
+            <h2 id="edit-form">Edit notes</h2>
+          </ScreenReaderOnly>
+
+          <div>
+            <label htmlFor="note">Things to remember:</label>
+            <textarea type="text" id="note" defaultValue={note} />
+          </div>
+
+          <div>
+            <Button variant="add" category="Save changes" type="submit">
+              Submit changes
+            </Button>
+          </div>
+        </form>
+      ) : (
+        <ListEntry>
+          <p>{note}</p>
+          <UploadedImage src={image} alt=""></UploadedImage>
+          <Button
+            variant="edit"
+            type="button"
+            aria-labelledby="Edit your card"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            <EditIcon size={20} />
+            <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
+          </Button>
+          <Button variant="delete" onClick={() => setIsVisible(!isVisible)}>
+            <DeleteIcon size={20} />
+          </Button>
+        </ListEntry>
+      )}
       {isVisible && (
         <Modal
           onDelete={() => onDelete(_id)}
@@ -26,6 +70,16 @@ export default function PastTripNotes({ note, onDelete, image, _id }) {
       )}
     </>
   );
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { note } = event.target.elements;
+    onEditNotes({
+      note: note.value,
+      _id: _id,
+    });
+    setIsEditing(false);
+  }
 }
 
 const ListEntry = styled.li`
@@ -50,5 +104,11 @@ const UploadedImage = styled.img`
 const DeleteIcon = styled(Delete)`
   position: absolute;
   bottom: 10px;
-  right: 16px;
+  right: 45px;
+`;
+
+const EditIcon = styled(Edit)`
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
 `;

@@ -8,6 +8,7 @@ export default function PastTripList({
   history,
   savePicture,
   onViewPort,
+  onEditNotes,
 }) {
   const [isActive, setIsActive] = useState(true);
   if (!history || history.length === 0) {
@@ -43,6 +44,7 @@ export default function PastTripList({
                 onDelete={onDelete}
                 onViewPort={onViewPort}
                 coordinates={coordinates}
+                onEditNotes={onEditNotes}
               />
             );
           }

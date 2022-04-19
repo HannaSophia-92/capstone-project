@@ -8,6 +8,7 @@ export default function HomePage({
   history,
   savePicture,
   onViewPort,
+  onEditNotes,
 }) {
   return (
     <>
@@ -19,6 +20,7 @@ export default function HomePage({
         history={history}
         savePicture={savePicture}
         onViewPort={onViewPort}
+        onEditNotes={onEditNotes}
       />
     </>
   );

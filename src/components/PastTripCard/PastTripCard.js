@@ -24,6 +24,7 @@ export default function PastTripStory({
   notes,
   onViewPort,
   coordinates,
+  onEditNotes,
 }) {
   const [imageModalVisible, setImageModalVisible] = useState(false);
   const [notesVisible, setNotesVisible] = useState(true);
@@ -107,6 +108,7 @@ export default function PastTripStory({
               onDelete={onDelete}
               image={image}
               _id={_id}
+              onEditNotes={onEditNotes}
             />
           );
         })}
