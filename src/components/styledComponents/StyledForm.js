@@ -29,6 +29,7 @@ const Label = styled.label`
 const Textarea = styled.textarea`
   padding: 5px;
   margin-top: 5px;
+  width: 100%;
 `;
 
 const DateWrapper = styled.div`

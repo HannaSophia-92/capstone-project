@@ -18,7 +18,7 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
   const [image, setImage] = useState('');
   const [process, setProcess] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  console.log(image);
   return (
     <>
       <Form
