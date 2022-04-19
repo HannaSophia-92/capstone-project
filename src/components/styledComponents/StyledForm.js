@@ -23,12 +23,12 @@ const Label = styled.label`
   display: flex;
   flex-direction: column;
   font-size: 16px;
-  margin-top: 10px;
   position: relative;
 `;
 
 const Textarea = styled.textarea`
   padding: 5px;
+  margin-top: 5px;
 `;
 
 const DateWrapper = styled.div`

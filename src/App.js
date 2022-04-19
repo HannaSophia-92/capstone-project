@@ -79,15 +79,16 @@ function App() {
   }
 
   function handleEditNotes(updatedValue) {
-    console.log(updatedValue);
-    const newNote = history.map(note => {
-      if (note.notes._id === updatedValue._id) {
-        const newNoteContent = { ...note, ...updatedValue };
-        return newNoteContent;
-      }
-      return note;
+    const updatedArray = history.map(note => {
+      const newNotes = note.notes.map(note => {
+        if (note._id === updatedValue._id) {
+          return updatedValue;
+        }
+        return note;
+      });
+      return { ...note, notes: newNotes };
     });
-    setHistory(newNote);
+    setHistory(updatedArray);
   }
 
   function handleDeleteNote(noteId) {

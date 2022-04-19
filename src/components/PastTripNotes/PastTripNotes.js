@@ -6,6 +6,7 @@ import React from 'react';
 import Button from '../Button/Button';
 import { FaEdit as Edit } from 'react-icons/fa';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import { Form, Label, Textarea } from '../styledComponents/StyledForm';
 
 export default function PastTripNotes({
   note,
@@ -17,12 +18,10 @@ export default function PastTripNotes({
   const [isVisible, setIsVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log(_id);
-
   return (
     <>
       {isEditing ? (
-        <form
+        <Form
           onSubmit={handleSubmit}
           autoComplete="off"
           aria-labelledby="edit-form"
@@ -32,8 +31,11 @@ export default function PastTripNotes({
           </ScreenReaderOnly>
 
           <div>
-            <label htmlFor="note">Things to remember:</label>
-            <textarea type="text" id="note" defaultValue={note} />
+            <Label htmlFor="note">Things to remember:</Label>
+            <ScreenReaderOnly id="notes-form">
+              Enter notes to remember
+            </ScreenReaderOnly>
+            <Textarea type="text" id="note" defaultValue={note} />
           </div>
 
           <div>
@@ -41,7 +43,7 @@ export default function PastTripNotes({
               Submit changes
             </Button>
           </div>
-        </form>
+        </Form>
       ) : (
         <ListEntry>
           <p>{note}</p>
