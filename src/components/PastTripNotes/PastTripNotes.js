@@ -73,15 +73,15 @@ export default function PastTripNotes({
             <>
               <input
                 type="file"
-                name="file"
-                aria-label="Upload a picture"
+                name="files-edit"
+                aria-label="Upload another image"
                 multiple="multiple"
                 id="files-edit"
                 onChange={upload}
               />
               <Label htmlFor="files-edit">
-                Upload image
-                <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
+                Change image
+                <ScreenReaderOnly>Choose another image</ScreenReaderOnly>
                 <UploadIcon size={25} />
               </Label>
             </>
@@ -125,7 +125,6 @@ export default function PastTripNotes({
   function upload(event) {
     const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
     const formData = new FormData();
-
     formData.append('file', event.target.files[0]);
     formData.append('upload_preset', PRESET);
 
