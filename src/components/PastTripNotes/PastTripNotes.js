@@ -59,7 +59,7 @@ export default function PastTripNotes({
 
           {loading && <div>Uploading Image...{process}%</div>}
           <EditImageUpload>
-            {image ? (
+            {picture ? (
               <ImageWrapper>
                 <Image src={picture} alt="" />
                 <RemoveImage
