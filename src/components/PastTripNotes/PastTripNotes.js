@@ -4,18 +4,113 @@ import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
 import Button from '../Button/Button';
+import { FaEdit as Edit } from 'react-icons/fa';
+import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import { Form, Label, Textarea } from '../styledComponents/StyledForm';
+import axios from 'axios';
+import {
+  EditImageUpload,
+  ImageWrapper,
+  Image,
+  UploadIcon,
+  RemoveImage,
+} from '../styledComponents/StyledImageUpload';
 
-export default function PastTripNotes({ note, onDelete, image, _id }) {
+const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
+const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
+
+export default function PastTripNotes({
+  note,
+  onDelete,
+  image,
+  _id,
+  onEditNotes,
+}) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [picture, setPicture] = useState(image);
+  const [process, setProcess] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
-      <ListEntry>
-        <p>{note}</p>
-        <UploadedImage src={image} alt=""></UploadedImage>
-        <Button variant="delete" onClick={() => setIsVisible(!isVisible)}>
-          <DeleteIcon size={20} />
-        </Button>
-      </ListEntry>
+      {isEditing ? (
+        <Form
+          onSubmit={handleSubmit}
+          autoComplete="off"
+          aria-labelledby="edit-form"
+        >
+          <ScreenReaderOnly>
+            <h2 id="edit-form">Edit notes</h2>
+          </ScreenReaderOnly>
+          <div>
+            <Label htmlFor="note">Edit your notes:</Label>
+            <ScreenReaderOnly id="notes-form">
+              Enter notes to remember
+            </ScreenReaderOnly>
+            <Textarea
+              type="text"
+              id="note"
+              defaultValue={note}
+              maxLength="500"
+              rows="5"
+            />
+          </div>
+
+          {loading && <div>Uploading Image...{process}%</div>}
+          <EditImageUpload>
+            {picture ? (
+              <ImageWrapper>
+                <Image src={picture} alt="" />
+                <RemoveImage
+                  size={25}
+                  variant="deleteImage"
+                  onClick={handleRemovePic}
+                  aria-label="Remove Image"
+                />
+              </ImageWrapper>
+            ) : undefined}
+            <>
+              <input
+                type="file"
+                name="files-edit"
+                aria-label="Upload another image"
+                multiple="multiple"
+                id="files-edit"
+                onChange={upload}
+              />
+              <Label htmlFor="files-edit">
+                Change image
+                <ScreenReaderOnly>Choose another image</ScreenReaderOnly>
+                <UploadIcon size={25} />
+              </Label>
+            </>
+          </EditImageUpload>
+
+          <ButtonWrapper>
+            <Button variant="add" category="Save changes" type="submit">
+              Submit changes
+            </Button>
+          </ButtonWrapper>
+        </Form>
+      ) : (
+        <ListEntry>
+          <p>{note}</p>
+          <UploadedImage src={picture} alt=""></UploadedImage>
+          <Button
+            variant="edit"
+            type="button"
+            aria-labelledby="Edit your card"
+            onClick={() => setIsEditing(!isEditing)}
+          >
+            <EditIcon size={20} />
+            <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
+          </Button>
+          <Button variant="delete" onClick={() => setIsVisible(!isVisible)}>
+            <DeleteIcon size={20} />
+          </Button>
+        </ListEntry>
+      )}
       {isVisible && (
         <Modal
           onDelete={() => onDelete(_id)}
@@ -26,6 +121,51 @@ export default function PastTripNotes({ note, onDelete, image, _id }) {
       )}
     </>
   );
+
+  function upload(event) {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    formData.append('upload_preset', PRESET);
+
+    axios
+      .post(url, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+        onUploadProgress: progressEvent => {
+          setLoading(true);
+          const percent = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total
+          );
+          setProcess(percent);
+        },
+      })
+      .then(onImageSave)
+      .catch(err => console.error(err));
+  }
+
+  function onImageSave(response) {
+    setPicture(response.data.url);
+    setLoading(false);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { note } = event.target.elements;
+    onEditNotes({
+      note: note.value,
+      image: picture,
+      _id: _id,
+    });
+    setIsEditing(false);
+  }
+
+  function handleRemovePic() {
+    setPicture('');
+    setProcess(0);
+    setLoading(false);
+  }
 }
 
 const ListEntry = styled.li`
@@ -49,6 +189,16 @@ const UploadedImage = styled.img`
 
 const DeleteIcon = styled(Delete)`
   position: absolute;
-  bottom: 10px;
-  right: 16px;
+  bottom: 12px;
+  right: 50px;
+`;
+
+const EditIcon = styled(Edit)`
+  position: absolute;
+  bottom: 12px;
+  right: 18px;
+`;
+
+const ButtonWrapper = styled.div`
+  text-align: center;
 `;

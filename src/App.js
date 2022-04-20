@@ -30,6 +30,7 @@ function App() {
               trips={futureTrips}
               savePicture={handleSavePicture}
               onViewPort={handleViewPort}
+              onEditNotes={handleEditNotes}
             />
           }
         />
@@ -75,6 +76,28 @@ function App() {
 
   function handlePopupClick(locationInfos) {
     setLocationInfos(locationInfos);
+  }
+
+  function handleEditNotes(updatedValue) {
+    const updatedArray = history.map(note => {
+      const newNotes = note.notes.map(note => {
+        if (note._id === updatedValue._id) {
+          return updatedValue;
+        }
+        return note;
+      });
+      return { ...note, notes: newNotes };
+    });
+    setHistory(updatedArray);
+  }
+
+  function handleDeleteNote(noteId) {
+    setHistory(
+      history.map(card => {
+        const filteredNotes = card.notes.filter(note => note._id !== noteId);
+        return { ...card, notes: filteredNotes };
+      })
+    );
   }
 
   function handleEdit(updatedValue) {
@@ -130,16 +153,6 @@ function App() {
   function createTrip(formData) {
     setFutureTrips([...futureTrips, formData]);
     navigate('/futurePage');
-  }
-
-  function handleDeleteNote(noteId) {
-    setHistory(
-      history.map(card => {
-        const filteredNotes = card.notes.filter(note => note._id !== noteId);
-        console.log(card.notes);
-        return { ...card, notes: filteredNotes };
-      })
-    );
   }
 
   function handleNewNote(note, _id) {
