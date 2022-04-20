@@ -56,16 +56,20 @@ export default function PastTripNotes({
               rows="5"
             />
           </div>
+
+          {loading && <div>Uploading Image...{process}%</div>}
           <EditImageUpload>
-            <ImageWrapper>
-              {loading && <div>Uploading Image...{process}%</div>}
-              <Image src={picture} alt="" />
-              {image ? (
-                <Button variant="deleteImage" onClick={handleRemovePic}>
-                  <RemoveImage size={25} />
-                </Button>
-              ) : undefined}
-            </ImageWrapper>
+            {image ? (
+              <ImageWrapper>
+                <Image src={picture} alt="" />
+                <RemoveImage
+                  size={25}
+                  variant="deleteImage"
+                  onClick={handleRemovePic}
+                  aria-label="Remove Image"
+                />
+              </ImageWrapper>
+            ) : undefined}
             <>
               <input
                 type="file"
@@ -73,7 +77,7 @@ export default function PastTripNotes({
                 aria-label="Upload a picture"
                 multiple="multiple"
                 id="files-edit"
-                onChange={upload2}
+                onChange={upload}
               />
               <Label htmlFor="files-edit">
                 Upload image
@@ -118,7 +122,7 @@ export default function PastTripNotes({
     </>
   );
 
-  function upload2(event) {
+  function upload(event) {
     const url = `https://api.cloudinary.com/v1_1/${CLOUDNAME}/upload`;
     const formData = new FormData();
 
@@ -148,7 +152,6 @@ export default function PastTripNotes({
   }
 
   function handleSubmit(event) {
-    console.log('hello');
     event.preventDefault();
     const { note } = event.target.elements;
     onEditNotes({
@@ -187,14 +190,14 @@ const UploadedImage = styled.img`
 
 const DeleteIcon = styled(Delete)`
   position: absolute;
-  bottom: 10px;
-  right: 45px;
+  bottom: 12px;
+  right: 50px;
 `;
 
 const EditIcon = styled(Edit)`
   position: absolute;
-  bottom: 10px;
-  right: 12px;
+  bottom: 12px;
+  right: 18px;
 `;
 
 const ButtonWrapper = styled.div`

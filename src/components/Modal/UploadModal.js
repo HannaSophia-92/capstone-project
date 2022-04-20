@@ -2,9 +2,15 @@ import Button from '../Button/Button';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
-import { ImageUpload, Label } from '../styledComponents/StyledForm';
-import { MdOutlineCloudUpload } from 'react-icons/md';
+import { Label } from '../styledComponents/StyledForm';
+import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
+import {
+  RemoveImage,
+  ImageWrapper,
+  ImageUpload,
+  Image,
+} from '../styledComponents/StyledImageUpload';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -21,7 +27,15 @@ export default function UploadModal({ onCancel, children, moveImage }) {
         {loading && <div>Uploading Image...{process}%</div>}
         <ImageUpload>
           {image ? (
-            <Image src={image} alt="" />
+            <ImageWrapper>
+              <Image src={image} alt="" />
+              <RemoveImage
+                size={20}
+                variant="deleteImage"
+                onClick={handleRemovePic}
+                aria-label="Remove Image"
+              />
+            </ImageWrapper>
           ) : (
             <>
               <input
@@ -76,6 +90,12 @@ export default function UploadModal({ onCancel, children, moveImage }) {
     setImage(response.data.url);
     setLoading(false);
   }
+
+  function handleRemovePic() {
+    setImage('');
+    setProcess(0);
+    setLoading(false);
+  }
 }
 
 const Background = styled.div`
@@ -104,13 +124,9 @@ const StyledModal = styled.section`
   border-radius: 18px;
 `;
 
-const Image = styled.img`
-  width: 70%;
-`;
-
-const UploadIcon = styled(MdOutlineCloudUpload)`
+const UploadIcon = styled(Upload)`
   position: absolute;
   bottom: 10px;
-  right: 15px;
+  right: 20px;
   color: var(--color-yellow);
 `;

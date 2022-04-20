@@ -2,15 +2,15 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import {
-  Form,
-  Label,
-  Textarea,
-  ImageUpload,
-} from '../styledComponents/StyledForm';
+import { Form, Label, Textarea } from '../styledComponents/StyledForm';
 import { Image } from '../styledComponents/StyledImageUpload';
 import axios from 'axios';
 import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
+import {
+  ImageUpload,
+  RemoveImage,
+  ImageWrapper,
+} from '../styledComponents/StyledImageUpload';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -19,7 +19,7 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
   const [image, setImage] = useState('');
   const [process, setProcess] = useState(0);
   const [loading, setLoading] = useState(false);
-  console.log(image);
+
   return (
     <>
       <Form
@@ -43,7 +43,15 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
         {loading && <div>Uploading Image...{process}%</div>}
         <ImageUpload>
           {image ? (
-            <Image src={image} alt="" />
+            <ImageWrapper>
+              <Image src={image} alt="" />
+              <RemoveImage
+                size={20}
+                variant="deleteImage"
+                onClick={handleRemovePic}
+                aria-label="Remove Image"
+              />
+            </ImageWrapper>
           ) : (
             <>
               <input
@@ -106,6 +114,12 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
 
   function onImageSave(response) {
     setImage(response.data.url);
+    setLoading(false);
+  }
+
+  function handleRemovePic() {
+    setImage('');
+    setProcess(0);
     setLoading(false);
   }
 }
