@@ -39,14 +39,16 @@ export default function PastTripStory({
           </Date>
           <Destination>
             {destination}
-            <StyledLink
-              to="/mapPage"
-              aria-label="show-on-map"
-              onClick={() => onViewPort(coordinates)}
-            >
-              <LocationIcon size={25} />
-              <ScreenReaderOnly>show on map</ScreenReaderOnly>
-            </StyledLink>
+            {coordinates[0] !== null ? (
+              <StyledLink
+                to="/mapPage"
+                aria-label="show-on-map"
+                onClick={() => onViewPort(coordinates)}
+              >
+                <LocationIcon size={25} />
+                <ScreenReaderOnly>show on map</ScreenReaderOnly>
+              </StyledLink>
+            ) : undefined}
           </Destination>
           <Notes>{textNotes}</Notes>
           {!picture ? (
@@ -149,6 +151,7 @@ const Destination = styled.p`
   flex-direction: column;
   text-align: center;
   border-bottom: 1px solid var(--color-white);
+  padding-bottom: 3px;
 `;
 
 const Notes = styled.p`
