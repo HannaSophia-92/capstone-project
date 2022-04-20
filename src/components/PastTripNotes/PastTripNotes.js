@@ -6,14 +6,15 @@ import React from 'react';
 import Button from '../Button/Button';
 import { FaEdit as Edit } from 'react-icons/fa';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import {
-  Form,
-  Label,
-  Textarea,
-  ImageUpload,
-} from '../styledComponents/StyledForm';
+import { Form, Label, Textarea } from '../styledComponents/StyledForm';
 import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
 import axios from 'axios';
+import { TiDeleteOutline as DeleteImage } from 'react-icons/ti';
+import {
+  EditImageUpload,
+  ImageWrapper,
+  Image,
+} from '../styledComponents/StyledImageUpload';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -27,7 +28,7 @@ export default function PastTripNotes({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [picture, setPicture] = useState('');
+  const [picture, setPicture] = useState(image);
   const [process, setProcess] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -57,9 +58,15 @@ export default function PastTripNotes({
             />
           </div>
 
-          <ImageUpload>
-            {image ? (
-              <Image src={image} alt="" />
+          <EditImageUpload>
+            {picture ? (
+              <ImageWrapper>
+                <Image src={picture} alt="" />
+
+                <Button variant="deleteImage" onClick={handleRemovePic}>
+                  <RemoveImage size={25} />
+                </Button>
+              </ImageWrapper>
             ) : (
               <>
                 <input
@@ -67,18 +74,17 @@ export default function PastTripNotes({
                   name="file"
                   aria-label="Upload a picture"
                   multiple="multiple"
-                  id="files"
-                  defaultValue={image}
+                  id="files-edit"
                   onChange={upload2}
                 />
-                <Label htmlFor="files">
+                <Label htmlFor="files-edit">
                   Upload image
                   <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
                   <UploadIcon size={25} />
                 </Label>
               </>
             )}
-          </ImageUpload>
+          </EditImageUpload>
           <ButtonWrapper>
             <Button variant="add" category="Save changes" type="submit">
               Submit changes
@@ -88,7 +94,7 @@ export default function PastTripNotes({
       ) : (
         <ListEntry>
           <p>{note}</p>
-          <UploadedImage src={image} alt=""></UploadedImage>
+          <UploadedImage src={picture} alt=""></UploadedImage>
           <Button
             variant="edit"
             type="button"
@@ -148,10 +154,16 @@ export default function PastTripNotes({
     const { note } = event.target.elements;
     onEditNotes({
       note: note.value,
-      image: image,
+      image: picture,
       _id: _id,
     });
     setIsEditing(false);
+  }
+
+  function handleRemovePic() {
+    setPicture('');
+    setProcess(0);
+    setLoading(false);
   }
 }
 
@@ -186,10 +198,6 @@ const EditIcon = styled(Edit)`
   right: 12px;
 `;
 
-const Image = styled.img`
-  width: 70%;
-`;
-
 const UploadIcon = styled(Upload)`
   position: absolute;
   bottom: 5px;
@@ -199,4 +207,10 @@ const UploadIcon = styled(Upload)`
 
 const ButtonWrapper = styled.div`
   text-align: center;
+`;
+
+const RemoveImage = styled(DeleteImage)`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;

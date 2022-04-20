@@ -8,6 +8,7 @@ import {
   Textarea,
   ImageUpload,
 } from '../styledComponents/StyledForm';
+import { Image } from '../styledComponents/StyledImageUpload';
 import axios from 'axios';
 import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
 
@@ -115,10 +116,6 @@ const ButtonWrapper = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-`;
-
-const Image = styled.img`
-  width: 70%;
 `;
 
 const UploadIcon = styled(Upload)`

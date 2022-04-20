@@ -118,4 +118,15 @@ export default styled.button`
       color: var(--color-yellow);
       text-transform: uppercase;
     `}
+
+    ${props =>
+    props.variant === 'deleteImage' &&
+    css`
+      background-color: transparent;
+      color: var(--color-white);
+      text-transform: uppercase;
+      margin: 0;
+      padding: 0;
+      width: 15px;
+    `}
 `;
