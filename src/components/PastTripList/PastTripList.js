@@ -63,7 +63,7 @@ const Card = styled.ul`
   flex-direction: column;
   gap: 20px;
   list-style: none;
-  margin: 20px;
+  margin: 0 20px;
 `;
 
 const Message = styled.p`
