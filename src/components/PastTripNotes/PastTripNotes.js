@@ -7,13 +7,13 @@ import Button from '../Button/Button';
 import { FaEdit as Edit } from 'react-icons/fa';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { Form, Label, Textarea } from '../styledComponents/StyledForm';
-import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
 import axios from 'axios';
-import { TiDeleteOutline as DeleteImage } from 'react-icons/ti';
 import {
   EditImageUpload,
   ImageWrapper,
   Image,
+  UploadIcon,
+  RemoveImage,
 } from '../styledComponents/StyledImageUpload';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
@@ -43,9 +43,8 @@ export default function PastTripNotes({
           <ScreenReaderOnly>
             <h2 id="edit-form">Edit notes</h2>
           </ScreenReaderOnly>
-
           <div>
-            <Label htmlFor="note">Things to remember:</Label>
+            <Label htmlFor="note">Edit your notes:</Label>
             <ScreenReaderOnly id="notes-form">
               Enter notes to remember
             </ScreenReaderOnly>
@@ -57,34 +56,33 @@ export default function PastTripNotes({
               rows="5"
             />
           </div>
-
           <EditImageUpload>
-            {picture ? (
-              <ImageWrapper>
-                <Image src={picture} alt="" />
-
+            <ImageWrapper>
+              {loading && <div>Uploading Image...{process}%</div>}
+              <Image src={picture} alt="" />
+              {image ? (
                 <Button variant="deleteImage" onClick={handleRemovePic}>
                   <RemoveImage size={25} />
                 </Button>
-              </ImageWrapper>
-            ) : (
-              <>
-                <input
-                  type="file"
-                  name="file"
-                  aria-label="Upload a picture"
-                  multiple="multiple"
-                  id="files-edit"
-                  onChange={upload2}
-                />
-                <Label htmlFor="files-edit">
-                  Upload image
-                  <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
-                  <UploadIcon size={25} />
-                </Label>
-              </>
-            )}
+              ) : undefined}
+            </ImageWrapper>
+            <>
+              <input
+                type="file"
+                name="file"
+                aria-label="Upload a picture"
+                multiple="multiple"
+                id="files-edit"
+                onChange={upload2}
+              />
+              <Label htmlFor="files-edit">
+                Upload image
+                <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
+                <UploadIcon size={25} />
+              </Label>
+            </>
           </EditImageUpload>
+
           <ButtonWrapper>
             <Button variant="add" category="Save changes" type="submit">
               Submit changes
@@ -150,6 +148,7 @@ export default function PastTripNotes({
   }
 
   function handleSubmit(event) {
+    console.log('hello');
     event.preventDefault();
     const { note } = event.target.elements;
     onEditNotes({
@@ -198,19 +197,6 @@ const EditIcon = styled(Edit)`
   right: 12px;
 `;
 
-const UploadIcon = styled(Upload)`
-  position: absolute;
-  bottom: 5px;
-  right: 20px;
-  color: var(--color-yellow);
-`;
-
 const ButtonWrapper = styled.div`
   text-align: center;
-`;
-
-const RemoveImage = styled(DeleteImage)`
-  position: absolute;
-  top: 0;
-  right: 0;
 `;

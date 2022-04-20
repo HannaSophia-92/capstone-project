@@ -79,6 +79,7 @@ function App() {
   }
 
   function handleEditNotes(updatedValue) {
+    console.log(history);
     const updatedArray = history.map(note => {
       const newNotes = note.notes.map(note => {
         if (note._id === updatedValue._id) {

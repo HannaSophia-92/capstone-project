@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
+import { TiDeleteOutline as DeleteImage } from 'react-icons/ti';
 
 const EditImageUpload = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin: 5px 0;
   input[type='file'] {
     opacity: 0;
     z-index: -1;
@@ -19,8 +21,8 @@ const EditImageUpload = styled.div`
     position: relative;
     font-size: 14px;
     padding: 10px;
-    margin: 10px 0;
     border-radius: 5px;
+    margin-top: 10px;
     box-shadow: var(--box-shadow);
     background-color: var(--color-gray);
     color: var(--color-light-gray);
@@ -38,4 +40,17 @@ const Image = styled.img`
   position: relative;
 `;
 
-export { EditImageUpload, ImageWrapper, Image };
+const UploadIcon = styled(Upload)`
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  color: var(--color-yellow);
+`;
+
+const RemoveImage = styled(DeleteImage)`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+export { EditImageUpload, ImageWrapper, Image, UploadIcon, RemoveImage };
