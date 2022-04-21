@@ -170,7 +170,7 @@ function App() {
 }
 
 const Wrapper = styled.div`
-  margin-bottom: 60px;
+  padding-bottom: 10vh;
 `;
 
 const Footer = styled.footer`

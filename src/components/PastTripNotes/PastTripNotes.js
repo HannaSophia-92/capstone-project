@@ -86,7 +86,6 @@ export default function PastTripNotes({
               </Label>
             </>
           </EditImageUpload>
-
           <ButtonWrapper>
             <Button variant="add" category="Save changes" type="submit">
               Submit changes

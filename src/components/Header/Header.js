@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as Logo } from '../../images/logo/journi-icon.svg';
+import { ReactComponent as Logo } from '../../images/logo/journi-logo.svg';
 
 export default function Header() {
   return (
@@ -23,5 +23,5 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const StyledLogo = styled(Logo)`
-  width: 140px;
+  width: 160px;
 `;
