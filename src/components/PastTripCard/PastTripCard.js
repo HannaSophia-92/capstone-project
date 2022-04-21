@@ -46,7 +46,9 @@ export default function PastTripStory({
                 aria-label="show-on-map"
                 onClick={() => onViewPort(coordinates)}
               >
-                <LocationIcon size={25} />
+                <IconButton variant="goToMap">
+                  <LocationIcon size={25} />
+                </IconButton>
                 <ScreenReaderOnly>show on map</ScreenReaderOnly>
               </StyledLink>
             ) : undefined}

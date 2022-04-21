@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiTrash } from 'react-icons/fi';
+import { FiTrash as DeleteIcon } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
 import SaveModal from '../Modal/SaveModal';
 import { useState } from 'react';
@@ -12,6 +12,7 @@ import { HiOutlineArrowNarrowRight as Arrow } from 'react-icons/hi';
 import { Form } from '../styledComponents/StyledForm';
 import { Link } from 'react-router-dom';
 import { MdLocationOn as Location } from 'react-icons/md';
+import { IconButton } from '../Button/Button';
 
 export default function FutureTripCard({
   onDelete,
@@ -40,7 +41,6 @@ export default function FutureTripCard({
           <ScreenReaderOnly>
             <h2 id="edit-form">Edit notes</h2>
           </ScreenReaderOnly>
-
           <div>
             <Label htmlFor="destination">Destination:</Label>
             <Input type="text" id="destination" defaultValue={destination} />
@@ -90,7 +90,9 @@ export default function FutureTripCard({
                   aria-label="show-on-map"
                   onClick={() => onViewPort(coordinates)}
                 >
-                  <LocationIcon size={25} />
+                  <IconButton variant="goToMap" type="button">
+                    <LocationIcon size={25} />
+                  </IconButton>
                   <ScreenReaderOnly>show on map</ScreenReaderOnly>
                 </StyledLink>
               ) : undefined}
@@ -98,35 +100,35 @@ export default function FutureTripCard({
 
             <Notes>{textNotes}</Notes>
             <ButtonWrapper>
-              <Button
+              <IconButton
                 variant="delete"
                 type="button"
                 aria-labelledby="Delete your trip"
                 onClick={() => setIsVisible(!isVisible)}
               >
-                <FiTrash size={25} />
-                <ScreenReaderOnly>Delete Card</ScreenReaderOnly>
-              </Button>
+                <DeleteIcon size={25} />
+                <ScreenReaderOnly>Delete card</ScreenReaderOnly>
+              </IconButton>
 
-              <Button
+              <IconButton
                 variant="edit"
                 type="button"
-                aria-labelledby="Edit your card"
+                aria-labelledby="Edit your entry"
                 onClick={() => setIsEditing(!isEditing)}
               >
                 <Edit size={25} />
-                <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
-              </Button>
+                <ScreenReaderOnly>Edit entry</ScreenReaderOnly>
+              </IconButton>
 
-              <Button
+              <IconButton
                 variant="done"
                 type="button"
                 aria-labelledby="Finish your trip"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <Checkbox size={25} />
-                <ScreenReaderOnly>Finish your trip</ScreenReaderOnly>
-              </Button>
+                <ScreenReaderOnly>Finish trip</ScreenReaderOnly>
+              </IconButton>
             </ButtonWrapper>
           </Card>
         </div>

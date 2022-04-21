@@ -3,7 +3,7 @@ import { FiTrash as Delete } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
 import { useState } from 'react';
 import React from 'react';
-import Button from '../Button/Button';
+import Button, { IconButton } from '../Button/Button';
 import { FaEdit as Edit } from 'react-icons/fa';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { Form, Label, Textarea } from '../styledComponents/StyledForm';
@@ -62,12 +62,13 @@ export default function PastTripNotes({
             {picture ? (
               <ImageWrapper>
                 <Image src={picture} alt="" />
-                <RemoveImage
-                  size={25}
+                <IconButton
                   variant="deleteImage"
                   onClick={handleRemovePic}
                   aria-label="Remove Image"
-                />
+                >
+                  <RemoveImage size={25} />
+                </IconButton>
               </ImageWrapper>
             ) : undefined}
             <>
@@ -82,7 +83,9 @@ export default function PastTripNotes({
               <Label htmlFor="files-edit">
                 Change image
                 <ScreenReaderOnly>Choose another image</ScreenReaderOnly>
-                <UploadIcon size={25} />
+                <IconButton variant="changeImage">
+                  <UploadIcon size={25} />
+                </IconButton>
               </Label>
             </>
           </EditImageUpload>
@@ -96,7 +99,7 @@ export default function PastTripNotes({
         <ListEntry>
           <p>{note}</p>
           <UploadedImage src={picture} alt=""></UploadedImage>
-          <Button
+          <IconButton
             variant="edit"
             type="button"
             aria-labelledby="Edit your card"
@@ -104,10 +107,14 @@ export default function PastTripNotes({
           >
             <EditIcon size={20} />
             <ScreenReaderOnly>Edit Card</ScreenReaderOnly>
-          </Button>
-          <Button variant="delete" onClick={() => setIsVisible(!isVisible)}>
+          </IconButton>
+          <IconButton
+            variant="delete"
+            onClick={() => setIsVisible(!isVisible)}
+            aria-label="Delete note"
+          >
             <DeleteIcon size={20} />
-          </Button>
+          </IconButton>
         </ListEntry>
       )}
       {isVisible && (

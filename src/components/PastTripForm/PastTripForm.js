@@ -11,6 +11,7 @@ import {
   RemoveImage,
   ImageWrapper,
 } from '../styledComponents/StyledImageUpload';
+import { IconButton } from '../Button/Button';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -45,12 +46,13 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
           {image ? (
             <ImageWrapper>
               <Image src={image} alt="" />
-              <RemoveImage
-                size={20}
+              <IconButton
                 variant="deleteImage"
                 onClick={handleRemovePic}
                 aria-label="Remove Image"
-              />
+              >
+                <RemoveImage size={20} />
+              </IconButton>
             </ImageWrapper>
           ) : (
             <>
@@ -65,7 +67,9 @@ export default function PastTripNotes({ onHandleNewNote, _id }) {
               <Label htmlFor="files">
                 Upload image
                 <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
-                <UploadIcon size={25} />
+                <IconButton variant="changeImage">
+                  <UploadIcon size={25} />
+                </IconButton>
               </Label>
             </>
           )}

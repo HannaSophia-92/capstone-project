@@ -24,32 +24,17 @@ export default styled.button`
   ${props =>
     props.variant === 'submit' &&
     css`
-      background-color: seagreen;
-      color: var(--color-white);
+      background-color: var(--color-yellow);
+      color: var(--color-dark-gray);
       text-transform: uppercase;
     `}
 
     ${props =>
     props.variant === 'danger' &&
     css`
-      background-color: crimson;
-      color: var(--color-white);
+      background-color: var(--color-white);
+      color: var(--color-dark-gray);
       text-transform: uppercase;
-    `}
-
-    ${props =>
-    props.variant === 'edit' &&
-    css`
-      background: transparent;
-      border: none;
-      color: var(--color-white);
-
-      &:hover {
-        color: var(--color-yellow);
-      }
-      &.active {
-        color: var(--color-yellow);
-      }
     `}
 
     ${props =>
@@ -58,30 +43,6 @@ export default styled.button`
       background: transparent;
       border: none;
       color: var(--color-white);
-    `}
-
-    ${props =>
-    props.variant === 'delete' &&
-    css`
-      background: transparent;
-      border: none;
-      color: var(--color-white);
-
-      &:hover {
-        color: var(--color-yellow);
-      }
-    `}
-
-    ${props =>
-    props.variant === 'done' &&
-    css`
-      background: transparent;
-      border: none;
-      color: var(--color-white);
-
-      &:hover {
-        color: var(--color-yellow);
-      }
     `}
 
     ${props =>
@@ -98,23 +59,6 @@ export default styled.button`
       background-color: var(--color-white);
       color: var(--color-dark-gray);
       text-transform: uppercase;
-    `}
-
-    ${props =>
-    props.variant === 'goToMap' &&
-    css`
-      background-color: transparent;
-      color: var(--color-yellow);
-    `}
-
-    ${props =>
-    props.variant === 'deleteImage' &&
-    css`
-      background-color: transparent;
-      color: var(--color-white);
-      margin: 0;
-      padding: 0;
-      width: 15px;
     `}
 `;
 
@@ -139,6 +83,89 @@ const IconButton = styled.button`
       &:hover {
         color: var(--color-yellow);
       }
+    `}
+
+    ${props =>
+    props.variant === 'goToMap' &&
+    css`
+      color: var(--color-yellow);
+    `}
+
+    ${props =>
+    props.variant === 'delete' &&
+    css`
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+
+      &:hover {
+        color: var(--color-yellow);
+      }
+    `}
+
+    ${props =>
+    props.variant === 'edit' &&
+    css`
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+
+      &:hover {
+        color: var(--color-yellow);
+      }
+      &.active {
+        color: var(--color-yellow);
+      }
+    `}
+
+    ${props =>
+    props.variant === 'done' &&
+    css`
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+
+      &:hover {
+        color: var(--color-yellow);
+      }
+    `}
+
+    ${props =>
+    props.variant === 'upload' &&
+    css`
+      position: absolute;
+      bottom: 8px;
+      right: 20px;
+      color: var(--color-yellow);
+    `}
+
+    ${props =>
+    props.variant === 'changeImage' &&
+    css`
+      position: absolute;
+      bottom: 2px;
+      right: 5px;
+      color: var(--color-yellow);
+    `}
+
+    ${props =>
+    props.variant === 'deleteImage' &&
+    css`
+      background-color: transparent;
+      color: var(--color-white);
+      margin: 0;
+      padding: 0;
+      width: 15px;
+    `}
+
+    ${props =>
+    props.variant === 'deleteImage' &&
+    css`
+      background-color: transparent;
+      color: var(--color-white);
+      margin: 0;
+      padding: 0;
+      width: 15px;
     `}
 `;
 

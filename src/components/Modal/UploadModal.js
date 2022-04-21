@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
 import { Label } from '../styledComponents/StyledForm';
-import { MdOutlineCloudUpload as Upload } from 'react-icons/md';
+import { MdOutlineCloudUpload as UploadIcon } from 'react-icons/md';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import {
   RemoveImage,
@@ -11,6 +11,7 @@ import {
   ImageUpload,
   Image,
 } from '../styledComponents/StyledImageUpload';
+import { IconButton } from '../Button/Button';
 
 const CLOUDNAME = process.env.REACT_APP_CLOUDINARY_CLOUDNAME;
 const PRESET = process.env.REACT_APP_CLOUDINARY_PRESET;
@@ -48,7 +49,9 @@ export default function UploadModal({ onCancel, children, moveImage }) {
               <Label htmlFor="files">
                 Upload image
                 <ScreenReaderOnly>Upload your image</ScreenReaderOnly>
-                <UploadIcon size={25} />
+                <IconButton variant="upload" aria-label="Upload your image">
+                  <UploadIcon size={25} />
+                </IconButton>
               </Label>
             </>
           )}
@@ -122,11 +125,4 @@ const StyledModal = styled.section`
   color: var(--color-white);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   border-radius: 18px;
-`;
-
-const UploadIcon = styled(Upload)`
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  color: var(--color-yellow);
 `;
