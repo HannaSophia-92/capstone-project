@@ -8,15 +8,17 @@ export default styled.button`
   color: var(--color-dark-gray);
   border: none;
   border-radius: 16px;
-  padding: 4px 12px;
+  padding: 5px;
   margin: 5px 0;
   width: 150px;
+  position: relative;
 
   ${props =>
     props.variant === 'add' &&
     css`
       background-color: var(--color-yellow);
       color: var(--color-dark-gray);
+      text-transform: uppercase;
     `}
 
   ${props =>
@@ -33,19 +35,6 @@ export default styled.button`
       background-color: crimson;
       color: var(--color-white);
       text-transform: uppercase;
-    `}
-
-    ${props =>
-    props.variant === 'notes' &&
-    css`
-      background: transparent;
-      border: none;
-      color: var(--color-white);
-      margin: 0;
-
-      &:hover {
-        color: var(--color-yellow);
-      }
     `}
 
     ${props =>
@@ -116,7 +105,6 @@ export default styled.button`
     css`
       background-color: transparent;
       color: var(--color-yellow);
-      text-transform: uppercase;
     `}
 
     ${props =>
@@ -124,9 +112,34 @@ export default styled.button`
     css`
       background-color: transparent;
       color: var(--color-white);
-      text-transform: uppercase;
       margin: 0;
       padding: 0;
       width: 15px;
     `}
 `;
+
+const IconButton = styled.button`
+  background: transparent;
+  border: none;
+
+  ${props =>
+    props.variant === 'uploadImage' &&
+    css`
+      color: var(--color-white);
+    `}
+
+  ${props =>
+    props.variant === 'notes' &&
+    css`
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+      margin: 0;
+
+      &:hover {
+        color: var(--color-yellow);
+      }
+    `}
+`;
+
+export { IconButton };

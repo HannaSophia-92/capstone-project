@@ -176,7 +176,7 @@ const Card = styled.article`
   flex-direction: column;
   word-wrap: break-word;
   padding: 15px 15px 5px 15px;
-  margin: 20px 0;
+  margin-bottom: 20px;
   border-radius: 40px;
   background-color: var(--color-dark-gray);
   color: var(--color-white);

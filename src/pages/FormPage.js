@@ -22,5 +22,5 @@ const StyledHeading = styled(Heading)`
 
 const Headline = styled.h2`
   text-align: center;
-  height: 20%;
+  margin-top: 10px;
 `;

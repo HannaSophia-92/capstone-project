@@ -57,4 +57,5 @@ const StyledHeading = styled(Heading)`
 
 const Headline = styled.h2`
   text-align: center;
+  margin: 10px 0;
 `;

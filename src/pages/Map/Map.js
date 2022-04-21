@@ -22,13 +22,13 @@ export default function BasicMap({
   mapboxgl.accessToken = process.env.REACT_APP_ACCESSTOKEN;
 
   const markerIconBlack = new L.Icon({
-    iconUrl: require('../../images/icon-black.png'),
+    iconUrl: require('../../images/location-marker-gray.png'),
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });
 
   const markerIconYellow = new L.Icon({
-    iconUrl: require('../../images/icon-yellow.png'),
+    iconUrl: require('../../images/location-marker-yellow.png'),
     iconSize: [32, 32],
     iconAnchor: [16, 32],
   });

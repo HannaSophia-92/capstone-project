@@ -22,22 +22,15 @@ export default createGlobalStyle`
   html {
     background: linear-gradient(0deg, rgba(47,47,47,1) 0%, rgba(246,246,246,1) 100%);
     background-attachment: fixed;
-    height: 100vh;
+    
   }
 
   body {
     font-family: 'Roboto', sans-serif;
     font-size: 112.5%;
+    max-width: 768px;
+    margin: 0 auto;
   }
-
-  /* h2 {
-    font-size: 20px;
-    color: var(--color-dark-gray);
-    border-bottom: 1px solid var(--color-dark-gray);
-    text-align: center;
-    margin: 20px;
-    font-weight: 500;
-  } */
 
   input, textarea {
   border: none;

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import Button from '../Button/Button';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
-import { MdOutlineNoteAlt } from 'react-icons/md';
+import { MdOutlineNoteAlt as NotesIcon } from 'react-icons/md';
 import { useState } from 'react';
 import UploadModal from '../Modal/UploadModal';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
-import { MdKeyboardBackspace } from 'react-icons/md';
+import { MdKeyboardBackspace as BackButton } from 'react-icons/md';
 import { MdLocationOn } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { BiImageAdd as UploadImage } from 'react-icons/bi';
+import { IconButton } from '../Button/Button';
 
 export default function PastTripStory({
   startDate,
@@ -53,26 +54,27 @@ export default function PastTripStory({
           <Notes>{textNotes}</Notes>
           {!picture ? (
             <UploadButtonWrapper>
-              <Button
+              <IconButton
                 type="button"
+                variant="uploadImage"
                 aria-labelledby="Upload image"
                 onClick={() => setImageModalVisible(!imageModalVisible)}
               >
-                Upload image
-              </Button>
+                <UploadImage size={28} />
+              </IconButton>
             </UploadButtonWrapper>
           ) : (
             <UploadedImage src={picture} alt="" />
           )}
           <ButtonWrapper>
-            <Button
+            <IconButton
               variant="notes"
               onClick={() => handleCardToggle(_id)}
               aria-labelledby="Enter notes"
             >
               <ScreenReaderOnly>Notes</ScreenReaderOnly>
-              <MdOutlineNoteAlt size={25} />
-            </Button>
+              <NotesIcon size={25} />
+            </IconButton>
           </ButtonWrapper>
         </Card>
       )}
@@ -89,7 +91,8 @@ export default function PastTripStory({
           aria-labelledby="Return to home page"
           onClick={() => handleCardToggle()}
         >
-          <MdKeyboardBackspace size={30} />
+          <BackButton size={30} />
+          <ScreenReaderOnly>Return to home page</ScreenReaderOnly>
         </GoBackButton>
       )}
       {!notesVisible && (

@@ -34,6 +34,7 @@ const Nav = styled.nav`
   align-items: center;
   height: 7vh;
   background-color: var(--color-dark-gray);
+  max-width: 768px;
 `;
 
 const NavLinkStyled = styled(NavLink)`
