@@ -34,7 +34,7 @@ export default function BasicMap({
   });
   const [destinationMapbox, setDestinationMapbox] = useLocalStorage(
     'destinationMapBox',
-    [22.613888888889, -83.734722222222]
+    [24.691402, -81.189682]
   );
   const ZOOM_LEVEL = 8;
   const mapRef = useRef();

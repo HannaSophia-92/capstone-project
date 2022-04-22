@@ -140,7 +140,7 @@ const Card = styled.li`
   background-color: var(--color-dark-gray);
   color: var(--color-white);
   min-height: 330px;
-  box-shadow: var(--box-shadow);
+
   position: relative;
 `;
 

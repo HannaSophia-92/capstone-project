@@ -191,6 +191,7 @@ const ListEntry = styled.li`
 const UploadedImage = styled.img`
   width: 100%;
   margin: 10px 0;
+  padding-bottom: 15px;
 `;
 
 const DeleteIcon = styled(Delete)`
