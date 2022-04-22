@@ -19,19 +19,17 @@ export default createGlobalStyle`
     padding: 0;
   }
 
+  html {
+    background: linear-gradient(0deg, rgba(47,47,47,1) 0%, rgba(246,246,246,1) 100%);
+    background-attachment: fixed;
+    
+  }
+
   body {
     font-family: 'Roboto', sans-serif;
     font-size: 112.5%;
-
-  }
-
-  h2 {
-    font-size: 20px;
-    color: var(--color-dark-gray);
-    border-bottom: 1px solid var(--color-dark-gray);
-    text-align: center;
-    margin: 20px;
-    font-weight: 500;
+    max-width: 768px;
+    margin: 0 auto;
   }
 
   input, textarea {

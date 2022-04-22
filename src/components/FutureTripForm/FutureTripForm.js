@@ -12,6 +12,7 @@ import {
   InputDate,
 } from '../styledComponents/StyledForm';
 import { Link } from 'react-router-dom';
+import { IconButton } from '../Button/Button';
 
 export default function FutureTripForm({ onCreateTrip, locationInfos }) {
   const disablePastDate = () => {
@@ -23,7 +24,7 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
   };
 
   return (
-    <FormWrapper>
+    <Wrapper>
       <Form
         aria-labelledby="future-trips-form"
         autoComplete="off"
@@ -46,7 +47,9 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
             required
           />
           <StyledLink to="/mapPage">
-            <LocationIcon size={25} />
+            <IconButton variant="goToMap">
+              <LocationIcon size={25} />
+            </IconButton>
           </StyledLink>
         </Label>
 
@@ -86,10 +89,10 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
           rows="3"
         />
         <ButtonWrapper>
-          <Button variant="add">Add Trip</Button>
+          <Button variant="add">Create Trip</Button>
         </ButtonWrapper>
       </Form>
-    </FormWrapper>
+    </Wrapper>
   );
 
   function handleSubmit(event) {
@@ -107,6 +110,10 @@ export default function FutureTripForm({ onCreateTrip, locationInfos }) {
   }
 }
 
+const Wrapper = styled(FormWrapper)`
+  margin-top: 8vh;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -119,7 +126,6 @@ const ArrowIcon = styled(HiOutlineArrowNarrowRight)`
 
 const LocationIcon = styled(MdLocationOn)`
   position: absolute;
-
   top: 35px;
 `;
 

@@ -7,10 +7,10 @@ export default function SaveModal({ onKeep, onFinishTrip, children }) {
     <Background>
       <StyledModal>
         <span>{children}</span>
-        <Button variant={'keep'} onClick={onKeep}>
+        <Button variant="keep" onClick={onKeep} type="button">
           No, keep it here!
         </Button>
-        <Button variant={'save'} onClick={onFinishTrip}>
+        <Button variant="save" onClick={onFinishTrip} type="button">
           Save it! <HomeIcon size={15} />
         </Button>
       </StyledModal>
@@ -20,8 +20,8 @@ export default function SaveModal({ onKeep, onFinishTrip, children }) {
 
 const HomeIcon = styled(HiHome)`
   position: absolute;
-  bottom: 26px;
-  right: 85px;
+  bottom: 6px;
+  right: 25px;
 `;
 
 const Background = styled.div`

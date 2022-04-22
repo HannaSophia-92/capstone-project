@@ -6,10 +6,10 @@ export default function Modal({ onKeep, onDelete, children }) {
     <Background>
       <StyledModal>
         <span>{children}</span>
-        <Button variant={'submit'} onClick={onKeep}>
+        <Button variant="submit" onClick={onKeep}>
           no
         </Button>
-        <Button variant={'danger'} onClick={onDelete}>
+        <Button variant="danger" onClick={onDelete}>
           yes
         </Button>
       </StyledModal>

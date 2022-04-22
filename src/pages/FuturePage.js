@@ -1,5 +1,6 @@
 import FutureTripCard from '../components/FutureTripCard/FutureTripCard';
 import styled from 'styled-components';
+import { ReactComponent as Heading } from '../../src/images/logo/upcoming-adventure.svg';
 
 export default function FuturePage({
   trips,
@@ -10,7 +11,9 @@ export default function FuturePage({
 }) {
   return (
     <>
-      <h2>Future Trips</h2>
+      <Headline>
+        <StyledHeading />
+      </Headline>
       <Card>
         {trips.map(
           ({
@@ -45,5 +48,14 @@ export default function FuturePage({
 
 const Card = styled.ul`
   list-style: none;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
+`;
+
+const StyledHeading = styled(Heading)`
+  width: 300px;
+`;
+
+const Headline = styled.h2`
+  text-align: center;
+  margin: 10px 0;
 `;

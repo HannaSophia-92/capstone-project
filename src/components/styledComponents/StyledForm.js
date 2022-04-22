@@ -12,6 +12,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 15px;
   padding: 25px 20px;
+  margin-bottom: 15px;
   color: var(--color-white);
   border: 1px solid var(--color-dark-gray);
   background-color: var(--color-dark-gray);
