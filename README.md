@@ -1,6 +1,6 @@
 # Capstone Project: Journi
 
-![Journi](/public/image/header.png)
+![Journi](/public/image/journi-header.png)
 
 ## `Description`
 
