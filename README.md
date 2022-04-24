@@ -34,7 +34,7 @@ This demo is optimized for mobile screen - please switch your browser to respons
 - Install all dependencies with `$ npm install`
 - Use `env.example` to create your own `.env.local` file
   - Add your Cloudinary Cloudname and Preset - [Cloudinary](https://cloudinary.com/)
-  - Add your Mapbox accesstoken - [Mapbox](https://www.mapbox.com/)
+  - Add your Mapbox Access Token - [Mapbox](https://www.mapbox.com/)
 - Run app in development mode with `$ npm start`
 - Open [http://localhost:3000/](http://localhost:3000/) to view it in your browser
 - Run tests via `$ npm run test`
