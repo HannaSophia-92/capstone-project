@@ -34,7 +34,7 @@ export default function BasicMap({
   });
   const [destinationMapbox, setDestinationMapbox] = useLocalStorage(
     'destinationMapBox',
-    [24.691402, -81.189682]
+    [23.113592, -82.366592]
   );
   const ZOOM_LEVEL = 8;
   const mapRef = useRef();
@@ -46,6 +46,10 @@ export default function BasicMap({
 
   const tripCoordinates = futureTrips.filter(
     futureTrip => futureTrip.coordinates[0] !== null
+  );
+
+  const historyCoordinates = history.filter(
+    history => history.coordinates[0] !== null
   );
 
   useEffect(() => {
@@ -74,18 +78,20 @@ export default function BasicMap({
           url={osm.maptiler.url}
           attribution={osm.maptiler.attribution}
         />
-        <Marker position={position} icon={markerIconBlack}>
-          <Popup>
-            <PopupText>Add new trip?</PopupText>
-            <StyledLink
-              to="/formPage"
-              aria-label="add-new-destination"
-              onClick={() => onPopupClick(destinationMapbox)}
-            >
-              <AddDestination size={20} />
-            </StyledLink>
-          </Popup>
-        </Marker>
+        {destinationMapbox[2] ? (
+          <Marker position={position} icon={markerIconBlack}>
+            <Popup>
+              <PopupText>Add new trip?</PopupText>
+              <StyledLink
+                to="/formPage"
+                aria-label="add-new-destination"
+                onClick={() => onPopupClick(destinationMapbox)}
+              >
+                <AddDestination size={20} />
+              </StyledLink>
+            </Popup>
+          </Marker>
+        ) : undefined}
         {tripCoordinates.map(trip => (
           <Marker
             key={trip.coordinates}
@@ -101,7 +107,7 @@ export default function BasicMap({
             </Popup>
           </Marker>
         ))}
-        {history?.map(trip => (
+        {historyCoordinates?.map(trip => (
           <Marker
             key={trip.coordinates}
             position={trip.coordinates}
