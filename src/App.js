@@ -15,6 +15,9 @@ function App() {
   const [locationInfos, setLocationInfos] = useState('');
   const [viewPort, setViewPort] = useState('');
 
+  console.log(history);
+  console.log(locationInfos);
+
   const navigate = useNavigate();
 
   return (
@@ -153,6 +156,7 @@ function App() {
   function createTrip(formData) {
     setFutureTrips([...futureTrips, formData]);
     navigate('/futurePage');
+    setLocationInfos('');
   }
 
   function handleNewNote(note, _id) {
