@@ -5,6 +5,9 @@ export default {
   component: FutureTripCard,
   argTypes: {
     onCreateTrip: 'createTrip',
+    onEdit: 'edit',
+    onFinishTrip: 'finishTrip',
+    onDeleteCard: 'deleteCard',
   },
 };
 
@@ -13,6 +16,9 @@ const Template = args => <FutureTripCard {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   _id: '1',
-  destination: 'South Africa',
-  date: '2022-04-28 - 2022-05-07',
+  destination: 'South Africa, Cape Town',
+  startDate: '2022-04-28',
+  endDate: '2022-04-25',
+  coordinates: '0',
+  textNotes: 'Passport...',
 };
