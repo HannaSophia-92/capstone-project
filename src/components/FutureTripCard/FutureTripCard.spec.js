@@ -11,6 +11,7 @@ describe('FutureTripCard', () => {
           dateStart="06-04-22"
           dateEnd="20-05-22"
           textNotes="passport"
+          coordinates="1"
         />
       </MemoryRouter>
     );
@@ -31,12 +32,12 @@ describe('FutureTripCard', () => {
   it('renders three buttons', () => {
     render(
       <MemoryRouter>
-        <FutureTripCard />
+        <FutureTripCard coordinates="1" />
       </MemoryRouter>
     );
 
     const buttons = screen.getAllByRole('button');
 
-    expect(buttons).toHaveLength(3);
+    expect(buttons).toHaveLength(4);
   });
 });

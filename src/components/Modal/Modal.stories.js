@@ -25,3 +25,8 @@ export const SaveModal = Template.bind({});
 SaveModal.args = {
   children: 'Back home? Your trip will be saved to your history',
 };
+
+export const UploadModal = Template.bind({});
+UploadModal.args = {
+  children: 'Upload image',
+};

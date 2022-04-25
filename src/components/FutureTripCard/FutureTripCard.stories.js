@@ -7,7 +7,7 @@ export default {
     onCreateTrip: 'createTrip',
     onEdit: 'edit',
     onFinishTrip: 'finishTrip',
-    onDeleteCard: 'deleteCard',
+    onDelete: 'delete',
   },
 };
 

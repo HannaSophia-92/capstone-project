@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { BiImageAdd as UploadImage } from 'react-icons/bi';
 import { IconButton } from '../Button/Button';
 
-export default function PastTripStory({
+export default function PastTripCard({
   startDate,
   endDate,
   destination,

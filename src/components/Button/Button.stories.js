@@ -38,3 +38,15 @@ Danger.args = {
   children: 'NO',
   variant: 'danger',
 };
+
+export const Keep = Template.bind({});
+Keep.args = {
+  children: 'KEEP IT!',
+  variant: 'keep',
+};
+
+export const Save = Template.bind({});
+Save.args = {
+  children: 'SAVE IT!',
+  variant: 'save',
+};
