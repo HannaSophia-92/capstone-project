@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';
 import { MdOutlineNoteAlt as NotesIcon } from 'react-icons/md';
 import { useState } from 'react';
-import UploadModal from '../Modal/UploadModal';
+import { UploadModal } from '../Modal/Modal';
 import PastTripForm from '../PastTripForm/PastTripForm';
 import PastTripNotes from '../PastTripNotes/PastTripNotes';
 import { MdKeyboardBackspace as BackButton } from 'react-icons/md';
