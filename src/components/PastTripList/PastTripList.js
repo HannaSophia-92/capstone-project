@@ -16,7 +16,7 @@ export default function PastTripList({
   }
   return (
     <>
-      <Card>
+      <Card role="list">
         {history.map(
           ({
             destination,

@@ -15,8 +15,8 @@ describe('PastTripNotes', () => {
     const input = screen.getByLabelText(/Things to remember/i);
     expect(input).toHaveAttribute('placeholder', 'Enter your notes...');
 
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(2);
   });
 
   it('renders a form with the name "Enter notes to remember"', () => {
@@ -28,14 +28,21 @@ describe('PastTripNotes', () => {
 
   it('submits form data when field is filled out', () => {
     const handleNewNote = jest.fn();
-    render(<PastTripForm onHandleNewNote={handleNewNote} />);
+    render(
+      <PastTripForm
+        onHandleNewNote={handleNewNote}
+        textarea="Lorem ipsum"
+        image=""
+        _id=""
+      />
+    );
 
-    const input = screen.getByLabelText(/Things to remember/i);
-    const button = screen.getByRole('button');
+    const textarea = screen.getByLabelText(/Things to remember/i);
+    const button = screen.getByRole('button', { name: /Save/i });
 
-    userEvent.type(input, 'Lorem ipsum');
     userEvent.click(button);
 
-    expect(handleNewNote).toHaveBeenCalledWith('Lorem ipsum');
+    expect(handleNewNote).toHaveBeenCalled();
+    expect(textarea).toBeInTheDocument();
   });
 });
