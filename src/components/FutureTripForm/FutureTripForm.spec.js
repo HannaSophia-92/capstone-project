@@ -1,13 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import FutureTripForm from './FutureTripForm';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('FutureTripForm', () => {
   it('renders three input fields with placeholder and a button', () => {
-    render(<FutureTripForm />);
+    render(
+      <MemoryRouter>
+        <FutureTripForm />
+      </MemoryRouter>
+    );
 
     const inputDestination = screen.getByLabelText(/Destination:/i);
-    expect(inputDestination).toHaveAttribute('placeholder', 'Country/City');
+    expect(inputDestination).toHaveAttribute(
+      'placeholder',
+      'Country/City - click to search on map'
+    );
 
     const inputStartDate = screen.getByLabelText(/Start:/i);
     expect(inputStartDate).toBeInTheDocument();
@@ -15,12 +23,16 @@ describe('FutureTripForm', () => {
     const inputEndDate = screen.getByLabelText(/End:/i);
     expect(inputEndDate).toBeInTheDocument();
 
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(2);
   });
 
   it('renders a form with the name "New Trip"', () => {
-    render(<FutureTripForm />);
+    render(
+      <MemoryRouter>
+        <FutureTripForm />
+      </MemoryRouter>
+    );
 
     const form = screen.getByRole('form', { name: 'New Trip' });
     expect(form).toBeInTheDocument();
@@ -28,7 +40,11 @@ describe('FutureTripForm', () => {
 
   it('does not submit form data when destination field is not filled out', () => {
     const neverCalled = jest.fn();
-    render(<FutureTripForm onSubmit={neverCalled} />);
+    render(
+      <MemoryRouter>
+        <FutureTripForm onSubmit={neverCalled} />
+      </MemoryRouter>
+    );
 
     const inputDestination = screen.getByLabelText(/Destination:/i);
 

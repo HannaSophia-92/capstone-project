@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FiTrash as DeleteIcon } from 'react-icons/fi';
 import Modal from '../Modal/Modal';
-import SaveModal from '../Modal/SaveModal';
+import { SaveModal } from '../Modal/Modal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import ScreenReaderOnly from '../styledComponents/ScreenReaderOnly';

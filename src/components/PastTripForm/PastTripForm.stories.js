@@ -11,4 +11,8 @@ export default {
 const Template = args => <PastTripForm {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  _id: '1',
+  note: '',
+  image: ' ',
+};

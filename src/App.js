@@ -15,9 +15,6 @@ function App() {
   const [locationInfos, setLocationInfos] = useState('');
   const [viewPort, setViewPort] = useState('');
 
-  console.log(history);
-  console.log(locationInfos);
-
   const navigate = useNavigate();
 
   return (

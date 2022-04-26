@@ -8,9 +8,10 @@ describe('FutureTripCard', () => {
       <MemoryRouter>
         <FutureTripCard
           destination="South Africa"
-          dateStart="06-04-22"
-          dateEnd="20-05-22"
+          startDate="06-04-22"
+          endDate="20-05-22"
           textNotes="passport"
+          coordinates="1"
         />
       </MemoryRouter>
     );
@@ -18,25 +19,25 @@ describe('FutureTripCard', () => {
     const destination = screen.getByText(/south africa/i);
     expect(destination).toBeInTheDocument();
 
-    const dateStart = screen.getByText(/22/i);
-    expect(dateStart).toBeInTheDocument();
+    const startDate = screen.getByText(/22/i);
+    expect(startDate).toBeInTheDocument();
 
-    const dateEnd = screen.getByText(/22/i);
-    expect(dateEnd).toBeInTheDocument();
+    const endDate = screen.getByText(/22/i);
+    expect(endDate).toBeInTheDocument();
 
     const note = screen.getByText(/passport/i);
     expect(note).toBeInTheDocument();
   });
 
-  it('renders three buttons', () => {
+  it('renders four buttons', () => {
     render(
       <MemoryRouter>
-        <FutureTripCard />
+        <FutureTripCard coordinates="1" />
       </MemoryRouter>
     );
 
     const buttons = screen.getAllByRole('button');
 
-    expect(buttons).toHaveLength(3);
+    expect(buttons).toHaveLength(4);
   });
 });

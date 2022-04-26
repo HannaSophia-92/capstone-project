@@ -8,7 +8,7 @@ describe('PastTripNotes', () => {
     const notes = screen.getByText(/Steenberg Winery/i);
     expect(notes).toBeInTheDocument();
 
-    const button = screen.getByRole('button');
-    expect(button).toBeInTheDocument();
+    const buttons = screen.getAllByRole('button');
+    expect(buttons).toHaveLength(2);
   });
 });
